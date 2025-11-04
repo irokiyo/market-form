@@ -1,0 +1,51 @@
+@extends('layouts.app')
+
+@section('css')
+<link rel="stylesheet" href="{{ asset('css/sanitize.css') }}" />
+<link rel="stylesheet" href="{{ asset('css/auth/register.css') }}" />
+@endsection
+
+@section('content')
+<div class="register-container">
+    <div class="register-card">
+        <h2 class="register-title">会員登録</h2>
+
+        <form action="" method="POST" class="register-form">
+            @csrf
+            <div class="form-group">
+                <label for="name">ユーザー名</label>
+                <input type="text" id="name" name="name" value="{{ old('name') }}">
+                @error('name')
+                <p class="error-message">{{ $message }}</p>
+                @enderror
+            </div>
+
+            <div class="form-group">
+                <label for="email">メールアドレス</label>
+                <input type="email" id="email" name="email" value="{{ old('email') }}">
+                @error('email')
+                <p class="error-message">{{ $message }}</p>
+                @enderror
+            </div>
+
+            <div class="form-group">
+                <label for="password">パスワード</label>
+                <input type="password" id="password" name="password">
+                @error('password')
+                <p class="error-message">{{ $message }}</p>
+                @enderror
+            </div>
+
+            <div class="form-group">
+                <label for="password_confirm">確認用パスワード</label>
+                <input type="password" id="password_confirm" name="password_confirm">
+            </div>
+
+            <button type="submit" class="btn-register">登録する</button>
+        </form>
+
+        <a href="" class="login-link">ログインはこちら</a>
+    </div>
+</div>
+@endsection
+

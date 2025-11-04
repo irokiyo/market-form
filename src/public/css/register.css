@@ -1,0 +1,69 @@
+body {
+    background-color: #222;
+    font-family: "Noto Sans JP", sans-serif;
+}
+
+.register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.register-card {
+    background-color: #fff;
+    padding: 40px 60px;
+    border-radius: 4px;
+    text-align: center;
+    width: 400px;
+}
+
+.logo {
+    width: 140px;
+    margin-bottom: 20px;
+}
+
+.register-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 25px;
+}
+
+.form-group {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.btn-register {
+    width: 100%;
+    background-color: #f15b5b;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    border-radius: 3px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.btn-register:hover {
+    opacity: 0.9;
+}
+
+.login-link {
+    display: block;
+    margin-top: 15px;
+    font-size: 13px;
+    color: #4c8bf5;
+    text-decoration: none;
+}
+
+.login-link:hover {
+    text-decoration: underline;
+}
+
+.error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: 3px;
+}
