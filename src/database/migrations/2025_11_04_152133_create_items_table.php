@@ -21,7 +21,7 @@ class CreateItemsTable extends Migration
             $table->integer('price');
             $table->text('description');
             $table->string('img_url');
-            $table->tinyInteger('condition');
+            $table->string('condition');
             $table->timestamps();
         });
     }
