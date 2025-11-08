@@ -1,0 +1,44 @@
+.address-edit {
+    max-width: 520px;
+    margin: 50px auto;
+    text-align: center;
+}
+
+.address-edit__title {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+
+.address-edit__form {
+    text-align: left;
+}
+
+.form__group {
+    margin-bottom: 18px;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 4px;
+    font-weight: 500;
+}
+
+.form__input {
+    width: 100%;
+    border: 1px solid #ccc;
+    height: 34px;
+    border-radius: 2px;
+    padding: 4px 8px;
+}
+
+.address-edit__btn {
+    width: 100%;
+    background: #F45B5B;
+    color: #fff;
+    border: none;
+    height: 38px;
+    margin-top: 16px;
+    border-radius: 2px;
+    cursor: pointer;
+}

@@ -19,4 +19,24 @@ class ItemController extends Controller
     {
         return view('auth.register');
     }
+    public function show()
+    {
+        return view('show');
+    }
+    public function address()
+    {
+        return view('address');
+    }
+    public function sell()
+    {
+        return view('sell');
+    }
+    public function mypage()
+    {
+        return view('mypage');
+    }
+    public function purchase()
+    {
+        return view('purchase');
+    }
 }

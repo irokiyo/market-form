@@ -25,3 +25,10 @@ Route::get('/purchase/address/{item_id}', [ItemController::class, 'address'])->n
 Route::get('/sell', [ItemController::class, 'sell'])->name('sell'); //商品出品画面
 Route::get('/mypage', [ItemController::class, 'mypage'])->name('mypage'); //プロフィール画面
 Route::get('/mypage/profile', [ItemController::class, 'edit'])->name('mypage.edit'); //プロフィール編集画面
+
+
+
+//完成したら消去するルート
+Route::get('/show', [ItemController::class, 'show'])->name('show'); //商品詳細画面
+Route::get('/purchase', [ItemController::class, 'purchase'])->name('purchase');
+Route::get('/address', [ItemController::class, 'address'])->name('purchase.address'); 

@@ -10,19 +10,9 @@
 </head>
 <body>
     <header class="header">
-        <h1 class="header__ttl"><img src="{{ asset('/images/Vector (2).png') }}" alt="ロゴ" class="tti-img"><img src="{{ asset('/images/Group.png') }}" alt="名前" class="tti-img">
-
+        <h1 class="header__ttl"><img src="{{ asset('/images/Vector (2).png') }}" alt="ロゴ" class="ttl-img1"><img src="{{ asset('/images/Group.png') }}" alt="名前" class="ttl-img2">
         </h1>
-        <form action="" class="search">
-            <input type="text" class="search-text" name="keyword" placeholder="なにをお探しですか？">
-        </form>
-        <nav class="header__nav">
-            <ul>
-                <li class="nav__item">ログアウト</li>
-                <li class="nav__item">マイページ</li>
-                <li class="nav__item">出品</li>
-            </ul>
-        </nav>
+        @yield('header')
     </header>
     <main class="main">
         @yield('content')

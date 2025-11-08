@@ -1,6 +1,16 @@
 body {
-    background-color: #222;
-    font-family: "Noto Sans JP", sans-serif;
+    background-color: #FFFFFF;
+}
+label{
+    font-size: 24px;
+    font-weight: bold;
+    color: #000000;
+    width: 680px;
+    display: block;
+}
+input{
+    height: 59px;
+    width: 680px;
 }
 
 .register-container {
@@ -11,11 +21,12 @@ body {
 }
 
 .register-card {
-    background-color: #fff;
+    background-color: #FFFFFF;
     padding: 40px 60px;
     border-radius: 4px;
     text-align: center;
-    width: 400px;
+    justify-content: center;
+    width: 680px;
 }
 
 .logo {
@@ -24,26 +35,30 @@ body {
 }
 
 .register-title {
-    font-size: 20px;
+    font-size: 36px;
+    color: #000000;
     font-weight: bold;
     margin-bottom: 25px;
+    width: 680px;
+    text-align: center;
 }
 
 .form-group {
     text-align: left;
     margin-bottom: 20px;
+    display: block;
 }
 
 .btn-register {
-    width: 100%;
-    background-color: #f15b5b;
-    color: #fff;
+    width: 680px;
+    background-color: #FF5555;
+    color: #FFFFFF;
     border: none;
     padding: 12px;
     border-radius: 3px;
-    font-size: 16px;
+    font-size: 26px;
     cursor: pointer;
-    margin-top: 10px;
+    margin-top: 80px;
 }
 
 .btn-register:hover {
@@ -53,9 +68,11 @@ body {
 .login-link {
     display: block;
     margin-top: 15px;
-    font-size: 13px;
-    color: #4c8bf5;
+    font-size: 20px;
+    color: #0073CC;
     text-decoration: none;
+    text-align: center;
+    width: 680px;
 }
 
 .login-link:hover {
