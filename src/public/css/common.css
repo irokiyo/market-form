@@ -67,6 +67,7 @@ body {
     margin-right: 30px;
     list-style: none;
     line-height: 1;
+    background-color: none;
 }
 .nav__item:hover{
     text-decoration: underline;

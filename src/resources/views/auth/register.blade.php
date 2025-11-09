@@ -10,7 +10,7 @@
     <div class="register-card">
         <h2 class="register-title">会員登録</h2>
 
-        <form action="" method="POST" class="register-form">
+        <form action="{{route('register')}}" method="POST" class="register-form">
             @csrf
             <div class="form-group">
                 <label for="name">ユーザー名</label>
@@ -44,7 +44,7 @@
             <button type="submit" class="btn-register">登録する</button>
         </form>
 
-        <a href="" class="login-link">ログインはこちら</a>
+        <a href="{{route('login')}}" class="login-link">ログインはこちら</a>
     </div>
 </div>
 @endsection

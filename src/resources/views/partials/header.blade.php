@@ -6,7 +6,12 @@
 </form>
 <nav class="header__nav">
     <ul class="header__nav__ul">
-        <li class="nav__item">ログアウト</li>
+        <li >
+            <form action="{{route('logout')}}" method="post">
+                @csrf
+                <button type="submit" class="nav__item">ログアウト</button>
+            </form>
+        </li>
         <li class="nav__item">マイページ</li>
         <li class="nav__item2">出品</li>
     </ul>

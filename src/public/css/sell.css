@@ -1,0 +1,121 @@
+.sell {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.sell__title {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+
+.sell-block {
+    margin-bottom: 28px;
+}
+
+.sell-block__title {
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.sell-image-drop {
+    border: 1px dashed #ccc;
+    background: #fff;
+    height: 140px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.sell-image-drop__text {
+    background: #fff;
+    border: 1px solid #F45B5B;
+    color: #F45B5B;
+    padding: 6px 16px;
+    border-radius: 4px;
+}
+
+.sell-divider {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin: 12px 0 16px;
+}
+
+.sell-label {
+    font-weight: 500;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.sell-categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.sell-category-tag {
+    cursor: pointer;
+}
+
+.sell-category-tag__input {
+    display: none;
+}
+
+.sell-category-tag__label {
+    border: 1px solid #F45B5B;
+    color: #F45B5B;
+    border-radius: 9999px;
+    padding: 4px 12px;
+    font-size: 12px;
+}
+
+.sell-category-tag__input:checked+.sell-category-tag__label {
+    background: #F45B5B;
+    color: #fff;
+}
+
+.sell-select,
+.sell-input,
+.sell-textarea {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    padding: 6px 8px;
+}
+
+.sell-textarea {
+    resize: vertical;
+}
+
+.sell-price {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.sell-price__yen {
+    font-weight: 600;
+}
+
+.sell-submit {
+    width: 100%;
+    background: #F45B5B;
+    color: #fff;
+    border: none;
+    border-radius: 2px;
+    height: 42px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 8px;
+}
+
+.form-error {
+    color: #e11d48;
+    font-size: 12px;
+    margin-top: 4px;
+}

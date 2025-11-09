@@ -31,7 +31,7 @@
             <button type="submit" class="btn-login">ログインする</button>
         </form>
 
-        <a href="" class="login-link">会員登録はこちら</a>
+        <a href="{{route('register')}}" class="login-link">会員登録はこちら</a>
     </div>
 </div>
 @endsection

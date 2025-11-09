@@ -15,29 +15,26 @@
 <div class="sell">
     <h2 class="sell__title">商品の出品</h2>
 
-    {{-- 実際は route('items.store') などに変えてください --}}
-    <form action="" method="POST" enctype="multipart/form-data" class="sell__form">
+    
+    <form action="" method="POST" class="sell__form">
         @csrf
 
         {{-- 商品画像 --}}
         <div class="sell-block">
             <h3 class="sell-block__title">商品画像</h3>
-            <p class="sell-block__note"></p>
-            <label class="sell-image-drop">
+            <div class="sell-image-drop">
                 <span class="sell-image-drop__text">画像を選択する</span>
-                <input type="file" name="image" accept="image/*" hidden>
-            </label>
+                <input type="file" name="image" accept="image/*" class="sell-image-drop__input" hidden>
+            </div>
             @error('image')
             <p class="form-error">{{ $message }}</p>
             @enderror
         </div>
 
-        {{-- 商品の詳細 --}}
         <div class="sell-block">
-            <h3 class="sell-block__title">商品の詳細</h3>
-            <hr class="sell-divider">
+            <h2 class="sell-block__title">商品の詳細</h2>
 
-            <p class="sell-label">カテゴリー</p>
+            <h3 class="sell-label">カテゴリー</h3>
             <div class="sell-categories">
                 {{-- 本番では $categories を回せばOK --}}
                 @foreach (['ファッション','家電','インテリア','レディース','メンズ','コスメ','本','ゲーム','スポーツ','キッチン','ハンドメイド','アクセサリー','おもちゃ','ベビー・キッズ'] as $category)
@@ -52,7 +49,7 @@
             @enderror
 
             <p class="sell-label">商品の状態</p>
-            <select name="condition" class="sell-select">
+            <select name="condition" class="sell__select">
                 <option value="">選択してください</option>
                 <option value="新品">新品</option>
                 <option value="未使用に近い">未使用に近い</option>
@@ -68,27 +65,26 @@
         {{-- 商品名と説明 --}}
         <div class="sell-block">
             <h3 class="sell-block__title">商品名と説明</h3>
-            <hr class="sell-divider">
 
             <div class="form-group">
-                <label for="name" class="sell-label">商品名</label>
-                <input type="text" id="name" name="name" class="sell-input" value="{{ old('name') }}">
+                <label for="name" class="sell__label">商品名</label>
+                <input type="text" id="name" name="name" class="sell__input" value="{{ old('name') }}">
                 @error('name')
                 <p class="form-error">{{ $message }}</p>
                 @enderror
             </div>
 
             <div class="form-group">
-                <label for="brand" class="sell-label">ブランド名</label>
-                <input type="text" id="brand" name="brand" class="sell-input" value="{{ old('brand') }}">
+                <label for="brand" class="sell__label">ブランド名</label>
+                <input type="text" id="brand" name="brand" class="sell__input" value="{{ old('brand') }}">
                 @error('brand')
                 <p class="form-error">{{ $message }}</p>
                 @enderror
             </div>
 
             <div class="form-group">
-                <label for="description" class="sell-label">商品の説明</label>
-                <textarea id="description" name="description" rows="5" class="sell-textarea">{{ old('description') }}</textarea>
+                <label for="description" class="sell__label">商品の説明</label>
+                <textarea id="description" name="description" rows="5" class="sell__textarea">{{ old('description') }}</textarea>
                 @error('description')
                 <p class="form-error">{{ $message }}</p>
                 @enderror
