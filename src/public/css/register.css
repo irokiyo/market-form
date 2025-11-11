@@ -1,23 +1,23 @@
 body {
     background-color: #FFFFFF;
+    margin: 0;
 }
 label{
     font-size: 24px;
     font-weight: bold;
     color: #000000;
-    width: 680px;
+    width: 100%;
     display: block;
+    text-align: left;
 }
 input{
     height: 59px;
-    width: 680px;
+    width: 100%;
 }
 
 .register-container {
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
 }
 
 .register-card {
@@ -26,7 +26,7 @@ input{
     border-radius: 4px;
     text-align: center;
     justify-content: center;
-    width: 680px;
+    width: 60%;
 }
 
 .logo {
@@ -39,7 +39,7 @@ input{
     color: #000000;
     font-weight: bold;
     margin-bottom: 25px;
-    width: 680px;
+    width: 100%;
     text-align: center;
 }
 
@@ -50,7 +50,7 @@ input{
 }
 
 .btn-register {
-    width: 680px;
+    width: 100%;
     background-color: #FF5555;
     color: #FFFFFF;
     border: none;
@@ -72,7 +72,7 @@ input{
     color: #0073CC;
     text-decoration: none;
     text-align: center;
-    width: 680px;
+    width: 100%;
 }
 
 .login-link:hover {
@@ -83,4 +83,12 @@ input{
     color: red;
     font-size: 12px;
     margin-top: 3px;
+}
+
+@media (max-width: 768px) {
+    .register-card {
+        width: 90%;
+        max-width: none;
+        padding: 30px 20px;
+    }
 }

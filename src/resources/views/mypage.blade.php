@@ -6,6 +6,11 @@
 <link rel="stylesheet" href="{{ asset('css/mypage.css') }}" />
 @endsection
 
+@section('header')
+@include('partials.header')
+@endsection
+
+
 @section('content')
 <div class="profile">
     <h2 class="profile-title">プロフィール設定</h2>
@@ -19,7 +24,8 @@
             </div>
             <label class="avatar-button">
                 画像を選択する
-                <input type="file" name="avatar" accept="image/*" hidden>
+                <input type="file" name="avatar" accept="image/*" class="avatar-button-hidden" hidden>
+
             </label>
             @error('avatar')
             <p class="error-message">{{ $message }}</p>

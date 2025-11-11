@@ -9,7 +9,7 @@
         <li >
             <form action="{{route('logout')}}" method="post">
                 @csrf
-                <button type="submit" class="nav__item">ログアウト</button>
+                <button type="submit" class="nav__logout">ログアウト</button>
             </form>
         </li>
         <li class="nav__item">マイページ</li>

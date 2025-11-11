@@ -38,7 +38,7 @@
 
             <div class="form-group">
                 <label for="password_confirm">確認用パスワード</label>
-                <input type="password" id="password_confirm" name="password_confirm">
+                <input type="password" id="password_confirm" name="password_confirmation">
             </div>
 
             <button type="submit" class="btn-register">登録する</button>

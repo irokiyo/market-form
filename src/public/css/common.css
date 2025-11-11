@@ -68,9 +68,13 @@ body {
     list-style: none;
     line-height: 1;
     background-color: none;
+    text-decoration: none
 }
 .nav__item:hover{
     text-decoration: underline;
+}
+.nav__item:focus {
+    outline: none;
 }
 
 .nav__item2{
@@ -83,6 +87,17 @@ body {
     justify-content: center;
     display: flex;
 }
+.nav__logout{
+    background-color: #000;
+    color: #FFFFFF;
+    border: none;
+    margin-right: 20px;
+    font-size: 16px;
+}
+.nav__logout:hover{
+    text-decoration: underline;
+}
+
 
 @media (max-width: 768px) {
     .nav__item {
