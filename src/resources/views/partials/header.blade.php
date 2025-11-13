@@ -13,6 +13,7 @@
             </form>
         </li>
         <li class="nav__item">マイページ</li>
-        <li class="nav__item2">出品</li>
+        <li class="nav__item2"><a href="{{route('sell')}}" class="nav__item2-sell">出品</a></li>
+
     </ul>
 </nav>

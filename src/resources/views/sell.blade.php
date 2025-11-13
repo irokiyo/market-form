@@ -13,7 +13,7 @@
 
 @section('content')
 <div class="sell">
-    <h2 class="sell__title">商品の出品</h2>
+    <h2 class="sell__ttl">商品の出品</h2>
 
     
     <form action="" method="POST" class="sell__form">
@@ -21,7 +21,7 @@
 
         {{-- 商品画像 --}}
         <div class="sell-block">
-            <h3 class="sell-block__title">商品画像</h3>
+            <h3 class="sell-block__ttl">商品画像</h3>
             <div class="sell-image-drop">
                 <span class="sell-image-drop__text">画像を選択する</span>
                 <input type="file" name="image" accept="image/*" class="sell-image-drop__input" hidden>
@@ -32,7 +32,7 @@
         </div>
 
         <div class="sell-block">
-            <h2 class="sell-block__title">商品の詳細</h2>
+            <h2 class="sell-block__ttl-gray">商品の詳細</h2>
 
             <h3 class="sell-label">カテゴリー</h3>
             <div class="sell-categories">
@@ -48,7 +48,7 @@
             <p class="form-error">{{ $message }}</p>
             @enderror
 
-            <p class="sell-label">商品の状態</p>
+            <p class="sell__label">商品の状態</p>
             <select name="condition" class="sell__select">
                 <option value="">選択してください</option>
                 <option value="新品">新品</option>
@@ -64,7 +64,7 @@
 
         {{-- 商品名と説明 --}}
         <div class="sell-block">
-            <h3 class="sell-block__title">商品名と説明</h3>
+            <h3 class="sell-block__ttl-gray">商品名と説明</h3>
 
             <div class="form-group">
                 <label for="name" class="sell__label">商品名</label>
@@ -94,7 +94,7 @@
                 <label for="price" class="sell-label">販売価格</label>
                 <div class="sell-price">
                     <span class="sell-price__yen">¥</span>
-                    <input type="number" id="price" name="price" class="sell-input" value="{{ old('price') }}">
+                    <input type="number" id="price" name="price" class="sell__input" value="{{ old('price') }}">
                 </div>
                 @error('price')
                 <p class="form-error">{{ $message }}</p>

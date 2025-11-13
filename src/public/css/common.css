@@ -97,6 +97,10 @@ body {
 .nav__logout:hover{
     text-decoration: underline;
 }
+.nav__item2-sell{
+    text-decoration: none;
+    color: #000;
+}
 
 
 @media (max-width: 768px) {

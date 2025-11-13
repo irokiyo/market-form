@@ -4,10 +4,10 @@
     padding: 0 20px;
 }
 
-.sell__title {
+.sell__ttl {
     text-align: center;
-    font-size: 20px;
-    font-weight: 600;
+    font-size: 36px;
+    font-weight: 700;
     margin-bottom: 30px;
 }
 
@@ -15,9 +15,10 @@
     margin-bottom: 28px;
 }
 
-.sell-block__title {
-    font-weight: 600;
+.sell-block__ttl {
+    font-weight: 700;
     margin-bottom: 10px;
+    font-size: 24px;
 }
 
 .sell-image-drop {
@@ -45,10 +46,14 @@
     margin: 12px 0 16px;
 }
 
-.sell-label {
-    font-weight: 500;
+.sell__label {
+    font-weight: 700;
     margin-bottom: 8px;
     display: block;
+    color: #000;
+    font-size: 24px;
+    width: 100%;
+
 }
 
 .sell-categories {
@@ -78,18 +83,32 @@
     background: #F45B5B;
     color: #fff;
 }
+.sell-block__ttl-gray{
+    font-weight: 700;
+    margin-bottom: 10px;
+    font-size: 30px;
+    color: #5F5F5F;
+    border-bottom: 1px solid #5F5F5F;
+    
+}
 
-.sell-select,
-.sell-input,
-.sell-textarea {
+.sell__select,
+.sell__input,
+.sell__textarea {
     width: 100%;
     border: 1px solid #ccc;
     border-radius: 2px;
     padding: 6px 8px;
+    display: block;
 }
 
-.sell-textarea {
+.sell__textarea {
     resize: vertical;
+    font-weight: 700;
+    margin-bottom: 8px;
+    display: block;
+    color: #000;
+    font-size: 24px;
 }
 
 .sell-price {
