@@ -13,6 +13,7 @@ class Profile extends Model
     [
         'user_id',
         'img_url',
+        'name',
         'postcode',
         'address',
         'building',

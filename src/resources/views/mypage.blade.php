@@ -15,7 +15,7 @@
 <div class="profile">
     <h2 class="profile-title">プロフィール設定</h2>
 
-    <form action="" method="POST" class="profile-form">
+    <form action="{{route('mypage.store')}}" method="POST" class="profile-form">
         @csrf
 
         <div class="avatar">
@@ -24,10 +24,10 @@
             </div>
             <label class="avatar-button">
                 画像を選択する
-                <input type="file" name="avatar" accept="image/*" class="avatar-button-hidden" hidden>
+                <input type="file" name="img_url" accept="image/*" class="avatar-button-hidden" hidden>
 
             </label>
-            @error('avatar')
+            @error('img_url')
             <p class="error-message">{{ $message }}</p>
             @enderror
         </div>
