@@ -72,15 +72,16 @@
 }
 
 .sell-category-tag__label {
-    border: 1px solid #F45B5B;
-    color: #F45B5B;
+    border: 1px solid #FF5655;
+    color: #FF5655;
     border-radius: 9999px;
     padding: 4px 12px;
     font-size: 12px;
+    background-color: #fff;
 }
 
 .sell-category-tag__input:checked+.sell-category-tag__label {
-    background: #F45B5B;
+    background: #FF5655;
     color: #fff;
 }
 .sell-block__ttl-gray{
@@ -93,13 +94,20 @@
 }
 
 .sell__select,
-.sell__input,
 .sell__textarea {
     width: 100%;
     border: 1px solid #ccc;
     border-radius: 2px;
     padding: 6px 8px;
     display: block;
+}
+.sell__input{
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    padding: 6px 8px;
+    display: block;
+    padding: 6px 8px 6px 28px;
 }
 
 .sell__textarea {
@@ -115,10 +123,16 @@
     display: flex;
     align-items: center;
     gap: 8px;
+    position: relative;
 }
 
 .sell-price__yen {
     font-weight: 600;
+    pointer-events: none;
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .sell-submit {

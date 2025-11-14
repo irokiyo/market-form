@@ -24,9 +24,9 @@
             <h3 class="sell-block__ttl">商品画像</h3>
             <div class="sell-image-drop">
                 <span class="sell-image-drop__text">画像を選択する</span>
-                <input type="file" name="image" accept="image/*" class="sell-image-drop__input" hidden>
+                <input type="file" name="img_url" accept="image/*" class="sell-image-drop__input" hidden>
             </div>
-            @error('image')
+            @error('img_url')
             <p class="form-error">{{ $message }}</p>
             @enderror
         </div>
@@ -36,15 +36,14 @@
 
             <h3 class="sell-label">カテゴリー</h3>
             <div class="sell-categories">
-                {{-- 本番では $categories を回せばOK --}}
-                @foreach (['ファッション','家電','インテリア','レディース','メンズ','コスメ','本','ゲーム','スポーツ','キッチン','ハンドメイド','アクセサリー','おもちゃ','ベビー・キッズ'] as $category)
+                @foreach ($categories as $category)
                 <label class="sell-category-tag">
-                    <input type="radio" name="category_id" value="{{ $category }}" class="sell-category-tag__input">
-                    <span class="sell-category-tag__label">{{ $category }}</span>
+                    <input type="checkbox" name="categories[]" value="{{ $category->id }}" class="sell-category-tag__input" >
+                    <span class="sell-category-tag__label">{{ $category->category}}</span>
                 </label>
                 @endforeach
             </div>
-            @error('category_id')
+            @error('categories')
             <p class="form-error">{{ $message }}</p>
             @enderror
 
@@ -91,7 +90,7 @@
             </div>
 
             <div class="form-group">
-                <label for="price" class="sell-label">販売価格</label>
+                <label for="price" class="sell__label">販売価格</label>
                 <div class="sell-price">
                     <span class="sell-price__yen">¥</span>
                     <input type="number" id="price" name="price" class="sell__input" value="{{ old('price') }}">

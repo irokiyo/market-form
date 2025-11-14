@@ -21,8 +21,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/purchase/{item_id}', [ItemController::class, 'purchase'])->name('purchase'); //商品購入画面
     Route::get('/purchase/address/{item_id}', [ItemController::class, 'address'])->name('purchase.address'); //住所変更ページ
     Route::get('/sell', [ItemController::class, 'sell'])->name('sell'); //商品出品画面
-    Route::get('/mypage', [ItemController::class, 'showMypage'])->name('mypage.show'); //プロフィール画面
-    Route::post('/mypage', [ItemController::class, 'storeMypage'])->name('mypage.store'); //プロフィール画面情報登録
-    Route::get('/mypage/profile', [ItemController::class, 'edit'])->name('mypage.edit'); //プロフィール編集画面
+    Route::post('/sell', [ItemController::class, 'sellCreate'])->name('sell.create'); //商品出品の登録
 
+    Route::get('/mypage/profile', [ItemController::class, 'showMypage'])->name('profile.show'); //プロフィール画面編集（初回）画面
+    Route::post('/mypage/profile', [ItemController::class, 'storeMypage'])->name('profile.store'); //プロフィール画面情報登録
+
+    Route::get('/mypage', [ItemController::class, 'mypage'])->name('mypage'); //マイページ画面
 });

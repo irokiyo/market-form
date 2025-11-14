@@ -28,7 +28,7 @@ class FortifyServiceProvider extends ServiceProvider
             return new class implements RegisterResponse {
                 public function toResponse($request)
                 {
-                    return redirect('/mypage');
+                    return redirect('/mypage/profile');
                 }
             };
         });

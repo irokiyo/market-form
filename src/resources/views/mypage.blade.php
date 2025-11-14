@@ -15,7 +15,7 @@
 <div class="profile">
     <h2 class="profile-title">プロフィール設定</h2>
 
-    <form action="{{route('mypage.store')}}" method="POST" class="profile-form">
+    <form action="{{route('profile.store')}}" method="POST" class="profile-form">
         @csrf
 
         <div class="avatar">
