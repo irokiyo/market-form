@@ -14,17 +14,17 @@
 @section('content')
 <div class="sell">
     <h2 class="sell__ttl">商品の出品</h2>
-
-    
-    <form action="" method="POST" class="sell__form">
+    <form action="{{route('sell.create')}}" method="POST" class="sell__form" enctype="multipart/form-data">
         @csrf
 
-        {{-- 商品画像 --}}
         <div class="sell-block">
             <h3 class="sell-block__ttl">商品画像</h3>
-            <div class="sell-image-drop">
-                <span class="sell-image-drop__text">画像を選択する</span>
-                <input type="file" name="img_url" accept="image/*" class="sell-image-drop__input" hidden>
+            <div class="sell-image">
+                <div class="sell-image-preview" id="preview"></div>
+                <label class="sell-image__btn">
+                    画像を選択する
+                    <input type="file" id="img_url" name="img_url" accept="image/png, image/jpeg" class="img__btn">
+                </label>
             </div>
             @error('img_url')
             <p class="form-error">{{ $message }}</p>
@@ -50,18 +50,16 @@
             <p class="sell__label">商品の状態</p>
             <select name="condition" class="sell__select">
                 <option value="">選択してください</option>
-                <option value="新品">新品</option>
-                <option value="未使用に近い">未使用に近い</option>
+                <option value="良好">良好品</option>
                 <option value="目立った傷や汚れなし">目立った傷や汚れなし</option>
                 <option value="やや傷や汚れあり">やや傷や汚れあり</option>
-                <option value="傷や汚れあり">傷や汚れあり</option>
+                <option value="状態が悪い">状態が悪い</option>
             </select>
             @error('condition')
             <p class="form-error">{{ $message }}</p>
             @enderror
         </div>
 
-        {{-- 商品名と説明 --}}
         <div class="sell-block">
             <h3 class="sell-block__ttl-gray">商品名と説明</h3>
 
@@ -93,7 +91,7 @@
                 <label for="price" class="sell__label">販売価格</label>
                 <div class="sell-price">
                     <span class="sell-price__yen">¥</span>
-                    <input type="number" id="price" name="price" class="sell__input" value="{{ old('price') }}">
+                    <input type="text" id="price" name="price" class="sell__input" value="{{ old('price') }}">
                 </div>
                 @error('price')
                 <p class="form-error">{{ $message }}</p>
@@ -104,5 +102,26 @@
         <button type="submit" class="sell-submit">出品する</button>
     </form>
 </div>
+<script>
+    document.getElementById('img_url').addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        const previewArea = document.getElementById('preview');
+        previewArea.innerHTML = ''; // 過去の画像をクリア
+
+        if (file && file.type.startsWith('image/')) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = document.createElement('img');
+                img.src = e.target.result;
+                previewArea.appendChild(img);
+            };
+            reader.readAsDataURL(file);
+        } else {
+            previewArea.textContent = '画像ファイルを選択してください。';
+        }
+    });
+
+</script>
+
 @endsection
 

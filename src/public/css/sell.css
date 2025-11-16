@@ -20,8 +20,15 @@
     margin-bottom: 10px;
     font-size: 24px;
 }
+.sell-image-preview img {
+    width: 80%;
+    max-height: 130px;
+    object-fit: contain;
+    margin-bottom: 10px;
+    border-radius: 4px;
+}
 
-.sell-image-drop {
+.sell-image {
     border: 1px dashed #ccc;
     background: #fff;
     height: 140px;
@@ -29,17 +36,21 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
 }
 
-.sell-image-drop__text {
+.sell-image__btn {
     background: #fff;
-    border: 1px solid #F45B5B;
-    color: #F45B5B;
+    border: 1px solid #FF5555;
+    color: #FF5555;
     padding: 6px 16px;
     border-radius: 4px;
 }
-
+.sell-image__btn:hover{
+    cursor: pointer;
+}
+.img__btn{
+    display: none;
+}
 .sell-divider {
     border: none;
     border-top: 1px solid #ddd;
@@ -90,7 +101,7 @@
     font-size: 30px;
     color: #5F5F5F;
     border-bottom: 1px solid #5F5F5F;
-    
+
 }
 
 .sell__select,
@@ -146,7 +157,9 @@
     cursor: pointer;
     margin-top: 8px;
 }
-
+.sell-submit:hover {
+    opacity: 0.9;
+}
 .form-error {
     color: #e11d48;
     font-size: 12px;

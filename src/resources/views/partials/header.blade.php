@@ -12,7 +12,7 @@
                 <button type="submit" class="nav__logout">ログアウト</button>
             </form>
         </li>
-        <li class="nav__item">マイページ</li>
+        <li class="nav__item"><a href="{{route('mypage')}}" class="nav__btn">マイページ</li>
         <li class="nav__item2"><a href="{{route('sell')}}" class="nav__item2-sell">出品</a></li>
 
     </ul>

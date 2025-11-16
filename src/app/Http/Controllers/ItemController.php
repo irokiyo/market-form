@@ -8,6 +8,9 @@ use App\Http\Requests\ExhibitionRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Profile;
 use App\Models\Category;
+use App\Models\Item;
+use App\Models\User;
+use App\Models\Order;
 
 
 
@@ -43,13 +46,28 @@ class ItemController extends Controller
     //出品商品登録
     public function sellCreate(ExhibitionRequest $request)
     {
-        
+        $item = $request->only(['name','brand','price','description','condition']);
+        $item['user_id'] = auth()->id();
+        $path = $request->file('img_url')->store('items', 'public');
+            $item['img_url'] = $path;
+
+        $item=Item::create($item);
+
+        if ($request->filled('categories')) {
+        $item->categories()->sync($request->input('categories'));
+        }
+
         return redirect()->route('mypage');
     }
     //マイページ画面表示
     public function mypage()
     {
-        return view('profile');
+        $user = Auth::user(); // 現在ログイン中のユーザーを取得
+        $profile = Profile::where('user_id', $user->id)->first();
+        $items = Item::where('user_id', $user->id)->get();
+        $orders = Order::with('item')->where('user_id', $user->id)->get();
+
+        return view('profile',compact('user','profile','items','orders'));
     }
 
 
