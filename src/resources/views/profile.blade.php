@@ -35,8 +35,8 @@ $tab = request('tab', 'sell');
 
     <div class="mypage__tabs">
         <ul class="tabs__list">
-            <li><a href="{{route('mypage', ['tab' => 'sell'])}}" class="tab__sell">出品した商品</a></li>
-            <li><a href="{{route('mypage', ['tab' => 'order'])}}" class="tab__sell">購入した商品</a></li>
+            <li><a href="{{route('mypage', ['tab' => 'sell'])}}" class="tab {{ $tab === 'sell' ? 'is-active' : '' }}">出品した商品</a></li>
+            <li><a href="{{route('mypage', ['tab' => 'order'])}}" class="tab {{ $tab === 'order' ? 'is-active' : '' }}">購入した商品</a></li>
         </ul>
     </div>
 

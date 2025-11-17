@@ -62,7 +62,7 @@ class ItemController extends Controller
     //マイページ画面表示
     public function mypage()
     {
-        $user = Auth::user(); // 現在ログイン中のユーザーを取得
+        $user = Auth::user();
         $profile = Profile::where('user_id', $user->id)->first();
         $items = Item::where('user_id', $user->id)->get();
         $orders = Order::with('item')->where('user_id', $user->id)->get();
