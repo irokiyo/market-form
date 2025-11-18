@@ -19,15 +19,10 @@ class ItemController extends Controller
     //商品一覧画面（トップ画面）
     public function index()
     {
-        return view('index');
-    }
-    public function login()
-    {
-        return view('auth.login');
-    }
-    public function register()
-    {
-        return view('auth.register');
+        $user = Auth::user();
+        $items = Item::all();
+
+        return view('index',compact('user','items'));
     }
     public function show()
     {
@@ -67,7 +62,7 @@ class ItemController extends Controller
         $items = Item::where('user_id', $user->id)->get();
         $orders = Order::with('item')->where('user_id', $user->id)->get();
 
-        return view('profile',compact('user','profile','items','orders'));
+        return view('mypage',compact('user','profile','items','orders'));
     }
 
 
@@ -77,7 +72,7 @@ class ItemController extends Controller
     public function showMypage()
     {
         $profile = Profile::where('user_id', Auth::id())->first();
-        return view('mypage',compact('profile'));
+        return view('profile',compact('profile'));
     }
     //プロフィール登録
     public function storeMypage(ProfileRequest $request)

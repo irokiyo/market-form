@@ -22,7 +22,7 @@
     border-bottom: 2px solid #f15b5b;
 }
 
-/* 商品一覧 */
+
 .items-list {
     display: flex;
     gap: 30px;
@@ -31,6 +31,9 @@
 
 .item-card {
     width: 150px;
+}
+.item-card:hover{
+    opacity: 0.9;
 }
 
 .item-img {
@@ -47,4 +50,8 @@
 
 .item-name {
     font-size: 13px;
+    color: #000;
+}
+.show-link{
+    text-decoration: none;
 }

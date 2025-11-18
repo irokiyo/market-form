@@ -13,7 +13,6 @@
 
 @section('content')
 <div class="items-page">
-    {{-- タブ部分 --}}
     <div class="tab-menu">
         <a href="#" class="tab-item">おすすめ</a>
         <a href="#" class="tab-item">マイリスト</a>
@@ -21,19 +20,16 @@
 
     {{-- 商品一覧 --}}
     <div class="items-list">
-        {{-- ここは本当は @foreach($items as $item) ... にするところ --}}
+        @foreach($items as $item)
         <div class="item-card">
-            <div class="item-img">商品画像</div>
-            <p class="item-name">商品名</p>
+            <a href="#" class="show-link">
+                <div class="item-img">
+                    <img src="{{ \Storage::url($item->img_url) }}" alt="プロフィール画像" class="item-img">
+                </div>
+                <p class="item-name">{{$item->name}}</p>
+            </a>
         </div>
-        <div class="item-card">
-            <div class="item-img">商品画像</div>
-            <p class="item-name">商品名</p>
-        </div>
-        <div class="item-card">
-            <div class="item-img">商品画像</div>
-            <p class="item-name">商品名</p>
-        </div>
+        @endforeach
     </div>
 </div>
 @endsection
