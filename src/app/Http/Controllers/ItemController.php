@@ -24,9 +24,11 @@ class ItemController extends Controller
 
         return view('index',compact('user','items'));
     }
-    public function show()
+    public function show($item_id)
     {
-        return view('show');
+        $item = $item = Item::findOrFail($item_id);
+        
+        return view('show',compact('item'));
     }
     public function address()
     {

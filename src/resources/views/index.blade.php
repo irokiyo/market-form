@@ -22,7 +22,7 @@
     <div class="items-list">
         @foreach($items as $item)
         <div class="item-card">
-            <a href="#" class="show-link">
+            <a href="{{ route('show', $item->id) }}" class="show-link">
                 <div class="item-img">
                     <img src="{{ \Storage::url($item->img_url) }}" alt="プロフィール画像" class="item-img">
                 </div>
