@@ -18,6 +18,7 @@ use App\Http\Controllers\ItemController;
 Route::middleware('auth')->group(function () {
     Route::get('/', [ItemController::class, 'index'])->name('index'); //商品一覧画面（トップ画面）
     Route::get('/item/{item_id}', [ItemController::class, 'show'])->name('show'); //商品詳細画面
+    Route::post('/item/{item_id}', [ItemController::class, 'commentCreate'])->name('comment.create'); //商品詳細画面
     Route::get('/purchase/{item_id}', [ItemController::class, 'purchase'])->name('purchase'); //商品購入画面
     Route::get('/purchase/address/{item_id}', [ItemController::class, 'address'])->name('purchase.address'); //住所変更ページ
     Route::get('/sell', [ItemController::class, 'sell'])->name('sell'); //商品出品画面

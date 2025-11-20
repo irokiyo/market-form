@@ -50,7 +50,7 @@
             <p class="sell__label">商品の状態</p>
             <select name="condition" class="sell__select">
                 <option value="">選択してください</option>
-                <option value="良好">良好品</option>
+                <option value="良好">良好</option>
                 <option value="目立った傷や汚れなし">目立った傷や汚れなし</option>
                 <option value="やや傷や汚れあり">やや傷や汚れあり</option>
                 <option value="状態が悪い">状態が悪い</option>

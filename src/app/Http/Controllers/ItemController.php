@@ -8,6 +8,7 @@ use App\Http\Requests\ExhibitionRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Profile;
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\Item;
 use App\Models\User;
 use App\Models\Order;
@@ -24,22 +25,50 @@ class ItemController extends Controller
 
         return view('index',compact('user','items'));
     }
+
+    //商品詳細画面
     public function show($item_id)
     {
+        $user = Auth::user();
         $item = $item = Item::findOrFail($item_id);
-        
-        return view('show',compact('item'));
+
+        return view('show',compact('item','user'));
     }
+    //コメント登録
+    public function commentCreate(Request $request,$item_id)
+    {
+        $comment = [
+            'item_id' => $item_id,
+            'user_id' => Auth::id(),
+            'comment' => $request->comment,
+        ];
+
+        Comment::create($comment);
+
+        return redirect()->route('show', $item_id);
+    }
+
+    //購入画面
+    public function purchase($item_id)
+    {
+        $item = $item = Item::findOrFail($item_id);
+
+        return view('purchase',compact('item'));
+    }
+
     public function address()
     {
         return view('address');
     }
+
+
     //出品画面の表示
     public function sell()
     {
         $categories=Category::all();
         return view('sell',compact('categories'));
     }
+
     //出品商品登録
     public function sellCreate(ExhibitionRequest $request)
     {
@@ -56,6 +85,7 @@ class ItemController extends Controller
 
         return redirect()->route('mypage');
     }
+
     //マイページ画面表示
     public function mypage()
     {
@@ -67,15 +97,13 @@ class ItemController extends Controller
         return view('mypage',compact('user','profile','items','orders'));
     }
 
-
-
-
     //プロフィール登録画面表示(初回)
     public function showMypage()
     {
         $profile = Profile::where('user_id', Auth::id())->first();
         return view('profile',compact('profile'));
     }
+
     //プロフィール登録
     public function storeMypage(ProfileRequest $request)
     {
@@ -93,8 +121,5 @@ class ItemController extends Controller
         return redirect()->route('index');
     }
 
-    public function purchase()
-    {
-        return view('purchase');
-    }
+    
 }
