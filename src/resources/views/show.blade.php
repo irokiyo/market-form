@@ -26,12 +26,12 @@
             <div class="item-actions">
                 <div class="item__actions-icons">
                     <div class="item-like">
-                        <span class="item__like-icon"><img src="{{asset('/images/like.png')}}" alt="お気に入り" class="action__btn"></span>
+                        <button class="item__like-icon"><img src="{{asset('/images/like.png')}}" alt="お気に入り" class="action__btn"></button>
                         <span class="item__like-count">3</span>
                     </div>
                     <div class="item__comment">
                         <span class="item__comment-icon"><img src="{{asset('/images/comment.png')}}" alt="コメント" class="action__btn"></span>
-                        <span class="item__comment-count">1</span>
+                        <span class="item__comment-count">{{$item->comments->count()}}</span>
                     </div>
                 </div>
                 <div class="purchase">
@@ -66,14 +66,22 @@
             </table>
 
             <section class="item-section">
-                <h3 class="section-title">コメント（1）</h3>
+                <h3 class="section-title">コメント({{$item->comments->count()}})</h3>
 
                 <div class="comment">
-                    <div class="comment__icon"></div>
-                    <div class="comment__body">
-                        <p class="comment__name">admin</p>
-                        <p class="comment__text">こちらにコメントが入ります。</p>
+                    @foreach($item->comments as $comment)
+                    <div class="comment__icon">
+                        @if(optional($comment->user->profile)->img_url)
+                        <img src="{{ Storage::url($comment->user->profile->img_url) }}" class="comment__icon-img">
+                        @else
+                        <img src="{{ asset('/images/Ellipse 1.png') }}" class="comment__icon-img">
+                        @endif
+                        <p class="comment__name">{{$comment->user->name}}</p>
                     </div>
+                    <div class="comment__body">
+                        <p class="comment__text">{{$comment->comment}}</p>
+                    </div>
+                    @endforeach
                 </div>
             </section>
 

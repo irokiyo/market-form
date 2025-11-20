@@ -48,13 +48,15 @@ class ItemController extends Controller
         return redirect()->route('show', $item_id);
     }
 
-    //購入画面
+    //購入画面表示
     public function purchase($item_id)
     {
         $item = $item = Item::findOrFail($item_id);
 
         return view('purchase',compact('item'));
     }
+
+    
 
     public function address()
     {

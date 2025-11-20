@@ -53,6 +53,11 @@
     gap: 16px;
     margin-bottom: 24px;
 }
+.item__like-icon{
+    text-decoration: none;
+    border: none;
+    background: transparent;
+}
 
 .item__actions-icons {
     display: flex;
@@ -63,6 +68,9 @@
     height: 30px;
     margin-bottom: 20px;
 }
+.action__btn:hover{
+    opacity: 0.9;
+}
 
 .btn {
     background: #f45b5b;
@@ -70,6 +78,9 @@
     padding: 10px 32px;
     border-radius: 4px;
     display: inline-block;
+}
+.btn:hover{
+    opacity: 0.9;
 }
 
 .item-section {
@@ -106,21 +117,23 @@
 }
 
 .comment {
-    display: flex;
+    display: block;
     gap: 12px;
     margin-bottom: 12px;
 }
+.comment__icon{
+    display: flex;
+}
 
-.comment__icon {
-    width: 36px;
-    height: 36px;
+.comment__icon-img {
+    width: 30px;
+    height: 30px;
     border-radius: 9999px;
-    background: #ccc;
 }
 
 .comment__name {
     font-weight: 600;
-    margin-bottom: 4px;
+    font-size: 16px;
 }
 
 .comment-form__textarea {

@@ -28,4 +28,8 @@ class Item extends Model
     {
         return $this->belongsToMany(Category::class, 'category_items');
     }
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }
