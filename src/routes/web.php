@@ -26,6 +26,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/mypage/profile', [ItemController::class, 'showMypage'])->name('profile.show'); //プロフィール画面編集（初回）画面
     Route::post('/mypage/profile', [ItemController::class, 'storeMypage'])->name('profile.store'); //プロフィール画面情報登録
+    Route::patch('/mypage/profile', [ItemController::class, 'storeUpdate'])->name('profile.update');//プロフィール画面情報更新
 
     Route::get('/mypage', [ItemController::class, 'mypage'])->name('mypage'); //マイページ画面
 });

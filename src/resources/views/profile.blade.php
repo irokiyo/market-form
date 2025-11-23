@@ -15,12 +15,19 @@
 <div class="profile">
     <h2 class="profile-title">プロフィール設定</h2>
 
-    <form action="{{route('profile.store')}}" method="POST" class="profile-form" enctype="multipart/form-data">
+    <form action="{{$profile ? route('profile.update') : route('profile.store')}}" method="POST" class="profile-form" enctype="multipart/form-data">
         @csrf
+        @if($profile)
+        @method('PATCH')
+        @endif
 
         <div class="avatar">
             <div class="avatar-circle">
-                <img id="preview-image" src="{{ asset('/images/Ellipse 1.png') }}" alt="グレーの丸" class="avatar-img">
+                @if(!empty($profile?->img_url))
+                <img src="{{ \Storage::url($profile->img_url) }}" . id="preview-image" alt="プロフィール画像" class="avatar__img">
+                @else
+                <img src="{{asset('/images/Ellipse 1.png')}}" id="preview-image" alt="プロフィール画像" class="avatar__img">
+                @endif
             </div>
             <label class="avatar-button">
                 画像を選択する

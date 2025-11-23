@@ -56,7 +56,6 @@ class ItemController extends Controller
         return view('purchase',compact('item'));
     }
 
-    
 
     public function address()
     {
@@ -121,6 +120,21 @@ class ItemController extends Controller
         Profile::create($profile);
 
         return redirect()->route('index');
+    }
+    //プロフィール更新
+    public function storeUpdate(ProfileRequest $request)
+    {
+        $profile = $request->only(['name','postcode','address','building']);
+        $profile['user_id'] = auth()->id();
+
+        if($request->hasFile('img_url')) {
+            $path = $request->file('img_url')->store('profiles', 'public');
+            $profile['img_url'] = $path;
+        }
+
+        profile::where('user_id', auth()->id()) -> update($profile);
+
+        return redirect()->route('mypage');
     }
 
     

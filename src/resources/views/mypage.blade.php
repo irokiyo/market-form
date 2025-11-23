@@ -26,7 +26,7 @@ $tab = request('tab', 'sell');
             @endif
         </div>
         <div class="mypage__info">
-            <p class="mypage__name">{{ $user->name }}</p>
+            <p class="mypage__name">{{ $profile->name }}</p>
         </div>
         <div class="mypage__btn">
             <a href="{{ route('profile.show') }}" class="mypage__edit-btn">プロフィールを編集</a>
