@@ -23,8 +23,8 @@ class ItemController extends Controller
     public function index(Request $request)
     {
         $user = Auth::user();
-        $items = Item::all();
-        $favorites = Favorite::all();
+        $items = Item::where('user_id','!=',$user->id )->get();
+        $favorites = Favorite::with('item')->where('user_id',$user->id )->get();
         $tab = $request->query('tab', '');
 
         return view('index',compact('user','items','favorites','tab'));
