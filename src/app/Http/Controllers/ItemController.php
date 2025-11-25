@@ -12,25 +12,29 @@ use App\Models\Comment;
 use App\Models\Item;
 use App\Models\User;
 use App\Models\Order;
+use App\Models\PaymentMethod;
+use App\Models\Favorite;
 
 
 
 class ItemController extends Controller
 {
     //商品一覧画面（トップ画面）
-    public function index()
+    public function index(Request $request)
     {
         $user = Auth::user();
         $items = Item::all();
+        $favorites = Favorite::all();
+        $tab = $request->query('tab', '');
 
-        return view('index',compact('user','items'));
+        return view('index',compact('user','items','favorites','tab'));
     }
 
     //商品詳細画面
     public function show($item_id)
     {
         $user = Auth::user();
-        $item = $item = Item::findOrFail($item_id);
+        $item = Item::findOrFail($item_id);
 
         return view('show',compact('item','user'));
     }
@@ -51,9 +55,12 @@ class ItemController extends Controller
     //購入画面表示
     public function purchase($item_id)
     {
-        $item = $item = Item::findOrFail($item_id);
+        $user = Auth::user();
+        $item  = Item::findOrFail($item_id);
+        $payment_methods = PaymentMethod::all();
+        $profile = Profile::where('user_id', Auth::id())->first();
 
-        return view('purchase',compact('item'));
+        return view('purchase',compact('item','user','payment_methods','profile'));
     }
 
 
@@ -88,14 +95,15 @@ class ItemController extends Controller
     }
 
     //マイページ画面表示
-    public function mypage()
+    public function mypage(Request $request)
     {
         $user = Auth::user();
         $profile = Profile::where('user_id', $user->id)->first();
         $items = Item::where('user_id', $user->id)->get();
         $orders = Order::with('item')->where('user_id', $user->id)->get();
+        $page = $request->query('page', 'sell');
 
-        return view('mypage',compact('user','profile','items','orders'));
+        return view('mypage',compact('user','profile','items','orders','page'));
     }
 
     //プロフィール登録画面表示(初回)
@@ -136,6 +144,4 @@ class ItemController extends Controller
 
         return redirect()->route('mypage');
     }
-
-    
 }

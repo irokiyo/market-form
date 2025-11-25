@@ -2,7 +2,6 @@
     width: 100%;
 }
 
-/* タブ */
 .tab-menu {
     display: flex;
     gap: 20px;
@@ -10,16 +9,15 @@
     border-bottom: 1px solid #ccc;
 }
 
-.tab-item {
-    font-size: 14px;
+.tab {
+    font-size: 24px;
     color: #000;
     text-decoration: none;
     padding-bottom: 10px;
 }
 
-.tab-item.active {
+.tab.is-active {
     color: #FF0000;
-    border-bottom: 2px solid #f15b5b;
 }
 
 

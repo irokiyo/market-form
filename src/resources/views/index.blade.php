@@ -12,14 +12,19 @@
 
 
 @section('content')
+
+@php
+$tab = request('tab', '');
+@endphp
+
 <div class="items-page">
     <div class="tab-menu">
-        <a href="#" class="tab-item">おすすめ</a>
-        <a href="#" class="tab-item">マイリスト</a>
+        <a href="{{route('index', ['tab' => ''])}}" class="tab {{ $tab === '' ? 'is-active' : '' }}" >おすすめ</a>
+        <a href="{{route('index', ['tab' => 'mylist'])}}" class="tab {{ $tab === 'mylist' ? 'is-active' : '' }}">マイリスト</a>
     </div>
 
-    {{-- 商品一覧 --}}
-    <div class="items-list">
+    {{-- おすすめ --}}
+    <div class="items-list {{ $tab==='' ? '' : 'is-hidden' }}" id="tab-">
         @foreach($items as $item)
         <div class="item-card">
             <a href="{{ route('show', $item->id) }}" class="show-link">
@@ -31,5 +36,19 @@
         </div>
         @endforeach
     </div>
+    {{-- マイリスト --}}
+    <div class="items-list {{ $tab==='mylist' ? '' : 'is-hidden' }}">
+        @foreach($favorites as $favorite)
+        <div class="item-card">
+            <a href="{{ route('show', $favorite->item->id) }}" class="show-link">
+                <div class="item-img">
+                    <img src="{{ \Storage::url($favorite->item->img_url) }}" alt="プロフィール画像" class="item-img">
+                </div>
+                <p class="item-name">{{$favorite->item->name}}</p>
+            </a>
+        </div>
+        @endforeach
+    </div>
+
 </div>
 @endsection

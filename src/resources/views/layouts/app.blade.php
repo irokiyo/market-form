@@ -10,7 +10,7 @@
 </head>
 <body>
     <header class="header">
-        <h1 class="header__ttl"><img src="{{ asset('/images/Vector (2).png') }}" alt="ロゴ" class="ttl-img1"><img src="{{ asset('/images/Group.png') }}" alt="名前" class="ttl-img2">
+        <a href="{{route('index')}}" class="header__link"><h1 class="header__ttl"><img src="{{ asset('/images/Vector (2).png') }}" alt="ロゴ" class="ttl-img1"><img src="{{ asset('/images/Group.png') }}" alt="名前" class="ttl-img2"></a>
         </h1>
         @yield('header')
     </header>

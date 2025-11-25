@@ -15,60 +15,55 @@
 <div class="purchase">
     <div class="purchase__inner">
 
-        {{-- 左カラム --}}
         <div class="purchase__left">
 
-            {{-- 商品情報 --}}
             <div class="purchase-item">
                 <div class="purchase-item__image">
-                    {{-- 実際は $item->image_path などに差し替え --}}
-                    <div class="purchase-item__image--placeholder">商品画像</div>
+                    <img src="{{ \Storage::url($item->img_url) }}" alt="商品画像" class="show-left__img">
                 </div>
                 <div class="purchase-item__info">
-                    <p class="purchase-item__name">商品名</p>
-                    <p class="purchase-item__price">¥ 47,000</p>
+                    <p class="purchase-item__name">{{$item->name}}</p>
+                    <p class="purchase-item__price">¥ {{$item->price}}</p>
                 </div>
             </div>
 
             <hr class="purchase__line">
 
-            {{-- 支払い方法 --}}
             <div class="purchase-block">
-                <h2 class="purchase-block__title">支払い方法</h2>
-                <select name="payment_method" class="purchase-select">
+                <h2 class="purchase-block__ttl">支払い方法</h2>
+                <select name="payment_method" class="purchase-select" id="payment_method_select">
+
                     <option value="">選択してください</option>
-                    <option value="conveni">コンビニ払い</option>
-                    <option value="card">クレジットカード</option>
-                    <option value="bank">銀行振込</option>
+                    @foreach ($payment_methods as $payment_method)
+                    <option value="{{ $payment_method->id }}">{{ $payment_method->payment_method }}</option>
+                    @endforeach
                 </select>
             </div>
 
             <hr class="purchase__line">
 
-            {{-- 配送先 --}}
             <div class="purchase-block">
                 <div class="purchase-block__head">
                     <h2 class="purchase-block__title">配送先</h2>
                     <a href="#" class="purchase-block__link">変更する</a>
                 </div>
                 <p class="purchase-address">
-                    〒 XXX-YYYY<br>
-                    ここには住所と建物が入ります
+                    〒 {{$profile->postcode}}<br>
+                    {{$profile->address}}<br>
+                    {{$profile->building}}
                 </p>
             </div>
 
         </div>
 
-        {{-- 右カラム --}}
         <div class="purchase__right">
             <div class="purchase-summary">
                 <div class="purchase-summary__row">
                     <span class="purchase-summary__label">商品代金</span>
-                    <span class="purchase-summary__value">¥ 47,000</span>
+                    <span class="purchase-summary__value">¥ {{$item->price}}</span>
                 </div>
                 <div class="purchase-summary__row">
-                    <span class="purchase-summary__label">支払い方法</span>
-                    <span class="purchase-summary__value">コンビニ払い</span>
+                    <p class="purchase-summary__label">支払い方法</p><span class="purchase-summary__label" id="payment_method_label"></span>
                 </div>
             </div>
 
@@ -77,5 +72,12 @@
 
     </div>
 </div>
+<script>
+    document.getElementById('payment_method_select').addEventListener('change', function() {
+        const selectedText = this.options[this.selectedIndex].text;
+        document.getElementById('payment_method_label').textContent = selectedText;
+    });
+
+</script>
 @endsection
 

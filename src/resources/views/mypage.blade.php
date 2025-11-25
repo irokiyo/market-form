@@ -12,9 +12,6 @@
 
 
 @section('content')
-@php
-$tab = request('tab', 'sell');
-@endphp
 
 <div class="mypage">
     <div class="mypage__header">
@@ -35,14 +32,14 @@ $tab = request('tab', 'sell');
 
     <div class="mypage__tabs">
         <ul class="tabs__list">
-            <li><a href="{{route('mypage', ['tab' => 'sell'])}}" class="tab {{ $tab === 'sell' ? 'is-active' : '' }}">出品した商品</a></li>
-            <li><a href="{{route('mypage', ['tab' => 'order'])}}" class="tab {{ $tab === 'order' ? 'is-active' : '' }}">購入した商品</a></li>
+            <li><a href="{{route('mypage', ['page' => 'sell'])}}" class="page {{ $page === 'sell' ? 'is-active' : '' }}">出品した商品</a></li>
+            <li><a href="{{route('mypage', ['page' => 'buy'])}}" class="page {{ $page === 'buy' ? 'is-active' : '' }}">購入した商品</a></li>
         </ul>
     </div>
     <div class="line"></div>
 
     {{-- 出品した商品 --}}
-    <div class="mypage__list {{ $tab==='sell' ? '' : 'is-hidden' }}" id="tab-sell">
+    <div class="mypage__list {{ $page==='sell' ? '' : 'is-hidden' }}" id="tab-sell">
         <div class="mypage-grid">
             @foreach($items as $item)
             <div class="item-card">
@@ -54,7 +51,7 @@ $tab = request('tab', 'sell');
     </div>
 
     {{-- 購入した商品 --}}
-    <div class="mypage__list {{ $tab==='order' ? '' : 'is-hidden' }}" id="tab-order">
+    <div class="mypage__list {{ $page==='buy' ? '' : 'is-hidden' }}" id="tab-order">
         <div class="mypage-grid">
             @foreach($orders as $order)
             <div class="item-card">
