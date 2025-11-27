@@ -53,7 +53,7 @@
 
             {{-- 商品の情報 --}}
             <table class="item__section">
-                <th class="table-title">商品の情報</th>
+                <h3 class="section-title">商品の情報</h3>
                 <tr class="table-row">
                     <td class="item-info-label">カテゴリー</td>
                     <td class="item-tags">
@@ -76,12 +76,17 @@
                 <div class="comment">
                     @foreach($item->comments as $comment)
                     <div class="comment__icon">
-                        @if(optional($comment->user->profile)->img_url)
-                        <img src="{{ Storage::url($comment->user->profile->img_url) }}" class="comment__icon-img">
+                        @php
+                        $profile = optional($comment->user->profile);
+                        @endphp
+
+                        @if($profile->img_url)
+                        <img src="{{ Storage::url($profile->img_url) }}" class="comment__icon-img">
                         @else
                         <img src="{{ asset('/images/Ellipse 1.png') }}" class="comment__icon-img">
                         @endif
-                        <p class="comment__name">{{$comment->user->name}}</p>
+
+                        <p class="comment__name">{{$comment->user->profile->name}}</p>
                     </div>
                     <div class="comment__body">
                         <p class="comment__text">{{$comment->comment}}</p>
@@ -95,7 +100,7 @@
                 <form action="{{route('comment.create',$item->id)}}" method="POST" class="comment-form">
                     @csrf
                     <textarea name="comment" rows="4" class="comment-form__textarea"></textarea>
-                    <button type="submit" class="btn">コメントを送信する</button>
+                    <button type="submit" class="btn-comment">コメントを送信する</button>
                 </form>
             </section>
         </div>

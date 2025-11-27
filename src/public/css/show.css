@@ -9,12 +9,15 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     column-gap: 40px;
+    margin: 20px;
 }
 
 .show-left__img {
-    width:90%;
-    flex: 0 0 360px;
-    margin: 10px;
+    width:80%;
+    height: 60%;
+    margin: 10px auto;
+    display: block;
+    
 }
 
 .item-image-placeholder {
@@ -80,12 +83,16 @@
     opacity: 0.9;
 }
 
-.btn {
+.btn,.btn-comment {
     background: #f45b5b;
     color: #fff;
     padding: 10px 32px;
     border-radius: 4px;
     display: inline-block;
+    text-decoration: none;
+    width: 100%;
+    text-align: center;
+    border: #f45b5b;
 }
 .btn:hover{
     opacity: 0.9;
@@ -141,7 +148,12 @@
 
 .comment__name {
     font-weight: 600;
-    font-size: 16px;
+    font-size: 20px;
+}
+.comment__text{
+    background-color: #E5E5E5;
+    padding: 20px;
+    border-radius: 4px;
 }
 
 .comment-form__textarea {
