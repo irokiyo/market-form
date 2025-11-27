@@ -32,4 +32,14 @@ class Item extends Model
     {
         return $this->hasMany(Comment::class);
     }
+    public function favoriteUsers()
+    {
+        return $this->belongsToMany(User::class, 'favorites');
+    }
+    public function liked()
+    {
+    return auth()->check()
+        && auth()->user()->favorites()->where('item_id', $this->id)->exists();
+    }
+
 }

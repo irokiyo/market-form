@@ -51,6 +51,29 @@ class ItemController extends Controller
 
         return redirect()->route('show', $item_id);
     }
+    public function favorite(Request $request,$item_id)
+    {
+
+        $userId = Auth::id();
+
+        $existing = Favorite::where('user_id', $userId)
+            ->where('item_id', $item_id)
+            ->first();
+
+        if ($existing) {
+        $existing->delete();
+        }
+        else {
+        Favorite::create([
+            'user_id' => $userId,
+            'item_id' => $item_id,
+        ]);
+        }
+        return redirect()->route('show', $item_id);
+    }
+
+
+
 
     //購入画面表示
     public function purchase($item_id)

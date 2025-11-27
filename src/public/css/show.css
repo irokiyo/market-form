@@ -53,15 +53,23 @@
     gap: 16px;
     margin-bottom: 24px;
 }
+.item__actions-icons{
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+}
 .item__like-icon{
     text-decoration: none;
     border: none;
     background: transparent;
 }
 
-.item__actions-icons {
+.item-like,.item__comment{
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
     display: flex;
-    gap: 16px;
+
 }
 .action__btn{
     width: 30px;

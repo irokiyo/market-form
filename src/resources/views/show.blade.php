@@ -26,11 +26,16 @@
             <div class="item-actions">
                 <div class="item__actions-icons">
                     <div class="item-like">
-                        <button class="item__like-icon"><img src="{{asset('/images/like.png')}}" alt="お気に入り" class="action__btn"></button>
-                        <span class="item__like-count">3</span>
+                        <form action="{{route('favorite',$item->id)}}" method="POST" class="favorite-form">
+                        @csrf
+                            <button class="item__like-icon" type="submit"><i class="fa-2xl {{$item->liked() ? 'fa-solid fa-heart' : 'fa-regular fa-heart'}}"></i></button>
+
+                        </form>
+                        <span class="item__like-count">{{$item->favoriteUsers->count()}}</span>
                     </div>
                     <div class="item__comment">
-                        <span class="item__comment-icon"><img src="{{asset('/images/comment.png')}}" alt="コメント" class="action__btn"></span>
+                        <span class="item__comment-icon"><i class="fa-2xl fa-regular fa-comment"></i></span>
+
                         <span class="item__comment-count">{{$item->comments->count()}}</span>
                     </div>
                 </div>
