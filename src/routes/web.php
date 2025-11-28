@@ -13,11 +13,11 @@ use App\Http\Controllers\ItemController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('/', [ItemController::class, 'index'])->name('index'); //商品一覧画面（トップ画面）
+Route::get('/search', [ItemController::class, 'search'])->name('search'); //商品検索
+Route::get('/item/{item_id}', [ItemController::class, 'show'])->name('show'); //商品詳細画面
 
 Route::middleware('auth')->group(function () {
-    Route::get('/', [ItemController::class, 'index'])->name('index'); //商品一覧画面（トップ画面）
-    Route::get('/item/{item_id}', [ItemController::class, 'show'])->name('show'); //商品詳細画面
     Route::post('/item/{item_id}', [ItemController::class, 'commentCreate'])->name('comment.create'); //コメント作成
     Route::post('/favorite/{item_id}', [ItemController::class, 'favorite'])->name('favorite');//お気に入り登録
     Route::get('/purchase/{item_id}', [ItemController::class, 'purchase'])->name('purchase'); //商品購入画面

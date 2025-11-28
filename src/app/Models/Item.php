@@ -41,5 +41,13 @@ class Item extends Model
     return auth()->check()
         && auth()->user()->favorites()->where('item_id', $this->id)->exists();
     }
+    public function scopeKeywordSearch($query ,$keyword)
+    {
+        if (!empty($keyword)) {
+        $query->where('name', 'like', "%{$keyword}%");
+        }
+        return $query;
+    }
+
 
 }

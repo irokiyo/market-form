@@ -19,8 +19,8 @@ $tab = request('tab', '');
 
 <div class="items-page">
     <div class="tab-menu">
-        <a href="{{route('index', ['tab' => ''])}}" class="tab {{ $tab === '' ? 'is-active' : '' }}" >おすすめ</a>
-        <a href="{{route('index', ['tab' => 'mylist'])}}" class="tab {{ $tab === 'mylist' ? 'is-active' : '' }}">マイリスト</a>
+        <a href="{{route('search', ['tab' => '', 'keyword' => request('keyword')])}}" class="tab {{ $tab === '' ? 'is-active' : '' }}">おすすめ</a>
+        <a href="{{route('search', ['tab' => 'mylist', 'keyword' => request('keyword')])}}" class="tab {{ $tab === 'mylist' ? 'is-active' : '' }}">マイリスト</a>
     </div>
 
     {{-- おすすめ --}}
@@ -40,11 +40,11 @@ $tab = request('tab', '');
     <div class="items-list {{ $tab==='mylist' ? '' : 'is-hidden' }}">
         @foreach($favorites as $favorite)
         <div class="item-card">
-            <a href="{{ route('show', $favorite->item->id) }}" class="show-link">
+            <a href="{{ route('show', $favorite->id) }}" class="show-link">
                 <div class="item-img">
-                    <img src="{{ \Storage::url($favorite->item->img_url) }}" alt="プロフィール画像" class="item-img">
+                    <img src="{{ \Storage::url($favorite->img_url) }}" alt="プロフィール画像" class="item-img">
                 </div>
-                <p class="item-name">{{$favorite->item->name}}</p>
+                <p class="item-name">{{$favorite->name}}</p>
             </a>
         </div>
         @endforeach

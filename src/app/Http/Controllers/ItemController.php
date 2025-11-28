@@ -19,15 +19,32 @@ use App\Models\Favorite;
 
 class ItemController extends Controller
 {
+    //検索
+    public function search(Request $request)
+    {
+        $items = Item::keywordSearch($request->keyword)->get();
+
+        $favorites = auth()->check()
+        ? auth()->user()->favorites()->keywordSearch($request->keyword)->get()
+        : collect();
+
+
+        return view('index', compact('items','favorites'));
+    }
     //商品一覧画面（トップ画面）
     public function index(Request $request)
     {
-        $user = Auth::user();
-        $items = Item::where('user_id','!=',$user->id )->get();
-        $favorites = Favorite::with('item')->where('user_id',$user->id )->get();
+        $userId = auth()->id();
+        $items = Item::when($userId, function ($q) use ($userId) {
+            return $q->where('user_id', '!=', $userId);
+        })
+            ->get();
+        $favorites = auth()->check()
+        ? auth()->user()->favorites()->keywordSearch($request->keyword)->get()
+        : collect();
         $tab = $request->query('tab', '');
 
-        return view('index',compact('user','items','favorites','tab'));
+        return view('index',compact('items','favorites','tab'));
     }
 
     //商品詳細画面
@@ -51,6 +68,7 @@ class ItemController extends Controller
 
         return redirect()->route('show', $item_id);
     }
+    //お気に入り登録
     public function favorite(Request $request,$item_id)
     {
 
