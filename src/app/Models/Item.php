@@ -48,6 +48,14 @@ class Item extends Model
         }
         return $query;
     }
+    public function order()
+    {
+        return $this->hasOne(Order::class);
+    }
+    public function soldOut()
+    {
+        return $this->order()-> exits();
+    }
 
 
 }
