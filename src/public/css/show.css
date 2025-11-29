@@ -163,4 +163,9 @@
     padding: 8px;
     margin-bottom: 12px;
 }
+.form-error {
+    color: #e11d48;
+    font-size: 12px;
+    margin-top: 4px;
+}
 

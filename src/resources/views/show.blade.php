@@ -102,6 +102,9 @@
                     <textarea name="comment" rows="4" class="comment-form__textarea"></textarea>
                     <button type="submit" class="btn-comment">コメントを送信する</button>
                 </form>
+                @error('comment')
+                <p class="form-error">{{ $message }}</p>
+                @enderror
             </section>
         </div>
     </div>

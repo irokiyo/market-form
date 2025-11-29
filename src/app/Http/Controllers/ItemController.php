@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProfileRequest;
 use App\Http\Requests\ExhibitionRequest;
+use App\Http\Requests\CommentRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Profile;
 use App\Models\Category;
@@ -56,7 +57,7 @@ class ItemController extends Controller
         return view('show',compact('item','user'));
     }
     //コメント登録
-    public function commentCreate(Request $request,$item_id)
+    public function commentCreate(CommentRequest $request,$item_id)
     {
         $comment = [
             'item_id' => $item_id,
