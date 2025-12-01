@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\ProfileRequest;
 use App\Http\Requests\ExhibitionRequest;
 use App\Http\Requests\CommentRequest;
+use App\Http\Requests\PurchaseRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Profile;
 use App\Models\Category;
@@ -103,6 +104,29 @@ class ItemController extends Controller
         $profile = Profile::where('user_id', Auth::id())->first();
 
         return view('purchase',compact('item','user','payment_methods','profile'));
+    }
+    //購入処理
+    public function purchaseStore(PurchaseRequest $request,$item_id)
+    {
+        $item = Item::findOrFail($item_id);
+        if ($item->order()->exists()){
+            return redirect()->route('show', $item_id)
+            ->with('error', 'この商品はすでに売り切れています。');
+        }
+
+        $order=
+        [
+            'item_id' => $item_id,
+            'user_id' => Auth::id(),
+            'payment_method_id'=> $request->payment_method,
+            'postcode'=> $request->postcode ,
+            'address'=> $request->address,
+            'building'=> $request->building,
+        ];
+
+        Order::create($order);
+
+        return redirect()->route('mypage');
     }
 
 

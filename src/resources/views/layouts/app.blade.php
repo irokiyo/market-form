@@ -16,6 +16,18 @@
         @yield('header')
     </header>
     <main class="main">
+        @if (session('error'))
+        <p class="flash flash-error">
+            {{ session('error') }}
+        </p>
+        @endif
+
+        @if (session('success'))
+        <p class="flash flash-success">
+            {{ session('success') }}
+        </p>
+        @endif
+
         @yield('content')
     </main>
 </body>

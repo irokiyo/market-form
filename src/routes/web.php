@@ -21,6 +21,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/item/{item_id}', [ItemController::class, 'commentCreate'])->name('comment.create'); //コメント作成
     Route::post('/favorite/{item_id}', [ItemController::class, 'favorite'])->name('favorite');//お気に入り登録
     Route::get('/purchase/{item_id}', [ItemController::class, 'purchase'])->name('purchase'); //商品購入画面
+    Route::post('/purchase/{item_id}', [ItemController::class, 'purchaseStore'])->name('purchase.store'); //商品購入処理
     Route::get('/purchase/address/{item_id}', [ItemController::class, 'address'])->name('purchase.address'); //住所変更ページ
     Route::get('/sell', [ItemController::class, 'sell'])->name('sell'); //商品出品画面
     Route::post('/sell', [ItemController::class, 'sellCreate'])->name('sell.create'); //商品出品の登録

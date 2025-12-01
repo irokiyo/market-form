@@ -52,9 +52,9 @@ class Item extends Model
     {
         return $this->hasOne(Order::class);
     }
-    public function soldOut()
+    public function getIsSoldOutAttribute()
     {
-        return $this->order()-> exits();
+        return $this->order()-> exists();
     }
 
 

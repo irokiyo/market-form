@@ -16,6 +16,9 @@
     <div class="show__inner">
 
         <div class="show-left">
+            @if ($item->is_sold_out)
+            <div class="sold-label">SOLD OUT</div>
+            @endif
             <img src="{{ \Storage::url($item->img_url) }}" alt="商品画像" class="show-left__img">
         </div>
 
