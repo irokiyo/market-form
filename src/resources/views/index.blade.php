@@ -45,7 +45,7 @@ $tab = request('tab', '');
         <div class="item-card">
             <a href="{{ route('show', $favorite->id) }}" class="show-link">
                 <div class="item-img">
-                    @if ($item->is_sold_out)
+                    @if ($favorite->is_sold_out)
                     <div class="sold-label">SOLD OUT</div>
                     @endif
                     <img src="{{ \Storage::url($favorite->img_url) }}" alt="プロフィール画像" class="item-img">

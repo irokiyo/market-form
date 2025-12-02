@@ -31,14 +31,18 @@
                     <div class="item-like">
                         <form action="{{route('favorite',$item->id)}}" method="POST" class="favorite-form">
                         @csrf
-                            <button class="item__like-icon" type="submit"><i class="fa-2xl {{$item->liked() ? 'fa-solid fa-heart' : 'fa-regular fa-heart'}}"></i></button>
-
+                            <button class="item__like-icon" type="submit">
+                                @if($item->liked())
+                                <img src="{{asset("/images/ハートロゴ_ピンク.png")}}" alt="ピンクのハート">
+                                @else
+                                <img src="{{asset("/images/ハートロゴ_デフォルト.png")}}" alt="無色のハート">
+                                @endif
+                            </button>
                         </form>
                         <span class="item__like-count">{{$item->favoriteUsers->count()}}</span>
                     </div>
                     <div class="item__comment">
-                        <span class="item__comment-icon"><i class="fa-2xl fa-regular fa-comment"></i></span>
-
+                        <img src="/images/ふきだしロゴ.png" alt="吹き出し">
                         <span class="item__comment-count">{{$item->comments->count()}}</span>
                     </div>
                 </div>
