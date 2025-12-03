@@ -79,6 +79,8 @@
                 </div>
             </div>
 
+            <hr class="purchase__line">
+
         </div>
 
         <div class="purchase__right">
