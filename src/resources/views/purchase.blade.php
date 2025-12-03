@@ -49,23 +49,33 @@
             <div class="purchase-block">
                 <div class="purchase-block__head">
                     <h2 class="purchase-block__title">配送先</h2>
-                    <a href="#" class="purchase-block__link">変更する</a>
+                    <a href="{{route('purchase.address',$item->id)}}" class="purchase-block__link">変更する</a>
                 </div>
-                <div class="purchase-address">
-                    <p>〒 {{$profile->postcode}}</p>
-                    <p>{{$profile->address}}</p>
-                    <p>{{$profile->building}}</p>
 
-                    <input type="hidden" name="postcode" value="{{ $profile->postcode }}">
-                    <input type="hidden" name="address" value="{{ $profile->address }}">
-                    <input type="hidden" name="building" value="{{ $profile->building }}">
+                @php
+                $temp = session('temp_address'); // 一時住所
+                $postcode = $temp['postcode'] ?? $profile->postcode;
+                $address = $temp['address'] ?? $profile->address;
+                $building = $temp['building'] ?? $profile->building;
+                @endphp
+
+                <div class="purchase-address">
+                    <p>〒 {{$postcode}}</p>
+                    <p>{{$address}}</p>
+                    <p>{{$building}}</p>
+
+                    <input type="hidden" name="postcode" value="{{ $postcode }}">
+                    <input type="hidden" name="address" value="{{ $address }}">
+                    <input type="hidden" name="building" value="{{ $building }}">
 
                     @error('postcode')
                     <p class="error-message">{{ $message }}</p>
                     @enderror
                     @error('address')
+
                     <p class="error-message">{{ $message }}</p>
                     @enderror
+                    
                 </div>
             </div>
 

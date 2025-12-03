@@ -66,8 +66,12 @@
 }
 
 .purchase-block__link {
-    font-size: 12px;
+    font-size: 20px;
     color: #0073ff;
+    text-decoration: none;
+}
+.purchase-block__link:hover {
+    opacity: 0.9;
 }
 
 .purchase-address {

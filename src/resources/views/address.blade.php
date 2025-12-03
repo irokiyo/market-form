@@ -15,10 +15,11 @@
 <div class="address-edit">
     <h2 class="address-edit__title">住所の変更</h2>
 
-    {{-- 実際は action に更新用のルートを入れる --}}
-    <form action="" method="POST" class="address-edit__form">
+
+
+
+    <form action="{{route("address.update",$item->id)}}" method="POST" class="address-edit__form">
         @csrf
-        @method('PATCH')
 
         <div class="form__group">
             <label for="postcode" class="form__label">郵便番号</label>

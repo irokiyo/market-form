@@ -12,13 +12,15 @@
 
 
 @section('content')
+
+@if ($item->is_sold_out)
+<div class="sold-label">SOLD OUT</div>
+@endif
+
 <div class="show">
     <div class="show__inner">
 
         <div class="show-left">
-            @if ($item->is_sold_out)
-            <div class="sold-label">SOLD OUT</div>
-            @endif
             <img src="{{ \Storage::url($item->img_url) }}" alt="商品画像" class="show-left__img">
         </div>
 
@@ -30,7 +32,7 @@
                 <div class="item__actions-icons">
                     <div class="item-like">
                         <form action="{{route('favorite',$item->id)}}" method="POST" class="favorite-form">
-                        @csrf
+                            @csrf
                             <button class="item__like-icon" type="submit">
                                 @if($item->liked())
                                 <img src="{{asset("/images/ハートロゴ_ピンク.png")}}" alt="ピンクのハート">
@@ -47,7 +49,7 @@
                     </div>
                 </div>
                 <div class="purchase">
-                <a href="{{route('purchase',$item->id)}}" class="btn">購入手続きへ</a>
+                    <a href="{{route('purchase',$item->id)}}" class="btn">購入手続きへ</a>
                 </div>
             </div>
 
@@ -58,14 +60,13 @@
                 </p>
             </section>
 
-            {{-- 商品の情報 --}}
             <table class="item__section">
                 <h3 class="section-title">商品の情報</h3>
                 <tr class="table-row">
                     <td class="item-info-label">カテゴリー</td>
                     <td class="item-tags">
                         @foreach($item->categories as $category)
-                            <span class="item-tag">{{$category->category}}</span>
+                        <span class="item-tag">{{$category->category}}</span>
                         @endforeach
                     </td>
                 </tr>

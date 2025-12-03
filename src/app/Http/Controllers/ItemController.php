@@ -16,6 +16,7 @@ use App\Models\User;
 use App\Models\Order;
 use App\Models\PaymentMethod;
 use App\Models\Favorite;
+use Illuminate\Support\Facades\Session;
 
 
 
@@ -92,9 +93,6 @@ class ItemController extends Controller
         return redirect()->route('show', $item_id);
     }
 
-
-
-
     //購入画面表示
     public function purchase($item_id)
     {
@@ -126,13 +124,28 @@ class ItemController extends Controller
 
         Order::create($order);
 
+        session()->forget('temp_address');
+
         return redirect()->route('mypage');
     }
 
-
-    public function address()
+    //住所変更のページ
+    public function address($item_id)
     {
-        return view('address');
+        $item = Item::findOrFail($item_id);
+
+        return view('address',compact('item'));
+    }
+    //住所変更処理
+    public function addressUpdate(Request $request,$item_id)
+    {
+        Session::put('temp_address', [
+        'postcode' => $request->postcode,
+        'address'  => $request->address,
+        'building' => $request->building,
+        ]);
+
+        return redirect()->route('purchase',$item_id);
     }
 
 
