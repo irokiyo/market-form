@@ -27,7 +27,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/sell', [ItemController::class, 'sell'])->name('sell'); //商品出品画面
     Route::post('/sell', [ItemController::class, 'sellCreate'])->name('sell.create'); //商品出品の登録
 
-    Route::get('/mypage/profile', [ItemController::class, 'showMypage'])->name('profile.show'); //プロフィール画面編集（初回）画面
+    Route::get('/mypage/profile', [ItemController::class, 'showMypage'])->name('profile.show'); //プロフィール画面編集画面
     Route::post('/mypage/profile', [ItemController::class, 'storeMypage'])->name('profile.store'); //プロフィール画面情報登録
     Route::patch('/mypage/profile', [ItemController::class, 'storeUpdate'])->name('profile.update');//プロフィール画面情報更新
 

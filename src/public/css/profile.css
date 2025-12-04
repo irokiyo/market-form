@@ -82,8 +82,8 @@ input {
 }
 
 .avatar-button{
-    width: 35%;
-    border: 1px solid #FF5555;
+    width: 40%;
+    border: 3px solid #FF5555;
     color: #FF5555;
     background-color: #FFFFFF;
     border-radius: 10px;
@@ -100,4 +100,22 @@ input {
     font-size: 12px;
     margin-top: 3px;
     text-align: left;
+}
+
+@media screen and (max-width: 768px) {
+    .avatar-circle img {
+        width: 120px;
+        height: 120px;
+        margin-right: 10px;
+        object-fit: cover;
+        flex-shrink: 0;
+        border-radius: 50%;
+    }
+    .avatar-button {
+        font-size: 10px;
+        width: 50%;
+    }
+    .avatar {
+            gap: 10px;
+    }
 }

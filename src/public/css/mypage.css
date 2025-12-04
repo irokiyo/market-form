@@ -24,7 +24,7 @@
 }
 
 .mypage__name {
-    font-size: 20px;
+    font-size: 30px;
     font-weight: 600;
     margin-left: 20px;
 }
@@ -36,12 +36,13 @@
 .mypage__edit-btn {
     border: 2px solid #F45B5B;
     color: #F45B5B;
-    padding: 6px 18px;
+    padding: 10px 20px;
     border-radius: 4px;
     background: #fff;
     text-decoration: none;
-    font-size: 20%;
+    font-size: 30px;
     font-weight: bold;
+    width: 50%;
 
 }
 
@@ -53,7 +54,7 @@
 }
 .line{
     width: 100%;
-    border-bottom: 2px solid #5F5F5F;
+    border-bottom: 3px solid #5F5F5F;
 }
 
 .tabs__list {
@@ -124,4 +125,13 @@
 
 .is-hidden {
     display: none;
+}
+
+@media screen and (max-width: 768px) {
+    .mypage__name{
+        font-size: 20px;
+    }
+    .mypage__edit-btn{
+        font-size: 20px;
+    }
 }

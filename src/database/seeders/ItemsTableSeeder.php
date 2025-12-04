@@ -24,6 +24,7 @@ class ItemsTableSeeder extends Seeder
                 'img_url' => 'items/Armani+Mens+Clock.jpg',
                 'user_id' => 1,
                 'condition' => '良好',
+                'categories'=> [5,12],
             ],
             [
                 'name' => 'HDD',
@@ -33,6 +34,7 @@ class ItemsTableSeeder extends Seeder
                 'img_url' => 'items/HDD+Hard+Disk.jpg',
                 'user_id' => 2,
                 'condition' => '目立った傷や汚れなし',
+                'categories'=> [2],
             ],
             [
                 'name' => '玉ねぎ3束',
@@ -42,6 +44,7 @@ class ItemsTableSeeder extends Seeder
                 'img_url' => 'items/iLoveIMG+d.jpg',
                 'user_id' => 3,
                 'condition' => 'やや傷や汚れあり',
+                'categories'=> [10],
             ],
             [
                 'name' => '革靴',
@@ -51,6 +54,7 @@ class ItemsTableSeeder extends Seeder
                 'img_url' => 'items/Leather+Shoes+Product+Photo.jpg',
                 'user_id' => 4,
                 'condition' => '状態が悪い',
+                'categories'=> [1,5],
             ],
             [
                 'name' => 'ノートPC',
@@ -60,6 +64,7 @@ class ItemsTableSeeder extends Seeder
                 'img_url' => 'items/Living+Room+Laptop.jpg',
                 'user_id' => 5,
                 'condition' => '良好',
+                'categories'=> [2],
             ],
             [
                 'name' => 'マイク',
@@ -69,6 +74,7 @@ class ItemsTableSeeder extends Seeder
                 'img_url' => 'items/Music+Mic+4632231.jpg',
                 'user_id' => 6,
                 'condition' => '目立った傷や汚れなし',
+                'categories'=> [13],
             ],
             [
                 'name' => 'ショルダーバッグ',
@@ -78,6 +84,7 @@ class ItemsTableSeeder extends Seeder
                 'img_url' => 'items/Purse+fashion+pocket.jpg',
                 'user_id' => 1,
                 'condition' => 'やや傷や汚れあり',
+                'categories'=> [1,4,11],
             ],
             [
                 'name' => 'タンブラー',
@@ -87,6 +94,7 @@ class ItemsTableSeeder extends Seeder
                 'img_url' => 'items/Tumbler+souvenir.jpg',
                 'user_id' => 2,
                 'condition' => '状態が悪い',
+                'categories'=> [3,10],
             ],
             [
                 'name' => 'コーヒーミル',
@@ -96,6 +104,7 @@ class ItemsTableSeeder extends Seeder
                 'img_url' => 'items/Waitress+with+Coffee+Grinder.jpg',
                 'user_id' => 3,
                 'condition' => '良好',
+                'categories'=> [3,10],
             ],
             [
                 'name' => 'メイクセット',
@@ -105,8 +114,17 @@ class ItemsTableSeeder extends Seeder
                 'img_url' => 'items/外出メイクアップセット.jpg',
                 'user_id' => 4,
                 'condition' => '目立った傷や汚れなし',
+                'categories'=> [1,4,5,6],
             ],
         ];
-        DB::table('items')->insert($params);
+        foreach ($params as $data) {
+            $categoryIds = $data['categories'];
+            unset($data['categories']);
+
+            $item = Item::create($data);
+
+            $item->categories()->attach($categoryIds);
+        }
+        
     }
 }

@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
         PaymentMethodsTableSeeder::class,
         UsersTableSeeder::class,
         ItemsTableSeeder::class,
+        ProfilesTableSeeder::class,
         ]);
     }
 }

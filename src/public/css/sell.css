@@ -53,7 +53,7 @@
 }
 .sell-divider {
     border: none;
-    border-top: 1px solid #ddd;
+    border-top: 3px solid #ddd;
     margin: 12px 0 16px;
 }
 
@@ -156,6 +156,7 @@
     font-weight: 600;
     cursor: pointer;
     margin-top: 8px;
+    font-size: 20px;
 }
 .sell-submit:hover {
     opacity: 0.9;
