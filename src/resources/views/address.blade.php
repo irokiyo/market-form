@@ -30,7 +30,7 @@
         </div>
 
         <div class="form__group">
-            <label for="address" class="form-label">住所</label>
+            <label for="address" class="form__label">住所</label>
             <input type="text" id="address" name="address" class="form__input" value="{{ old('address') }}">
             @error('address')
             <p class="form-error">{{ $message }}</p>
@@ -38,7 +38,7 @@
         </div>
 
         <div class="form__group">
-            <label for="building" class="form-label">建物名</label>
+            <label for="building" class="form__label">建物名</label>
             <input type="text" id="building" name="building" class="form__input" value="{{ old('building') }}">
             @error('building')
             <p class="form-error">{{ $message }}</p>

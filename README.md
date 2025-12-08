@@ -31,6 +31,8 @@
 1. php artisan db:seed  
 
 ## user のログイン用初期データ
+- email:yamada@example.com  
+- password:password
 
 ## 使用技術
 - MySQL 8.0.26  
@@ -42,4 +44,4 @@
 - phpMyAdmin: http://localhost:8080/  
 
 ## ER 図
-![ER図]
+![ER図]('market.drawio.png')

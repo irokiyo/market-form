@@ -7,6 +7,7 @@ use App\Http\Requests\ProfileRequest;
 use App\Http\Requests\ExhibitionRequest;
 use App\Http\Requests\CommentRequest;
 use App\Http\Requests\PurchaseRequest;
+use App\Http\Requests\AddressRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Profile;
 use App\Models\Category;
@@ -137,7 +138,7 @@ class ItemController extends Controller
         return view('address',compact('item'));
     }
     //住所変更処理
-    public function addressUpdate(Request $request,$item_id)
+    public function addressUpdate(AddressRequest $request,$item_id)
     {
         Session::put('temp_address', [
         'postcode' => $request->postcode,
