@@ -32,8 +32,8 @@
 
 ## user のログイン用初期データ  
 
-- email: yamada@example.com  
-- password: password
+- メールアドレス: yamada@example.com  
+- パスワード: password
 
 ## 使用技術
 - MySQL 8.0.26  
