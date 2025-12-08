@@ -31,7 +31,7 @@
 1. php artisan db:seed  
 
 ## user のログイン用初期データ  
-```md  
+
 - email: yamada@example.com  
 - password: password
 
