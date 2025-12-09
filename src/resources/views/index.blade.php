@@ -30,7 +30,7 @@ $tab = request('tab', '');
             <a href="{{ route('show', $item->id) }}" class="show-link">
                 <div class="item-img">
                     @if ($item->is_sold_out)
-                    <div class="sold-label">SOLD OUT</div>
+                    <div class="sold-label">Sold</div>
                     @endif
                     <img src="{{ \Storage::url($item->img_url) }}" alt="プロフィール画像" class="item-img">
                 </div>
@@ -46,7 +46,7 @@ $tab = request('tab', '');
             <a href="{{ route('show', $favorite->id) }}" class="show-link">
                 <div class="item-img">
                     @if ($favorite->is_sold_out)
-                    <div class="sold-label">SOLD OUT</div>
+                    <div class="sold-label">Sold</div>
                     @endif
                     <img src="{{ \Storage::url($favorite->img_url) }}" alt="プロフィール画像" class="item-img">
                 </div>

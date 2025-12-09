@@ -14,7 +14,7 @@
 @section('content')
 
 @if ($item->is_sold_out)
-<div class="sold-label">SOLD OUT</div>
+<div class="sold-label">Sold</div>
 @endif
 
 <div class="show">
