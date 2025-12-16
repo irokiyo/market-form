@@ -9,39 +9,63 @@ jobs:
     defaults:
       run:
         working-directory: src
-    
+
+    services:
+      mysql:
+        image: mysql:8
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: testing
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -uroot -proot"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
 
     steps:
       - uses: actions/checkout@v4
-
-      - name: Debug repo structure
-        run: |
-          echo "ROOT:"
-          pwd
-          ls -la
-          echo "SRC:"
-          ls -la src || true
-          echo "SRC composer.json:"
-          ls -la src/composer.json || true
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: 8.1
           coverage: none
+          extensions: mbstring, pdo_mysql, intl
 
       - name: Install dependencies
-        working-directory: src
         run: composer install --no-progress --no-interaction --prefer-dist
 
+      - name: Prepare testing env
+        run: |
+          cp .env.example .env.testing
+          php artisan key:generate --env=testing
+
+      - name: Run migrations
+        env:
+          APP_ENV: testing
+          DB_CONNECTION: mysql
+          DB_HOST: mysql
+          DB_PORT: 3306
+          DB_DATABASE: testing
+          DB_USERNAME: root
+          DB_PASSWORD: root
+        run: php artisan migrate --force --env=testing
+
       - name: Run PHPUnit
-        working-directory: src
-        run: vendor/bin/phpunit
+        env:
+          APP_ENV: testing
+          DB_CONNECTION: mysql
+          DB_HOST: mysql
+          DB_PORT: 3306
+          DB_DATABASE: testing
+          DB_USERNAME: root
+          DB_PASSWORD: root
+        run: php artisan test --env=testing
 
       - name: Run PHPStan
-        working-directory: src
         run: vendor/bin/phpstan analyse
 
       - name: Run PHPCS
-        working-directory: src
         run: vendor/bin/phpcs
