@@ -17,13 +17,13 @@
     <div class="mypage__header">
         <div class="avatar">
             @if(!empty($profile?->img_url))
-            <img src="{{ \Storage::url($profile->img_url) }}" alt="プロフィール画像" class="avatar__img">
+            <img src="{{ $profile?->img_url ? Storage::url($profile->img_url) : asset('/images/Ellipse 1.png') }}" alt="プロフィール画像" class="avatar__img">
             @else
             <img src="{{asset('/images/Ellipse 1.png')}}" alt="プロフィール画像" class="avatar__img">
             @endif
         </div>
         <div class="mypage__info">
-            <p class="mypage__name">{{ $profile->name }}</p>
+            <p class="mypage__name">{{ $profile?->name }}</p>
         </div>
         <div class="mypage__btn">
             <a href="{{ route('profile.show') }}" class="mypage__edit-btn">プロフィールを編集</a>
