@@ -30,3 +30,13 @@ jobs:
 
       - name: Run PHPCS
         run: vendor/bin/phpcs
+
+      - name: Debug working directory
+        run: |
+          echo "PWD:"
+          pwd
+          echo "LIST:"
+          ls -la
+          echo "COMPOSER:"
+          ls -la composer.json || true
+
