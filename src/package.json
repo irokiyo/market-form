@@ -7,7 +7,9 @@
         "watch-poll": "mix watch -- --watch-options-poll=1000",
         "hot": "mix watch --hot",
         "prod": "npm run production",
-        "production": "mix --production"
+        "production": "mix --production",
+        "format": "prettier --write resources/js resources/css resources/views",
+        "format:check": "prettier --check resources/js resources/css resources/views"
     },
     "devDependencies": {
         "axios": "^0.21",
