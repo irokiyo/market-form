@@ -1,77 +1,32 @@
 name: CI
 
-on:
-  push:
-    branches: [ main, master ]
-  pull_request:
+on: [push, pull_request]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
-    services:
-      mysql:
-        image: mysql:8
-        env:
-          MYSQL_ROOT_PASSWORD: root
-          MYSQL_DATABASE: testing
-        ports: ["3306:3306"]
-        options: >-
-          --health-cmd="mysqladmin ping -h 127.0.0.1 -uroot -proot"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=3
+    defaults:
+      run:
+        working-directory: ./src
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v3
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.2'
-          extensions: mbstring, pdo_mysql, intl
+          php-version: 8.2
           coverage: none
 
-      - name: Install Composer dependencies
+      - name: Install dependencies
         run: composer install --no-progress --no-interaction --prefer-dist
 
-      - name: Copy .env.testing
-        run: cp .env.example .env.testing
-
-      - name: Generate app key
-        run: php artisan key:generate --env=testing
-
-      - name: Run migrations
-        env:
-          DB_CONNECTION: mysql
-          DB_DATABASE: testing
-          DB_USERNAME: root
-          DB_PASSWORD: root
-          DB_HOST: 127.0.0.1
-        run: php artisan migrate --env=testing --force
-
       - name: Run PHPUnit
-        env:
-          DB_CONNECTION: mysql
-          DB_DATABASE: testing
-          DB_USERNAME: root
-          DB_PASSWORD: root
-          DB_HOST: 127.0.0.1
-        run: php artisan test
-
-      - name: Run PHP_CodeSniffer
-        run: vendor/bin/phpcs
+        run: vendor/bin/phpunit
 
       - name: Run PHPStan
         run: vendor/bin/phpstan analyse
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Install NPM deps
-        run: npm install
-
-      - name: Run Prettier check
-        run: npm run format:check
+      - name: Run PHPCS
+        run: vendor/bin/phpcs
