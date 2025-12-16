@@ -6,12 +6,18 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    defaults:
-      run:
-        working-directory: src
-
     steps:
       - uses: actions/checkout@v4
+
+      - name: Debug repo structure
+        run: |
+          echo "ROOT:"
+          pwd
+          ls -la
+          echo "SRC:"
+          ls -la src || true
+          echo "SRC composer.json:"
+          ls -la src/composer.json || true
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -20,23 +26,17 @@ jobs:
           coverage: none
 
       - name: Install dependencies
+        working-directory: src
         run: composer install --no-progress --no-interaction --prefer-dist
 
       - name: Run PHPUnit
+        working-directory: src
         run: vendor/bin/phpunit
 
       - name: Run PHPStan
+        working-directory: src
         run: vendor/bin/phpstan analyse
 
       - name: Run PHPCS
+        working-directory: src
         run: vendor/bin/phpcs
-
-      - name: Debug working directory
-        run: |
-          echo "PWD:"
-          pwd
-          echo "LIST:"
-          ls -la
-          echo "COMPOSER:"
-          ls -la composer.json || true
-
