@@ -15,7 +15,7 @@ class PurchaseTest extends TestCase
     use RefreshDatabase;
 
      //購入する」ボタンを押下すると購入が完了する
-    public function test_user_can_purchase_item()
+    public function testUserCanPurchaseItem()
     {
         $user = User::factory()->create();
         $item = Item::factory()->create();
@@ -43,7 +43,7 @@ class PurchaseTest extends TestCase
 
 
     //購入した商品は商品一覧画面にて「sold」と表示される
-    public function test_purchased_item_sold_on()
+    public function testPurchasedItemSoldOn()
     {
         $user = User::factory()->create();
         $item = Item::factory()->create();
@@ -70,7 +70,7 @@ class PurchaseTest extends TestCase
     }
 
     //プロフィール/購入した商品一覧」に追加されている
-    public function test_purchased_item_is_listed_in()
+    public function testPurchasedItemIsListedIn()
     {
         $user = User::factory()->create();
         $item = Item::factory()->create([

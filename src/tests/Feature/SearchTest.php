@@ -13,7 +13,7 @@ class SearchTest extends TestCase
     use RefreshDatabase;
 
     //一部検索
-    public function test_parts_of_search_items()
+    public function testPartsOfSearchItems()
     {
         Item::factory()->create(['name' => 'りんご']);
         Item::factory()->create(['name' => 'バナナ']);
@@ -27,7 +27,7 @@ class SearchTest extends TestCase
     }
 
     // 検索状態がマイリストでも保持されている
-    public function test_search_keyword_is_kerping()
+    public function testSearchKeywordIsKerping()
     {
         $user = User::factory()->create();
 

@@ -15,7 +15,7 @@ class ItemListTest extends TestCase
     use RefreshDatabase;
 
     //全商品の表示
-    public function test_all_item__list()
+    public function testAllItemList()
     {
         $items = Item::factory()->count(6)->create();
 
@@ -29,7 +29,7 @@ class ItemListTest extends TestCase
     }
 
     //購入済みの商品にsoldがついている
-    public function test_sold_item__list()
+    public function testSoldItemList()
     {
         $item = Item::factory()->create();
         $user = User::factory()->create();
@@ -49,7 +49,7 @@ class ItemListTest extends TestCase
         $response->AssertSee('Sold');
     }
     //自分が出品した商品は表示されない
-    public function test_my_item__list()
+    public function testMyItemList()
     {
         $user = User::factory()->create();
 

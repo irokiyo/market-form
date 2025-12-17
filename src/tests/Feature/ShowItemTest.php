@@ -15,7 +15,7 @@ class ShowItemTest extends TestCase
 
 
     //すべての情報が商品詳細ページに表示されている
-    public function test_item_display()
+    public function testItemDisplay()
     {
         $item = Item::factory()->create([
             'name'        => 'テスト商品',
@@ -35,7 +35,7 @@ class ShowItemTest extends TestCase
             ->assertSee('テスト商品の説明です。');
     }
     //複数選択されたカテゴリが商品詳細ページに表示されている
-    public function test_selected_categories_display()
+    public function testSelectedCategoriesDisplay()
     {
         $item = Item::factory()->create([
             'name' => 'カテゴリテスト商品',

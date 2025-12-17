@@ -15,7 +15,7 @@ class PaymentMethodTest extends TestCase
     use RefreshDatabase;
 
     // 支払い方法選択画面で、支払い方法の選択肢が反映される
-    public function test_payment_methods()
+    public function testPaymentMethods()
     {
         $user = User::factory()->create();
         $item = Item::factory()->create();

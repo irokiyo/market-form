@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 class LogoutTest extends TestCase
 {
-    public function test_logout()
+    public function testLogout()
     {
         $user = User::factory()->create([
             'password' => bcrypt('password'),

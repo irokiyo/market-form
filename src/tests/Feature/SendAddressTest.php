@@ -18,7 +18,7 @@ class SendAddressTest extends TestCase
     /**
      * 送付先住所変更画面にて登録した住所が商品購入画面に反映されている
      */
-    public function test_changed_address_is_reflected_on_purchase_page()
+    public function testChangedAddressIsReflectedOnPurchasePage()
     {
         $user = User::factory()->create();
         $item = Item::factory()->create();
@@ -52,7 +52,7 @@ class SendAddressTest extends TestCase
         $response->assertSee('テストビル999');
     }
 
-    public function test_order_is_saved_with_shipping_address()
+    public function testOrderIsSavedWithShippingAddress()
     {
         $user = User::factory()->create();
         $item = Item::factory()->create();

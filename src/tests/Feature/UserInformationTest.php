@@ -15,7 +15,7 @@ class UserInformationTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_mypage_displays_profile_and_items_and_orders()
+    public function testMypageDisplaysProfileAndItemsAndOrders()
     {
         $user = User::factory()->create();
 

@@ -15,7 +15,7 @@ class ItemInformationTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_sell_item_store()
+    public function testSellItemStore()
     {
         Storage::fake('public');
 

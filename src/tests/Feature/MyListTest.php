@@ -15,7 +15,7 @@ class MyListTest extends TestCase
     use RefreshDatabase;
 
     //いいねした商品のみ見れる
-    public function test_favorite_items()
+    public function testFavoriteItems()
     {
         $user = User::factory()->create();
 
@@ -33,7 +33,7 @@ class MyListTest extends TestCase
     }
 
     //購入済み商品はsoldと出る
-    public function test_sold_item__list()
+    public function testSoldItemList()
     {
         $item = Item::factory()->create();
         $user = User::factory()->create();
@@ -55,7 +55,7 @@ class MyListTest extends TestCase
         $response->AssertSee('Sold');
     }
     //未認証の場合は表示されない
-    public function test_no_login_item__list()
+    public function testNoLoginItemList()
     {
         $response = $this->get('/search?tab=mylist');
 

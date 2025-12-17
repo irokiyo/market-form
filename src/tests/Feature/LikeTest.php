@@ -14,7 +14,7 @@ class LikeTest extends TestCase
     use RefreshDatabase;
 
     //いいねした商品として登録され、いいね合計値が増加表示される
-    public function test_user_favorite_item()
+    public function testUserFavoriteItem()
     {
         $user = User::factory()->create();
         $item = Item::factory()->create();
@@ -31,7 +31,7 @@ class LikeTest extends TestCase
     }
 
     //いいねアイコンが押下された状態では色が変化する
-    public function test_favorite_icon_color_change()
+    public function testFavoriteIconColorChange()
     {
         $user = User::factory()->create();
         $item = Item::factory()->create();
@@ -50,7 +50,7 @@ class LikeTest extends TestCase
     }
 
     //いいねが解除され、いいね合計値が減少表示される
-    public function test_user_can_unfavorite_item()
+    public function testUserCanUnfavoriteItem()
     {
         $user = User::factory()->create();
         $item = Item::factory()->create();
