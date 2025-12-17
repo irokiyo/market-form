@@ -62,7 +62,7 @@ class UserInformationTest extends TestCase
         $response->assertSee('購入した商品B');
     }
 
-    public function test_profile_edit_page_shows_initial_values()
+    public function testProfileEditPageShowsInitialValues()
     {
         $user = User::factory()->create();
 
