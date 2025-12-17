@@ -10,7 +10,7 @@ class LoginTest extends TestCase
 {
     use RefreshDatabase;
 
-    private function validData(array $overrides = []): array
+    private function _validData(array $overrides = []): array
     {
         return array_merge([
             'email' => 'test@example.com',
