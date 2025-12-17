@@ -2,9 +2,9 @@
 <ruleset name="App Standard">
     <description>Laravel app coding standard (PSR12ベース)</description>
 
-    <file>app</file>
-    <file>routes</file>
-    <file>tests</file>
+    <file>./app</file>
+    <file>./routes</file>
+    <file>./tests</file>
 
     <rule ref="PSR12"/>
 
