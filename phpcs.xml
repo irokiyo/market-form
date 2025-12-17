@@ -10,11 +10,6 @@
 
     <rule ref="PSR12"/>
 
-    <rule ref="Squiz.NamingConventions.ValidVariableName">
-        <properties>
-            <property name="allowUnderscore" value="true"/>
-        </properties>
-    </rule>
 
     <rule ref="Squiz.NamingConventions.ValidFunctionName"/>
 </ruleset>
