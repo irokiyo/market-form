@@ -9,7 +9,6 @@ use App\Models\User;
 use App\Models\Item;
 use App\Models\Category;
 
-
 class ShowItemTest extends TestCase
 {
     use RefreshDatabase;

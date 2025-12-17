@@ -108,7 +108,5 @@ class RegisterTest extends TestCase
         ]);
 
         $response->assertRedirect('/mypage/profile');
-
-
     }
 }

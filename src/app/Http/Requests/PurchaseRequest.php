@@ -31,10 +31,10 @@ class PurchaseRequest extends FormRequest
     }
     public function messages()
     {
-    return [
+        return [
         'payment_method.required' => '支払い方法を選択してください',
         'postcode.required' => '郵便番号を入力してください',
         'address.required' => '住所を入力してください',
-    ];
-  }
+        ];
+    }
 }

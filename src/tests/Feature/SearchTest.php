@@ -29,7 +29,7 @@ class SearchTest extends TestCase
     // 検索状態がマイリストでも保持されている
     public function test_search_keyword_is_kerping()
     {
-        $user =User::factory()->create();
+        $user = User::factory()->create();
 
         $response = $this->actingAs($user)->get(route('search', ['keyword' => 'りんご']));
 

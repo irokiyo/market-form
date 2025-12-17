@@ -22,7 +22,5 @@ class LogoutTest extends TestCase
         $this->assertGuest();
 
         $response->assertRedirect((route('index')));
-
-
     }
 }

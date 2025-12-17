@@ -34,7 +34,8 @@ class ExhibitionRequest extends FormRequest
             'categories.*' => ['integer','distinct','exists:categories,id'],
         ];
     }
-    public function messages(){
+    public function messages()
+    {
         return[
             'name.required' => '商品名を入力してください',
             'price.required' => '値段を入力してください',

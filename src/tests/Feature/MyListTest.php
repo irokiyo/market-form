@@ -30,8 +30,6 @@ class MyListTest extends TestCase
         $response = $this->actingAs($user)->get('/search?tab=mylist');
 
         $response->assertSee('FAVORITED_ITEM');
-
-
     }
 
     //購入済み商品はsoldと出る

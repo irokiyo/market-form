@@ -13,11 +13,11 @@ class Favorite extends Model
 
     public function item()
     {
-        return $this->belongsTo(Item::class,'item_id');
+        return $this->belongsTo(Item::class, 'item_id');
     }
 
     public function user()
     {
-        return $this->belongsTo(User::class,'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

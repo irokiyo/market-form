@@ -19,8 +19,6 @@ use App\Models\PaymentMethod;
 use App\Models\Favorite;
 use Illuminate\Support\Facades\Session;
 
-
-
 class ItemController extends Controller
 {
     //検索
@@ -33,7 +31,7 @@ class ItemController extends Controller
         : collect();
 
 
-        return view('index', compact('items','favorites'));
+        return view('index', compact('items', 'favorites'));
     }
     //商品一覧画面（トップ画面）
     public function index(Request $request)
@@ -48,7 +46,7 @@ class ItemController extends Controller
         : collect();
         $tab = $request->query('tab', '');
 
-        return view('index',compact('items','favorites','tab'));
+        return view('index', compact('items', 'favorites', 'tab'));
     }
 
     //商品詳細画面
@@ -57,10 +55,10 @@ class ItemController extends Controller
         $user = Auth::user();
         $item = Item::findOrFail($item_id);
 
-        return view('show',compact('item','user'));
+        return view('show', compact('item', 'user'));
     }
     //コメント登録
-    public function commentCreate(CommentRequest $request,$item_id)
+    public function commentCreate(CommentRequest $request, $item_id)
     {
         $comment = [
             'item_id' => $item_id,
@@ -73,7 +71,7 @@ class ItemController extends Controller
         return redirect()->route('show', $item_id);
     }
     //お気に入り登録
-    public function favorite(Request $request,$item_id)
+    public function favorite(Request $request, $item_id)
     {
 
         $userId = Auth::id();
@@ -83,13 +81,12 @@ class ItemController extends Controller
             ->first();
 
         if ($existing) {
-        $existing->delete();
-        }
-        else {
-        Favorite::create([
+            $existing->delete();
+        } else {
+            Favorite::create([
             'user_id' => $userId,
             'item_id' => $item_id,
-        ]);
+            ]);
         }
         return redirect()->route('show', $item_id);
     }
@@ -102,25 +99,25 @@ class ItemController extends Controller
         $payment_methods = PaymentMethod::all();
         $profile = Profile::where('user_id', Auth::id())->first();
 
-        return view('purchase',compact('item','user','payment_methods','profile'));
+        return view('purchase', compact('item', 'user', 'payment_methods', 'profile'));
     }
     //購入処理
-    public function purchaseStore(PurchaseRequest $request,$item_id)
+    public function purchaseStore(PurchaseRequest $request, $item_id)
     {
         $item = Item::findOrFail($item_id);
-        if ($item->order()->exists()){
+        if ($item->order()->exists()) {
             return redirect()->route('show', $item_id)
             ->with('error', 'この商品はすでに売り切れています。');
         }
 
-        $order=
+        $order =
         [
             'item_id' => $item_id,
             'user_id' => Auth::id(),
-            'payment_method_id'=> $request->payment_method,
-            'postcode'=> $request->postcode ,
-            'address'=> $request->address,
-            'building'=> $request->building,
+            'payment_method_id' => $request->payment_method,
+            'postcode' => $request->postcode ,
+            'address' => $request->address,
+            'building' => $request->building,
         ];
 
         Order::create($order);
@@ -135,10 +132,10 @@ class ItemController extends Controller
     {
         $item = Item::findOrFail($item_id);
 
-        return view('address',compact('item'));
+        return view('address', compact('item'));
     }
     //住所変更処理
-    public function addressUpdate(AddressRequest $request,$item_id)
+    public function addressUpdate(AddressRequest $request, $item_id)
     {
         Session::put('temp_address', [
         'postcode' => $request->postcode,
@@ -146,15 +143,15 @@ class ItemController extends Controller
         'building' => $request->building,
         ]);
 
-        return redirect()->route('purchase',$item_id);
+        return redirect()->route('purchase', $item_id);
     }
 
 
     //出品画面の表示
     public function sell()
     {
-        $categories=Category::all();
-        return view('sell',compact('categories'));
+        $categories = Category::all();
+        return view('sell', compact('categories'));
     }
 
     //出品商品登録
@@ -165,10 +162,10 @@ class ItemController extends Controller
         $path = $request->file('img_url')->store('items', 'public');
             $item['img_url'] = $path;
 
-        $item=Item::create($item);
+        $item = Item::create($item);
 
         if ($request->filled('categories')) {
-        $item->categories()->sync($request->input('categories'));
+            $item->categories()->sync($request->input('categories'));
         }
 
         return redirect()->route('mypage');
@@ -183,14 +180,14 @@ class ItemController extends Controller
         $orders = Order::with('item')->where('user_id', $user->id)->get();
         $page = $request->query('page', 'sell');
 
-        return view('mypage',compact('user','profile','items','orders','page'));
+        return view('mypage', compact('user', 'profile', 'items', 'orders', 'page'));
     }
 
     //プロフィール登録画面表示(初回)
     public function showMypage()
     {
         $profile = Profile::where('user_id', Auth::id())->first();
-        return view('profile',compact('profile'));
+        return view('profile', compact('profile'));
     }
 
     //プロフィール登録
@@ -199,10 +196,9 @@ class ItemController extends Controller
         $profile = $request->only(['name','postcode','address','building']);
         $profile['user_id'] = auth()->id();
 
-        if($request->hasFile('img_url')) {
+        if ($request->hasFile('img_url')) {
             $path = $request->file('img_url')->store('profiles', 'public');
             $profile['img_url'] = $path;
-
         }
 
         Profile::create($profile);
@@ -215,7 +211,7 @@ class ItemController extends Controller
         $profile = $request->only(['name','postcode','address','building']);
         $profile['user_id'] = auth()->id();
 
-        if($request->hasFile('img_url')) {
+        if ($request->hasFile('img_url')) {
             $path = $request->file('img_url')->store('profiles', 'public');
             $profile['img_url'] = $path;
         }

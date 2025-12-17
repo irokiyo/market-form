@@ -86,5 +86,4 @@ class CommentTest extends TestCase
 
         $this->assertDatabaseCount('comments', 0);
     }
-
 }

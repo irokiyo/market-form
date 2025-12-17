@@ -23,8 +23,8 @@ class ItemListTest extends TestCase
 
         $response->assertStatus(200);
 
-        foreach ($items as $item){
-        $response->AssertSee($item->name);
+        foreach ($items as $item) {
+            $response->AssertSee($item->name);
         }
     }
 
@@ -64,8 +64,8 @@ class ItemListTest extends TestCase
         $response->assertStatus(200);
 
         $response->assertDontSee('MY_TEST_ITEM_SHOULD_NOT_APPEAR');
-        foreach ($otherItems as $item){
-        $response->assertSee($item->name);
+        foreach ($otherItems as $item) {
+            $response->assertSee($item->name);
         }
     }
 }

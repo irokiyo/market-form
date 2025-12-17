@@ -13,7 +13,7 @@ use App\Models\Item;
 
 class ItemInformationTest extends TestCase
 {
-use RefreshDatabase;
+    use RefreshDatabase;
 
     public function test_sell_item_store()
     {

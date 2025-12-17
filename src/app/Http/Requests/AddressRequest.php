@@ -30,7 +30,7 @@ class AddressRequest extends FormRequest
     }
     public function messages()
     {
-    return [
+        return [
         'postcode.required' => '郵便番号を入力してください',
         'address.required' => '住所を入力してください',
         ];

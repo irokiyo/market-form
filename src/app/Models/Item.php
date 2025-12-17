@@ -22,7 +22,7 @@ class Item extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class,'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
     public function categories()
     {
@@ -38,13 +38,13 @@ class Item extends Model
     }
     public function liked()
     {
-    return auth()->check()
+        return auth()->check()
         && auth()->user()->favorites()->where('item_id', $this->id)->exists();
     }
-    public function scopeKeywordSearch($query ,$keyword)
+    public function scopeKeywordSearch($query, $keyword)
     {
         if (!empty($keyword)) {
-        $query->where('name', 'like', "%{$keyword}%");
+            $query->where('name', 'like', "%{$keyword}%");
         }
         return $query;
     }
@@ -56,6 +56,4 @@ class Item extends Model
     {
         return $this->order()-> exists();
     }
-
-
 }
