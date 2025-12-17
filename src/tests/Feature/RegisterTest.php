@@ -86,7 +86,7 @@ class RegisterTest extends TestCase
     public function testPasswordMismatchValidation()
     {
         $response = $this->from(route('register'))
-            ->post(route('register'), $this->validData([
+            ->post(route('register'), $this->_validData([
                 'password' => 'pass',
                 'password_confirmation' => 'word',
             ]));
