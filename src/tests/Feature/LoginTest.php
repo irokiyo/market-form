@@ -10,7 +10,7 @@ class LoginTest extends TestCase
 {
     use RefreshDatabase;
 
-    private function _validData(array $overrides = []): array
+    private function validData(array $overrides = []): array
     {
         return array_merge([
             'email' => 'test@example.com',
@@ -23,7 +23,7 @@ class LoginTest extends TestCase
     public function testLoginEmailValidation()
     {
         $response = $this->from(route('login'))
-            ->post(route('login'), $this->_validData([
+            ->post(route('login'), $this->validData([
                 'email' => '',
             ]));
 
@@ -38,7 +38,7 @@ class LoginTest extends TestCase
     public function testLoginPasswordValidation()
     {
         $response = $this->from(route('login'))
-            ->post(route('login'), $this->_validData([
+            ->post(route('login'), $this->validData([
                 'password' => '',
             ]));
 
@@ -58,7 +58,7 @@ class LoginTest extends TestCase
         ]);
 
         $response = $this->from(route('login'))
-            ->post(route('login'), $this->_validData([
+            ->post(route('login'), $this->validData([
                 'email' => '123@example.com',
                 'password' => 'pass',
             ]));
@@ -78,7 +78,7 @@ class LoginTest extends TestCase
         'password' => bcrypt('password'),
         ]);
 
-        $response = $this->post(route('login'), $this->_validData([
+        $response = $this->post(route('login'), $this->validData([
             ]));
 
         $this->assertAuthenticated();
