@@ -25,7 +25,7 @@ class RegisterTest extends TestCase
     public function testNameValidation()
     {
         $response = $this->from(route('register'))
-            ->post(route('register'), $this->validData([
+            ->post(route('register'), $this->_validData([
                 'name' => '',
             ]));
 
@@ -40,7 +40,7 @@ class RegisterTest extends TestCase
     public function testEmailValidation()
     {
         $response = $this->from(route('register'))
-            ->post(route('register'), $this->validData([
+            ->post(route('register'), $this->_validData([
                 'email' => '',
             ]));
 
@@ -55,7 +55,7 @@ class RegisterTest extends TestCase
     public function testPasswordValidation()
     {
         $response = $this->from(route('register'))
-            ->post(route('register'), $this->validData([
+            ->post(route('register'), $this->_validData([
                 'password' => '',
             ]));
 
@@ -70,7 +70,7 @@ class RegisterTest extends TestCase
     public function testPasswordShortValidation()
     {
         $response = $this->from(route('register'))
-            ->post(route('register'), $this->validData([
+            ->post(route('register'), $this->_validData([
                 'password' => 'pass',
                 'password_confirmation' => 'pass',
             ]));
@@ -101,7 +101,7 @@ class RegisterTest extends TestCase
     public function testSuccessRegister()
     {
         $response = $this->from(route('register'))
-            ->post(route('register'), $this->validData());
+            ->post(route('register'), $this->_validData());
 
         $this->assertDatabaseHas('users', [
             'email' => 'test@example.com',

@@ -23,7 +23,7 @@ class LoginTest extends TestCase
     public function testLoginEmailValidation()
     {
         $response = $this->from(route('login'))
-            ->post(route('login'), $this->validData([
+            ->post(route('login'), $this->_validData([
                 'email' => '',
             ]));
 
@@ -38,7 +38,7 @@ class LoginTest extends TestCase
     public function testLoginPasswordValidation()
     {
         $response = $this->from(route('login'))
-            ->post(route('login'), $this->validData([
+            ->post(route('login'), $this->_validData([
                 'password' => '',
             ]));
 
@@ -58,7 +58,7 @@ class LoginTest extends TestCase
         ]);
 
         $response = $this->from(route('login'))
-            ->post(route('login'), $this->validData([
+            ->post(route('login'), $this->_validData([
                 'email' => '123@example.com',
                 'password' => 'pass',
             ]));
@@ -78,7 +78,7 @@ class LoginTest extends TestCase
         'password' => bcrypt('password'),
         ]);
 
-        $response = $this->post(route('login'), $this->validData([
+        $response = $this->post(route('login'), $this->_validData([
             ]));
 
         $this->assertAuthenticated();
