@@ -11,5 +11,4 @@
     <rule ref="PSR12"/>
 
 
-    <rule ref="Squiz.NamingConventions.ValidFunctionName"/>
 </ruleset>
