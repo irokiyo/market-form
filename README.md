@@ -39,6 +39,7 @@
 - MySQL 8.0.26  
 - Laravel: 8.83.3  
 - PHP 8.1 (Docker)  
+- MailHog (ローカル開発用)  
 
 ## URL
 - 環境開発: http://localhost/login  

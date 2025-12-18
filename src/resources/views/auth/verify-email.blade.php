@@ -16,9 +16,12 @@
     <p class="verify-status">確認メールを再送しました。</p>
     @endif
 
-    <a href="{{ route('profile.show') }}" class="verify-button">
+    @env('local')
+    <a href="http://localhost:8025" target="_blank" class="verify-button">
         認証はこちらから
     </a>
+    @endenv
+
 
     <form method="POST" action="{{ route('verification.send') }}" class="verify-form">
         @csrf
