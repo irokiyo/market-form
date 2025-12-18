@@ -16,6 +16,7 @@ use Illuminate\Support\Str;
 use Laravel\Fortify\Fortify;
 use Laravel\Fortify\Contracts\RegisterResponse;
 use Laravel\Fortify\Contracts\LoginResponse;
+use Laravel\Fortify\Contracts\VerifyEmailResponse;
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -28,7 +29,16 @@ class FortifyServiceProvider extends ServiceProvider
             return new class implements RegisterResponse {
                 public function toResponse($request)
                 {
-                    return redirect('/mypage/profile');
+                    return redirect('/email/verify');
+                }
+            };
+        });
+
+        $this->app->singleton(VerifyEmailResponse::class, function () {
+            return new class implements VerifyEmailResponse {
+                public function toResponse($request)
+                {
+                return redirect('/mypage/profile');
                 }
             };
         });
@@ -54,6 +64,10 @@ class FortifyServiceProvider extends ServiceProvider
         //会員登録表示
         Fortify::registerView(function () {
             return view('auth.register');
+        });
+        //メール認証
+        Fortify::verifyEmailView(function () {
+        return view('auth.verify-email');
         });
 
 
