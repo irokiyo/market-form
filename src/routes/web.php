@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\StripeCheckoutController;
+use App\Http\Controllers\StripeWebhookController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,3 +39,17 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/mypage/profile', [ItemController::class, 'showMypage'])->name('profile.show'); //プロフィール画面編集画面
     Route::post('/mypage/profile', [ItemController::class, 'storeMypage'])->name('profile.store'); //プロフィール画面情報登録
 });
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::post('/checkout/{item}', [StripeCheckoutController::class, 'create'])//決済画面表示
+        ->name('checkout.create');
+
+    Route::get('/checkout/success', [StripeCheckoutController::class, 'success'])//決済成功
+        ->name('checkout.success');
+
+    Route::get('/checkout/cancel', [StripeCheckoutController::class, 'cancel'])//決済できないとき
+        ->name('checkout.cancel');
+});
+
+Route::post('/stripe/webhook', [StripeWebhookController::class, 'handle'])
+    ->name('stripe.webhook');
