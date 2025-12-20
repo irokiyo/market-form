@@ -16,7 +16,8 @@
     <p class="verify-status">確認メールを再送しました。</p>
     @endif
 
-    @env('local')
+    @env(['local','testing'])
+
     <a href="http://localhost:8025" target="_blank" class="verify-button">
         認証はこちらから
     </a>
