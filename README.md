@@ -91,6 +91,12 @@ Webhook を利用していますので
 - MailHog (ローカル開発用)  
 - Stripe（決済）  
 
+## テスト・品質管理
+- PHPUnit（Feature Test）
+- PHPStan（静的解析）
+- PHPCS（コーディング規約チェック）
+- GitHub Actions（CI）
+
 ## URL
 - 環境開発: http://localhost/  
 - phpMyAdmin: http://localhost:8080/  
