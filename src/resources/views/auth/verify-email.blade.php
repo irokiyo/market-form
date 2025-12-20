@@ -15,14 +15,11 @@
     @if (session('status') === 'verification-link-sent')
     <p class="verify-status">確認メールを再送しました。</p>
     @endif
-
     @env(['local','testing'])
-
     <a href="http://localhost:8025" target="_blank" class="verify-button">
         認証はこちらから
     </a>
     @endenv
-
 
     <form method="POST" action="{{ route('verification.send') }}" class="verify-form">
         @csrf
@@ -30,7 +27,6 @@
             認証メールを再送する
         </button>
     </form>
-
 </div>
 @endsection
 

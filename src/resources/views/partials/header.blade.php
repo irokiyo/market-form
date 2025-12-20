@@ -1,12 +1,9 @@
-
-
-
 <form action="{{route('search')}}" class="search">
-    <input type="text" class="search-input" name="keyword" value="{{ request('keyword')}}"  placeholder="なにをお探しですか？">
+    <input type="text" class="search-input" name="keyword" value="{{ request('keyword')}}" placeholder="なにをお探しですか？">
 </form>
 <nav class="header__nav">
     <ul class="header__nav__ul">
-        <li >
+        <li>
             <form action="{{route('logout')}}" method="post">
                 @csrf
                 <button type="submit" class="nav__logout">ログアウト</button>
@@ -17,3 +14,4 @@
 
     </ul>
 </nav>
+
