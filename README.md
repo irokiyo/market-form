@@ -70,7 +70,7 @@ STRIPE_KEY=pk_test_xxxxxxxxxxxxx
 STRIPE_SECRET=sk_test_xxxxxxxxxxxxx  
 STRIPE_WEBHOOK_SECRET=whsec_xxxxxxxxxxxxx  
 ```  
-※ 値はStripe (https://dashboard.stripe.com/)ダッシュボードから取得しています。  
+※ 値はStripe (https://dashboard.stripe.com/)  ダッシュボードから取得しています。  
 Webhook を利用していますので
 ローカルでは Stripe CLI を使用しています。  
 1. stripe login
@@ -95,6 +95,7 @@ Webhook を利用していますので
 - 環境開発: http://localhost/  
 - phpMyAdmin: http://localhost:8080/  
 - MailHog: http://localhost:8025/  
+- Stripe: https://dashboard.stripe.com/  
 
 
 ## ER 図
