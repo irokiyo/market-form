@@ -14,6 +14,7 @@
     @csrf
     <div class="purchase">
         <div class="purchase__inner">
+
             <div class="purchase__left">
                 <div class="purchase-item">
                     <div class="purchase-item__image">
@@ -35,8 +36,8 @@
                         <option value="{{ $payment_method->id }}" data-action="{{ $payment_method->payment_method === 'カード支払い'
                         ? route('checkout.create', $item->id)
                         : route('purchase.store', $item->id)
-                        }">{{ $payment_method->payment_method }}
-                        </option>
+                            }}">{{ $payment_method->payment_method }}</option>
+
                         @endforeach
                     </select>
                     @error('payment_method')
@@ -54,9 +55,9 @@
 
                     @php
                     $temp = session('temp_address'); // 一時住所
-                    $postcode = $temp['postcode'] ?? $profile->postcode;
-                    $address = $temp['address'] ?? $profile->address;
-                    $building = $temp['building'] ?? $profile->building;
+                    $postcode = $temp['postcode'] ?? ($profile?->postcode ?? '');
+                    $address = $temp['address'] ?? ($profile?->address ?? '');
+                    $building = $temp['building'] ?? ($profile?->building ?? '');
                     @endphp
 
                     <div class="purchase-address">
@@ -72,11 +73,13 @@
                         <p class="error-message">{{ $message }}</p>
                         @enderror
                         @error('address')
+
                         <p class="error-message">{{ $message }}</p>
                         @enderror
 
                     </div>
                 </div>
+
                 <hr class="purchase__line">
             </div>
 
@@ -93,6 +96,7 @@
                 </div>
                 <button type="submit" class="purchase-btn">購入する</button>
             </div>
+
         </div>
     </div>
 </form>

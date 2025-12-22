@@ -16,7 +16,6 @@ class StripeCheckoutController extends Controller
 {
     public function create(Request $request, Item $item)
     {
-        // バリデーション
     $request->validate(
         ['payment_method' => 'required'],
         ['payment_method.required' => '支払い方法を選択してください']
@@ -24,12 +23,8 @@ class StripeCheckoutController extends Controller
 
     $paymentMethod = PaymentMethod::findOrFail($request->payment_method);
 
-    // =========================
-    // ① コンビニ払いの場合
-    // =========================
     if ($paymentMethod->payment_method === 'コンビニ払い') {
 
-        // すでに売れていたら防止
         if ($item->order()->exists()) {
             return redirect()
                 ->route('show', $item->id)
@@ -48,9 +43,6 @@ class StripeCheckoutController extends Controller
         return redirect()->route('mypage');
     }
 
-    // =========================
-    // ② カード払い → Stripe
-    // =========================
     Stripe::setApiKey(config('services.stripe.secret'));
 
     $session = CheckoutSession::create([
@@ -83,8 +75,6 @@ class StripeCheckoutController extends Controller
 
     public function success(Request $request)
     {
-        // ここで session_id を使って決済情報を確認できる
-        // 本番では webhook で確定処理するのが推奨
         return redirect()->route('mypage');
     }
 

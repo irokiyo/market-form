@@ -30,7 +30,7 @@ class PaymentMethodTest extends TestCase
         ]);
 
         $method1 = PaymentMethod::create([
-            'payment_method' => 'クレジットカード',
+            'payment_method' => 'カード払い',
         ]);
 
         $method2 = PaymentMethod::create([
@@ -42,7 +42,7 @@ class PaymentMethodTest extends TestCase
 
         $response->assertStatus(200);
 
-        $response->assertSee('クレジットカード');
+        $response->assertSee('カード払い');
         $response->assertSee('コンビニ払い');
     }
 }
