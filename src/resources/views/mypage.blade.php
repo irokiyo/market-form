@@ -1,6 +1,5 @@
 @extends('layouts.app')
 
-
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/sanitize.css') }}" />
 <link rel="stylesheet" href="{{ asset('css/mypage.css') }}" />
@@ -10,9 +9,7 @@
 @include('partials.header')
 @endsection
 
-
 @section('content')
-
 <div class="mypage">
     <div class="mypage__header">
         <div class="avatar">
@@ -62,5 +59,5 @@
         </div>
     </div>
 </div>
-    @endsection
+@endsection
 

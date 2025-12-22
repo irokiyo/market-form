@@ -1,6 +1,5 @@
 @extends('layouts.app')
 
-
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/sanitize.css') }}" />
 <link rel="stylesheet" href="{{ asset('css/show.css') }}" />
@@ -9,7 +8,6 @@
 @section('header')
 @include('partials.header')
 @endsection
-
 
 @section('content')
 
@@ -74,13 +72,11 @@
                 <tr class="table-row">
                     <td class="item-info-label">商品の状態</td>
                     <td class="item-status">{{$item->condition}}</td>
-
                 </tr>
             </table>
 
             <section class="item-section">
                 <h3 class="section-title">コメント({{$item->comments->count()}})</h3>
-
                 <div class="comment">
                     @foreach($item->comments as $comment)
                     <div class="comment__icon">

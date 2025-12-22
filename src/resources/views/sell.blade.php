@@ -1,6 +1,5 @@
 @extends('layouts.app')
 
-
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/sanitize.css') }}" />
 <link rel="stylesheet" href="{{ asset('css/sell.css') }}" />
@@ -10,10 +9,11 @@
 @include('partials.header')
 @endsection
 
-
 @section('content')
 <div class="sell">
+
     <h2 class="sell__ttl">商品の出品</h2>
+
     <form action="{{route('sell.create')}}" method="POST" class="sell__form" enctype="multipart/form-data">
         @csrf
 
@@ -33,12 +33,11 @@
 
         <div class="sell-block">
             <h2 class="sell-block__ttl-gray">商品の詳細</h2>
-
             <h3 class="sell-label">カテゴリー</h3>
             <div class="sell-categories">
                 @foreach ($categories as $category)
                 <label class="sell-category-tag">
-                    <input type="checkbox" name="categories[]" value="{{ $category->id }}" class="sell-category-tag__input" >
+                    <input type="checkbox" name="categories[]" value="{{ $category->id }}" class="sell-category-tag__input">
                     <span class="sell-category-tag__label">{{ $category->category}}</span>
                 </label>
                 @endforeach
@@ -100,8 +99,10 @@
         </div>
 
         <button type="submit" class="sell-submit">出品する</button>
+
     </form>
 </div>
+
 <script>
     document.getElementById('img_url').addEventListener('change', function(event) {
         const file = event.target.files[0];

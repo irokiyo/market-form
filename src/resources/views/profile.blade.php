@@ -1,6 +1,5 @@
 @extends('layouts.app')
 
-
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/sanitize.css') }}" />
 <link rel="stylesheet" href="{{ asset('css/profile.css') }}" />
@@ -10,11 +9,9 @@
 @include('partials.header')
 @endsection
 
-
 @section('content')
 <div class="profile">
     <h2 class="profile-title">プロフィール設定</h2>
-
     <form action="{{$profile ? route('profile.update') : route('profile.store')}}" method="POST" class="profile-form" enctype="multipart/form-data">
         @csrf
         @if($profile)
@@ -69,7 +66,6 @@
             <p class="error-message">{{ $message }}</p>
             @enderror
         </div>
-
         <button type="submit" class="profile-submit">更新する</button>
     </form>
 </div>
@@ -81,8 +77,6 @@
             preview.src = URL.createObjectURL(file);
         }
     });
-
 </script>
-
 @endsection
 

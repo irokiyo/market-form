@@ -1,6 +1,5 @@
 @extends('layouts.app')
 
-
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/sanitize.css') }}" />
 <link rel="stylesheet" href="{{ asset('css/index.css') }}" />
@@ -9,7 +8,6 @@
 @section('header')
 @include('partials.header')
 @endsection
-
 
 @section('content')
 
@@ -55,6 +53,6 @@ $tab = request('tab', '');
         </div>
         @endforeach
     </div>
-
 </div>
 @endsection
+
