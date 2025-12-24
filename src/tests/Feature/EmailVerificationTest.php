@@ -33,7 +33,7 @@ class EmailVerificationTest extends TestCase
     }
 
     //メール認証誘導画面で「認証はこちらから」ボタンを押下するとメール認証サイトに遷移する
-   public function testVerificationeMailAthenticationSite(): void
+    public function testVerificationeMailAthenticationSite(): void
     {
         config(['app.env' => 'local']);
 
@@ -45,10 +45,10 @@ class EmailVerificationTest extends TestCase
         $response->assertSee('認証はこちらから');
 
         $response->assertSee('http://localhost:8025');
-    } 
+    }
 
     //認証リンクにアクセスすると認証完了し、プロフィール設定画面へ遷移する
-    public function test_EmailRedirectsProfileLink(): void
+    public function testEmailRedirectsProfileLink(): void
     {
         $user = User::factory()->unverified()->create();
 

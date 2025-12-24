@@ -38,7 +38,7 @@ class FortifyServiceProvider extends ServiceProvider
             return new class implements VerifyEmailResponse {
                 public function toResponse($request)
                 {
-                return redirect('/mypage/profile');
+                    return redirect('/mypage/profile');
                 }
             };
         });
@@ -67,7 +67,7 @@ class FortifyServiceProvider extends ServiceProvider
         });
         //メール認証
         Fortify::verifyEmailView(function () {
-        return view('auth.verify-email');
+            return view('auth.verify-email');
         });
 
 

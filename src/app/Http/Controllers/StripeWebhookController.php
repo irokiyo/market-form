@@ -27,42 +27,42 @@ class StripeWebhookController extends Controller
         if ($event->type === 'checkout.session.completed') {
             $session = $event->data->object;
 
-    $itemId = $session->metadata->item_id ?? null;
-    $buyerId = $session->metadata->user_id ?? null;
-    $paymentMethodId = $session->metadata->payment_method_id ?? null;
-    $postcode = $session->metadata->postcode ?? null;
-    $address = $session->metadata->address ?? null;
-    $building = $session->metadata->building ?? null;
+            $itemId = $session->metadata->item_id ?? null;
+            $buyerId = $session->metadata->user_id ?? null;
+            $paymentMethodId = $session->metadata->payment_method_id ?? null;
+            $postcode = $session->metadata->postcode ?? null;
+            $address = $session->metadata->address ?? null;
+            $building = $session->metadata->building ?? null;
 
-    if (!$itemId || !$buyerId || !$paymentMethodId || !$postcode || !$address) {
-        Log::error('Missing metadata', (array) $session->metadata);
-        return new Response('Missing metadata', 400);
-    }
+            if (!$itemId || !$buyerId || !$paymentMethodId || !$postcode || !$address) {
+                Log::error('Missing metadata', (array) $session->metadata);
+                return new Response('Missing metadata', 400);
+            }
 
-    DB::transaction(function () use (
-        $itemId,
-        $buyerId,
-        $paymentMethodId,
-        $postcode,
-        $address,
-        $building
-    ) {
-        $item = Item::lockForUpdate()->findOrFail($itemId);
+            DB::transaction(function () use (
+                $itemId,
+                $buyerId,
+                $paymentMethodId,
+                $postcode,
+                $address,
+                $building
+            ) {
+                $item = Item::lockForUpdate()->findOrFail($itemId);
 
-        if (Order::where('item_id', $item->id)->exists()) {
-            return;
+                if (Order::where('item_id', $item->id)->exists()) {
+                    return;
+                }
+
+                Order::create([
+                    'user_id' => $buyerId,
+                    'item_id' => $itemId,
+                    'payment_method_id' => $paymentMethodId,
+                    'postcode' => $postcode,
+                    'address' => $address,
+                    'building' => $building ?: null,
+                ]);
+            });
         }
-
-        Order::create([
-            'user_id' => $buyerId,
-            'item_id' => $itemId,
-            'payment_method_id' => $paymentMethodId,
-            'postcode' => $postcode,
-            'address' => $address,
-            'building' => $building ?: null,
-        ]);
-    });
-}
 
 
         return new Response('ok', 200);

@@ -11,41 +11,39 @@ use Stripe\Stripe;
 use Stripe\Checkout\Session as CheckoutSession;
 use Illuminate\Support\Facades\Auth;
 
-
 class StripeCheckoutController extends Controller
 {
     public function create(Request $request, Item $item)
     {
-    $request->validate(
-        ['payment_method' => 'required'],
-        ['payment_method.required' => '支払い方法を選択してください']
-    );
+        $request->validate(
+            ['payment_method' => 'required'],
+            ['payment_method.required' => '支払い方法を選択してください']
+        );
 
-    $paymentMethod = PaymentMethod::findOrFail($request->payment_method);
+        $paymentMethod = PaymentMethod::findOrFail($request->payment_method);
 
-    if ($paymentMethod->payment_method === 'コンビニ払い') {
-
-        if ($item->order()->exists()) {
-            return redirect()
+        if ($paymentMethod->payment_method === 'コンビニ払い') {
+            if ($item->order()->exists()) {
+                return redirect()
                 ->route('show', $item->id)
                 ->with('error', 'この商品はすでに売り切れています');
-        }
+            }
 
-        Order::create([
+            Order::create([
             'user_id' => Auth::id(),
             'item_id' => $item->id,
             'payment_method_id' => $paymentMethod->id,
             'postcode' => $request->postcode,
             'address' => $request->address,
             'building' => $request->building,
-        ]);
+            ]);
 
-        return redirect()->route('mypage');
-    }
+            return redirect()->route('mypage');
+        }
 
-    Stripe::setApiKey(config('services.stripe.secret'));
+        Stripe::setApiKey(config('services.stripe.secret'));
 
-    $session = CheckoutSession::create([
+        $session = CheckoutSession::create([
         'mode' => 'payment',
         'payment_method_types' => ['card'],
         'line_items' => [[
@@ -68,10 +66,10 @@ class StripeCheckoutController extends Controller
         ],
         'success_url' => route('checkout.success') . '?session_id={CHECKOUT_SESSION_ID}',
         'cancel_url'  => route('checkout.cancel'),
-    ]);
+        ]);
 
-    return redirect()->away($session->url);
-}
+        return redirect()->away($session->url);
+    }
 
     public function success(Request $request)
     {
