@@ -28,7 +28,7 @@
             {{ session('success') }}
         </p>
         @endif
-        
+
         @yield('content')
     </main>
 </body>

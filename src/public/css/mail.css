@@ -1,45 +1,9 @@
-/* ===== Base ===== */
-.verify-page {
-    min-height: 100vh;
-    background: #ffffff;
-}
-
-/* ===== Header (black bar) ===== */
-.verify-header {
-    height: 48px;
-    background: #000;
-    display: flex;
-    align-items: center;
-}
-
-.verify-header__inner {
-    width: 100%;
-    max-width: 1540px;
-    margin: 0 auto;
-    padding: 0 24px;
-}
-
-.verify-logo {
-    color: #fff;
-    font-weight: 700;
-    letter-spacing: 0.02em;
-    text-decoration: none;
-    font-size: 18px;
-}
-
-/* ===== Main ===== */
-.verify-main {
-    min-height: calc(100vh - 48px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 40px 24px;
-}
 
 .verify-card {
     width: 100%;
-    max-width: 720px;
     text-align: center;
+    justify-content: center;
+    align-items: center;  
 }
 
 .verify-text {
@@ -108,18 +72,6 @@
 }
 
 @media screen and (min-width: 768px) and (max-width: 850px) {
-    .verify-header__inner {
-        padding: 0 18px;
-    }
-
-    .verify-logo {
-        font-size: 16px;
-    }
-
-    .verify-main {
-        padding: 32px 18px;
-    }
-
     .verify-text {
         font-size: 12px;
         line-height: 1.9;

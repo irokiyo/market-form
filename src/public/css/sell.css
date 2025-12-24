@@ -51,11 +51,6 @@
 .img__btn{
     display: none;
 }
-.sell-divider {
-    border: none;
-    border-top: 3px solid #ddd;
-    margin: 12px 0 16px;
-}
 
 .sell__label {
     font-weight: 700;

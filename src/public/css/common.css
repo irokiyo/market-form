@@ -38,11 +38,11 @@ body {
     display: flex;
 }
 .ttl-img1{
-    width: 20%;
+    width: 60px;
     padding: 10px 0 10px 20px;
 }
 .ttl-img2 {
-    width: 60%;
+    width: 140px;
     padding: 10px 20px 10px 0;
 }
 .header__nav{

@@ -50,13 +50,6 @@ input {
 .img__btn {
     display: none;
 }
-.profile-image-preview img {
-    width: 80%;
-    max-height: 130px;
-    object-fit: contain;
-    margin-bottom: 10px;
-    border-radius: 4px;
-}
 .form-group {
     text-align: center;
     margin-bottom: 40px;

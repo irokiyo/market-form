@@ -25,15 +25,6 @@
     height: 120px;
 }
 
-.purchase-item__image--placeholder {
-    width: 100%;
-    height: 100%;
-    background: #ddd;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 .purchase-item__name {
     font-weight: 600;
     margin-bottom: 6px;
