@@ -30,7 +30,6 @@ class ItemController extends Controller
         ? auth()->user()->favorites()->keywordSearch($request->keyword)->get()
         : collect();
 
-
         return view('index', compact('items', 'favorites'));
     }
     //商品一覧画面（トップ画面）
@@ -48,7 +47,6 @@ class ItemController extends Controller
 
         return view('index', compact('items', 'favorites', 'tab'));
     }
-
     //商品詳細画面
     public function show($item_id)
     {
@@ -73,7 +71,6 @@ class ItemController extends Controller
     //お気に入り登録
     public function favorite(Request $request, $item_id)
     {
-
         $userId = Auth::id();
 
         $existing = Favorite::where('user_id', $userId)
@@ -90,7 +87,6 @@ class ItemController extends Controller
         }
         return redirect()->route('show', $item_id);
     }
-
     //購入画面表示
     public function purchase($item_id)
     {
@@ -126,7 +122,6 @@ class ItemController extends Controller
 
         return redirect()->route('mypage');
     }
-
     //住所変更のページ
     public function address($item_id)
     {
@@ -145,15 +140,12 @@ class ItemController extends Controller
 
         return redirect()->route('purchase', $item_id);
     }
-
-
     //出品画面の表示
     public function sell()
     {
         $categories = Category::all();
         return view('sell', compact('categories'));
     }
-
     //出品商品登録
     public function sellCreate(ExhibitionRequest $request)
     {
@@ -167,10 +159,8 @@ class ItemController extends Controller
         if ($request->filled('categories')) {
             $item->categories()->sync($request->input('categories'));
         }
-
         return redirect()->route('mypage');
     }
-
     //マイページ画面表示
     public function mypage(Request $request)
     {
@@ -182,14 +172,12 @@ class ItemController extends Controller
 
         return view('mypage', compact('user', 'profile', 'items', 'orders', 'page'));
     }
-
     //プロフィール登録画面表示(初回)
     public function showMypage()
     {
         $profile = Profile::where('user_id', Auth::id())->first();
         return view('profile', compact('profile'));
     }
-
     //プロフィール登録
     public function storeMypage(ProfileRequest $request)
     {
@@ -200,7 +188,6 @@ class ItemController extends Controller
             $path = $request->file('img_url')->store('profiles', 'public');
             $profile['img_url'] = $path;
         }
-
         Profile::create($profile);
 
         return redirect()->route('index');

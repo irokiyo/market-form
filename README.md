@@ -3,13 +3,8 @@
 ## 環境構築
 
 ### Docker ビルド
-1. git clone git@github.com:Estra-Coachtech/laravel-docker-template.git  
-1. mv laravel-docker-template market-form  
-1. git remote set-url origin git@github.com:irokiyo/market-form.git  
-1. git remote -v  
-1. git add .  
-1. git commit -m "リモートリポジトリの変更"  
-1. git push origin main  
+1. git clone https://github.com/irokiyo/market-form.git market-clone  
+1. cd market-clone  
 1. docker-compose up -d --build  
 
 ### Laravel 環境構築

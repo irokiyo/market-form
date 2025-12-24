@@ -35,7 +35,7 @@ class StripeWebhookController extends Controller
     $building = $session->metadata->building ?? null;
 
     if (!$itemId || !$buyerId || !$paymentMethodId || !$postcode || !$address) {
-        \Log::error('Missing metadata', (array) $session->metadata);
+        Log::error('Missing metadata', (array) $session->metadata);
         return new Response('Missing metadata', 400);
     }
 
