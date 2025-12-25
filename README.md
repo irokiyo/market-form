@@ -11,6 +11,7 @@
 
 1. docker-compose exec php bash  
 1. composer install  
+1. cd src  
 1. cp .env.example .env  
 1. .env ファイルの一部を以下のように編集
 ```
@@ -18,24 +19,18 @@
     DB_HOST=mysql  
     DB_PORT=3306  
     DB_DATABASE=laravel_db  
-    DB_USERNAME=laravel_user 
-    DB_PASSWORD=laravel_pass 
+    DB_USERNAME=laravel_user  
+    DB_PASSWORD=laravel_pass  
 ```
-5. php artisan key:generate  
-1. php artisan migrate  
+6. docker-compose exec php bash  
+1. php artisan key:generate  
+1. php artisan migrate:fresh  
 1. php artisan db:seed  
 ## メール認証(MailHog)
 メール認証はMailHogを使用しています  
 
-### MailHog 環境構築
-1. docker-compose.ymlに以下を追加する
-```
-mailhog:
-  image: mailhog/mailhog  
-  ports:  
-    - "8025:8025"  
-    - "1025:1025"  
-```
+### MailHog 環境構築  
+
 1. .envに以下を追加する
 ```
 MAIL_MAILER=smtp  
@@ -59,7 +54,7 @@ MAIL_FROM_NAME="${APP_NAME}"
 ### Stripe 環境構築
 1. docker-compose exec php bash
 1. composer require stripe/stripe-php  
-1. .env ファイルの一部を以下のように編集  
+1. .env ファイルに以下を追加する  
 ```
 STRIPE_KEY=pk_test_xxxxxxxxxxxxx  
 STRIPE_SECRET=sk_test_xxxxxxxxxxxxx  
