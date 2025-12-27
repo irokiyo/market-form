@@ -17,12 +17,36 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         $params = [
-            ['name' => '山田太郎', 'email' => 'yamada@example.com', 'email_verified_at' => now(),'password' => Hash::make('password')],
-            ['name' => '佐藤花子', 'email' => 'sato@example.com', 'email_verified_at' => now(),'password' => Hash::make('password')],
-            ['name' => '鈴木一郎', 'email' => 'suzuki@example.com', 'email_verified_at' => now(),'password' => Hash::make('password')],
-            ['name' => '高橋美咲', 'email' => 'takahashi@example.com', 'email_verified_at' => now(),'password' => Hash::make('password')],
-            ['name' => '伊藤健', 'email' => 'ito@example.com', 'email_verified_at' => now(),'password' => Hash::make('password')],
-            ['name' => '中村彩', 'email' => 'nakamura@example.com', 'email_verified_at' => now(),'password' => Hash::make('password')],
+            [
+            'name' => '山田太郎',
+            'email' => 'yamada@example.com',
+            'email_verified_at' => now(),'password' => Hash::make('password')
+            ],
+            [
+            'name' => '佐藤花子',
+            'email' => 'sato@example.com',
+            'email_verified_at' => now(),'password' => Hash::make('password')
+            ],
+            [
+            'name' => '鈴木一郎',
+            'email' => 'suzuki@example.com',
+            'email_verified_at' => now(),'password' => Hash::make('password')
+            ],
+            [
+            'name' => '高橋美咲',
+            'email' => 'takahashi@example.com',
+            'email_verified_at' => now(),'password' => Hash::make('password')
+            ],
+            [
+            'name' => '伊藤健',
+            'email' => 'ito@example.com',
+            'email_verified_at' => now(),'password' => Hash::make('password')
+            ],
+            [
+            'name' => '中村彩',
+            'email' => 'nakamura@example.com',
+            'email_verified_at' => now(),'password' => Hash::make('password')
+            ],
         ];
         DB::table('users')->insert($params);
     }
