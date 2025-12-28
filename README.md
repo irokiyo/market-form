@@ -26,6 +26,8 @@
 1. php artisan key:generate  
 1. php artisan migrate:fresh  
 1. php artisan db:seed  
+1. php artisan storage:link  
+
 ## メール認証(MailHog)
 メール認証はMailHogを使用しています  
 
