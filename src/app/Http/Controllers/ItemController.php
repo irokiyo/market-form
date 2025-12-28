@@ -26,9 +26,19 @@ class ItemController extends Controller
     {
         $items = Item::keywordSearch($request->keyword)->get();
 
+        $userId = auth()->id();
+
+        $items = Item::when($userId, function ($q) use ($userId) {
+            $q->where('user_id', '!=', $userId);
+        })
+        ->keywordSearch($request->keyword)
+        ->get();
+
         $favorites = auth()->check()
         ? auth()->user()->favorites()->keywordSearch($request->keyword)->get()
         : collect();
+
+        $tab = $request->query('tab', '');
 
         return view('index', compact('items', 'favorites'));
     }
@@ -120,7 +130,7 @@ class ItemController extends Controller
 
         session()->forget('temp_address');
 
-        return redirect()->route('mypage');
+        return redirect()->route('index');
     }
     //住所変更のページ
     public function address($item_id)

@@ -10,7 +10,7 @@
     <div class="register-card">
         <h2 class="register-title">会員登録</h2>
 
-        <form action="{{route('register')}}" method="POST" class="register-form">
+        <form action="{{route('register')}}" method="POST" class="register-form" novalidate>
             @csrf
             <div class="form-group">
                 <label for="name">ユーザー名</label>

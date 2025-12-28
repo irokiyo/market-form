@@ -19,7 +19,7 @@ Route::get('/', [ItemController::class, 'index'])->name('index'); //商品一覧
 Route::get('/search', [ItemController::class, 'search'])->name('search'); //商品検索
 Route::get('/item/{item_id}', [ItemController::class, 'show'])->name('show'); //商品詳細画面
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/item/{item_id}', [ItemController::class, 'commentCreate'])->name('comment.create'); //コメント作成
     Route::post('/favorite/{item_id}', [ItemController::class, 'favorite'])->name('favorite');//お気に入り登録
     Route::get('/purchase/{item_id}', [ItemController::class, 'purchase'])->name('purchase'); //商品購入画面
@@ -33,14 +33,10 @@ Route::middleware('auth')->group(function () {
     Route::patch('/mypage/profile', [ItemController::class, 'storeUpdate'])->name('profile.update');//プロフィール画面情報更新
 
     Route::get('/mypage', [ItemController::class, 'mypage'])->name('mypage'); //マイページ画面
-});
 
-Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/mypage/profile', [ItemController::class, 'showMypage'])->name('profile.show'); //プロフィール画面編集画面
     Route::post('/mypage/profile', [ItemController::class, 'storeMypage'])->name('profile.store'); //プロフィール画面情報登録
-});
 
-Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/checkout/{item}', [StripeCheckoutController::class, 'create'])//決済画面表示
         ->name('checkout.create');
 
