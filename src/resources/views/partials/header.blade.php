@@ -1,4 +1,4 @@
-<form action="{{route('search')}}" class="search">
+<form action="{{route('index')}}" class="search" method="GET">
     <input type="text" class="search-input" name="keyword" value="{{ request('keyword')}}" placeholder="なにをお探しですか？">
 </form>
 <nav class="header__nav">

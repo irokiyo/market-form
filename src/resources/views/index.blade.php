@@ -17,8 +17,8 @@ $tab = request('tab', '');
 
 <div class="items-page">
     <div class="tab-menu">
-        <a href="{{route('search', ['tab' => '', 'keyword' => request('keyword')])}}" class="tab {{ $tab === '' ? 'is-active' : '' }}">おすすめ</a>
-        <a href="{{route('search', ['tab' => 'mylist', 'keyword' => request('keyword')])}}" class="tab {{ $tab === 'mylist' ? 'is-active' : '' }}">マイリスト</a>
+        <a href="{{route('index', ['tab' => '', 'keyword' => request('keyword')])}}" class="tab {{ $tab === '' ? 'is-active' : '' }}">おすすめ</a>
+        <a href="{{route('index', ['tab' => 'mylist', 'keyword' => request('keyword')])}}" class="tab {{ $tab === 'mylist' ? 'is-active' : '' }}">マイリスト</a>
     </div>
 
     {{-- おすすめ --}}

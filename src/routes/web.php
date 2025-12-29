@@ -16,7 +16,7 @@ use App\Http\Controllers\StripeWebhookController;
 |
 */
 Route::get('/', [ItemController::class, 'index'])->name('index'); //商品一覧画面（トップ画面）
-Route::get('/search', [ItemController::class, 'search'])->name('search'); //商品検索
+//Route::get('/search', [ItemController::class, 'search'])->name('search'); //商品検索
 Route::get('/item/{item_id}', [ItemController::class, 'show'])->name('show'); //商品詳細画面
 
 Route::middleware(['auth', 'verified'])->group(function () {

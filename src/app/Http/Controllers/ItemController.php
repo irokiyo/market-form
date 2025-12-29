@@ -21,39 +21,25 @@ use Illuminate\Support\Facades\Session;
 
 class ItemController extends Controller
 {
-    //検索
-    public function search(Request $request)
-    {
-        $items = Item::keywordSearch($request->keyword)->get();
-
-        $userId = auth()->id();
-
-        $items = Item::when($userId, function ($q) use ($userId) {
-            $q->where('user_id', '!=', $userId);
-        })
-        ->keywordSearch($request->keyword)
-        ->get();
-
-        $favorites = auth()->check()
-        ? auth()->user()->favorites()->keywordSearch($request->keyword)->get()
-        : collect();
-
-        $tab = $request->query('tab', '');
-
-        return view('index', compact('items', 'favorites'));
-    }
     //商品一覧画面（トップ画面）
     public function index(Request $request)
     {
-        $userId = auth()->id();
-        $items = Item::when($userId, function ($q) use ($userId) {
-            return $q->where('user_id', '!=', $userId);
-        })
-            ->get();
-        $favorites = auth()->check()
-        ? auth()->user()->favorites()->keywordSearch($request->keyword)->get()
-        : collect();
         $tab = $request->query('tab', '');
+        $keyword = $request->query('keyword');
+        $userId = auth()->id();
+
+        $items = Item::query()
+            ->when($userId, fn ($q) => $q->where('user_id', '!=', $userId))
+            ->keywordSearch($keyword)
+            ->get();
+
+        $favorites = collect();
+        if ($tab === 'mylist' && auth()->check()) {
+            $favorites = auth()->user()
+                ->favorites()
+                ->keywordSearch($keyword)
+                ->get();
+        }
 
         return view('index', compact('items', 'favorites', 'tab'));
     }
