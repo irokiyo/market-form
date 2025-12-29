@@ -27,7 +27,7 @@ class MyListTest extends TestCase
 
         $user->favorites()->attach($items[0]->id);
 
-        $response = $this->actingAs($user)->get('/search?tab=mylist');
+        $response = $this->actingAs($user)->get('/?tab=mylist');
 
         $response->assertSee('FAVORITED_ITEM');
     }
