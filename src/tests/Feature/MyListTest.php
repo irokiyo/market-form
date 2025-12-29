@@ -50,14 +50,14 @@ class MyListTest extends TestCase
             'building'          => 'テストビル101',
         ]);
 
-        $response = $this->actingAs($user)->get('/search?tab=mylist');
+        $response = $this->actingAs($user)->get('/?tab=mylist');
 
         $response->AssertSee('Sold');
     }
     //未認証の場合は表示されない
     public function testNoLoginItemList()
     {
-        $response = $this->get('/search?tab=mylist');
+        $response = $this->get('/?tab=mylist');
 
         $response->assertStatus(200);
     }

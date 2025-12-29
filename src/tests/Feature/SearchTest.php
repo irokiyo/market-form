@@ -18,10 +18,9 @@ class SearchTest extends TestCase
         Item::factory()->create(['name' => 'りんご']);
         Item::factory()->create(['name' => 'バナナ']);
 
-        $response = $this->get(route('search', ['keyword' => 'りん']));
+        $response = $this->get(route('index', ['keyword' => 'りん']));
 
         $response->assertStatus(200);
-
         $response->assertSee('りんご');
         $response->assertDontSee('バナナ');
     }
@@ -31,11 +30,11 @@ class SearchTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $response = $this->actingAs($user)->get(route('search', ['keyword' => 'りんご']));
+        $response = $this->actingAs($user)->get(route('index', ['keyword' => 'りんご']));
 
         $response->assertStatus(200);
 
-        $expectedUrl = route('search', ['tab' => 'mylist', 'keyword' => 'りんご']);
+        $expectedUrl = route('index', ['tab' => 'mylist', 'keyword' => 'りんご']);
         $response->assertSee($expectedUrl);
     }
 }
