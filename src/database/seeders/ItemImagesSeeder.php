@@ -23,7 +23,7 @@ class ItemImagesSeeder extends Seeder
             $filename = $file->getFilename();
 
             Storage::disk('public')->put(
-                $toDir.'/'.$filename,
+                $toDir . '/' . $filename,
                 File::get($file->getRealPath())
             );
         }
