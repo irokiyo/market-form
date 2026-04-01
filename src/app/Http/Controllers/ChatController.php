@@ -15,7 +15,6 @@ class ChatController extends Controller
     {
         $messages = $trade->messages;
 
-
         return view('chat.show', compact(
             'trade',
             'messages'

@@ -49,17 +49,17 @@
             </div>
         </div>
         <div class="chat-card">
-            <div class="chat-left">
+            @foreach($messages as $message)
+            <div class="{{ $message->isMine() ? 'chat-right' : 'chat-left' }}">
 
-            </div>
-            <div class="chat-right">
-                @foreach($messages as $message)
                 <div class="chat___user">
                     <div class="user__name">{{$trade->buyer->name}}</div>
                     <img src="{{ \Storage::url($trade->buyer->img_url) }}" alt="プロフィール画像">
                 </div>
-                <div class="comment">
-                    {{$message->comment}}
+                <div class="chat__message">
+                    <div class="comment">
+                        {{$message->comment}}
+                    </div>
                 </div>
                 @if($message->isMine())
                 <div class="message__edit">
@@ -72,7 +72,7 @@
             <div class="message">
                 <div class="message___form">
                     <form action="{{route('message.store', ['trade' => $trade->id])}}" method='post' enctype="multipart/form-data">
-                    @csrf
+                        @csrf
                         <textarea class="form__textarea" name="comment" id="comment" placeholder="取引メッセージを記入してください">
                         </textarea>
                         <label for="" class="img__upload">

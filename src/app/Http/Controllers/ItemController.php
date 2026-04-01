@@ -173,8 +173,12 @@ class ItemController extends Controller
         $items = Item::where('user_id', $user->id)->get();
         $orders = Order::with('item')->where('user_id', $user->id)->get();
         $page = $request->query('page', 'sell');
+        $trades = Trade::with('item')
+            ->where('buyer_id', $user->id)
+            ->orWhere('seller_id', $user->id)
+            ->get();
 
-        return view('mypage', compact('user', 'profile', 'items', 'orders', 'page'));
+        return view('mypage', compact('user', 'profile', 'items', 'orders', 'page','trades'));
     }
     //プロフィール登録画面表示(初回)
     public function showMypage()

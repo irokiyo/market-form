@@ -21,6 +21,7 @@
         </div>
         <div class="mypage__info">
             <p class="mypage__name">{{ $profile?->name }}</p>
+
         </div>
         <div class="mypage__btn">
             <a href="{{ route('profile.show') }}" class="mypage__edit-btn">プロフィールを編集</a>
@@ -31,6 +32,8 @@
         <ul class="tabs__list">
             <li><a href="{{route('mypage', ['page' => 'sell'])}}" class="page {{ $page === 'sell' ? 'is-active' : '' }}">出品した商品</a></li>
             <li><a href="{{route('mypage', ['page' => 'buy'])}}" class="page {{ $page === 'buy' ? 'is-active' : '' }}">購入した商品</a></li>
+            <li><a href="{{route('mypage', ['page' => 'progress'])}}" class="page {{ $page === 'progress' ? 'is-active' : '' }}">取引中の商品</a></li>
+
         </ul>
     </div>
     <div class="line"></div>
@@ -58,5 +61,17 @@
             @endforeach
         </div>
     </div>
+    {{-- 取引中の商品 --}}
+    <div class="mypage__list {{ $page==='progress' ? '' : 'is-hidden' }}" id="tab-order">
+        <div class="mypage-grid">
+            @foreach($trades as $trade)
+            <div class="item-card">
+                <a href="{{route('chat.show',['trade' => $trade->id])}}"><img src="{{ \Storage::url($trade->item->img_url) }}" alt="{{ $trade->item->name }}" class="item__img"></a>
+                <p class="item__name">{{$trade->item->name}}</p>
+            </div>
+            @endforeach
+        </div>
+    </div>
+
 </div>
 @endsection
