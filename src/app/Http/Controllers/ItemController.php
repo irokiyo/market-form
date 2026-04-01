@@ -176,6 +176,7 @@ class ItemController extends Controller
         $trades = Trade::with('item')
             ->where('buyer_id', $user->id)
             ->orWhere('seller_id', $user->id)
+            ->orderBy('created_at', 'desc')
             ->get();
 
         return view('mypage', compact('user', 'profile', 'items', 'orders', 'page','trades'));

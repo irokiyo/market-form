@@ -13,10 +13,17 @@ class ChatController extends Controller
 {
     public function show(Trade $trade)
     {
+        $user = auth()->id();
         $messages = $trade->messages;
+        $trades = Trade::with('item')
+            ->where('buyer_id', $user)
+            ->orWhere('seller_id', $user)
+            ->orderBy('created_at', 'desc')
+            ->get();
 
         return view('chat.show', compact(
             'trade',
+            'trades',
             'messages'
         ));
     }

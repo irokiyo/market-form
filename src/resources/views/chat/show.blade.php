@@ -13,6 +13,15 @@
 <div class="card">
     <div class="left-card">
         <h2 class="category__ttl">その他の取引</h2>
+        @foreach($trades as $t)
+        @if($t->id !== $trade->id)
+        <div class="progress___list">
+            <a href="{{route('chat.show',['trade' => $t->id])}}">
+                <p class="item__name">{{$t->item->name}}</p>
+            </a>
+        </div>
+        @endif
+        @endforeach
     </div>
     <div class="right-card">
         <div class="sub__ttl">
