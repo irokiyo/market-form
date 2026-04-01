@@ -1,0 +1,46 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Trade extends Model
+{
+    use HasFactory;
+
+    const STATUS_IN_PROGRESS = 'in_progress';
+    const STATUS_COMPLETED = 'completed';
+    const STATUS_CANCELLED = 'cancelled';
+
+    protected $fillable =
+        [
+            'buyer_id',
+            'seller_id',
+            'item_id',
+            'status',
+        ];
+
+
+    public function buyer()
+    {
+        return $this->belongsTo(User::class, 'buyer_id');
+    }
+    public function seller()
+    {
+        return $this->belongsTo(User::class, 'seller_id');
+    }
+    public function item()
+    {
+        return $this->belongsTo(Item::class, 'item_id');
+    }
+
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
+    }
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+}
