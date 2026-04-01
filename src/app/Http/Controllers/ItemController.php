@@ -17,6 +17,7 @@ use App\Models\User;
 use App\Models\Order;
 use App\Models\PaymentMethod;
 use App\Models\Favorite;
+use App\Models\Trade;
 use Illuminate\Support\Facades\Session;
 
 class ItemController extends Controller
@@ -98,8 +99,7 @@ class ItemController extends Controller
     {
         $item = Item::findOrFail($item_id);
         if ($item->order()->exists()) {
-            return redirect()->route('show', $item_id)
-            ->with('error', 'この商品はすでに売り切れています。');
+            return redirect()->route('show', $item_id);
         }
 
         $order =
@@ -114,9 +114,17 @@ class ItemController extends Controller
 
         Order::create($order);
 
+        $trade =Trade::create
+            ([
+                'buyer_id'=>Auth::id(),
+                'seller_id'=>$item->user_id,
+                'item_id'=>$item_id,
+                'status'=>Trade::STATUS_IN_PROGRESS,
+            ]);
+
         session()->forget('temp_address');
 
-        return redirect()->route('index');
+        return redirect()->route('chat.show',['trade'=>$trade->id]);
     }
     //住所変更のページ
     public function address($item_id)

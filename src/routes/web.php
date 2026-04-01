@@ -48,7 +48,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         ->name('checkout.cancel');
 
     //チャット機能
-    Route::get('/chat/{trade}', [ChatController::class, 'chat'])->name('chat');
+    Route::get('/chat/{trade}', [ChatController::class, 'show'])->name('chat.show');
 
 });
 
