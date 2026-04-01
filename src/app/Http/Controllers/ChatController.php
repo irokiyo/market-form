@@ -13,6 +13,12 @@ class ChatController extends Controller
 {
     public function show(Trade $trade)
     {
-        return view('chat.show', compact('trade'));
+        $messages = $trade->messages;
+
+
+        return view('chat.show', compact(
+            'trade',
+            'messages'
+        ));
     }
 }
