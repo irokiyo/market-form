@@ -66,7 +66,7 @@ class RegisterTest extends TestCase
         ]);
     }
 
-    //パスワードの７文字以下のバリデーション
+    //パスワードの8文字以下のバリデーション
     public function testPasswordShortValidation()
     {
         $response = $this->from(route('register'))

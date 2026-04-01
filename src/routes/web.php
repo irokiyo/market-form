@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\StripeCheckoutController;
 use App\Http\Controllers\StripeWebhookController;
 
@@ -45,6 +46,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/checkout/cancel', [StripeCheckoutController::class, 'cancel'])//決済できないとき
         ->name('checkout.cancel');
+
+    //チャット機能
+    Route::get('/chat/{trade}', [ChatController::class, 'chat'])->name('chat');
+
 });
 
 Route::post('/stripe/webhook', [StripeWebhookController::class, 'handle'])
