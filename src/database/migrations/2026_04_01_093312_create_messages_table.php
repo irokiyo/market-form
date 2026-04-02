@@ -16,9 +16,11 @@ class CreateMessagesTable extends Migration
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('receiver_id')->constrained('users')->cascadeOnDelete();
             $table->foreignId('trade_id')->constrained()->cascadeOnDelete();
             $table->text('comment');
             $table->string('image_url')->nullable();
+            $table->boolean('read')->default(false);
             $table->timestamps();
         });
     }

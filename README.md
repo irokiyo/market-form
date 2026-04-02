@@ -121,6 +121,7 @@ messagesテーブル（メッセージテーブル）
 |trade_id　 |bigint       |             |             |⚪︎        |trade(id)    |
 |comment    |varchar(255) |             |             |⚪︎       |             |
 |image_url  |varchar(255) |             |             |         |             |
+|read       |boolean      |             |             |         |             |
 |created_at |timestamp    |             |             |         |             |
 |updated_at |timestamp    |             |             |         |             |
 

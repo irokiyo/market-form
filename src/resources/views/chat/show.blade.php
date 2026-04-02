@@ -27,20 +27,20 @@
     <div class="right-card">
         <div class="sub__ttl">
             <h1 class="ttl">
-                @if($trade->buyer)
-                @if((!empty($trade->seller->profile->img_url)))
-                <img src="{{ \Storage::url($trade->seller->profile->img_url) }}" id="preview-image" alt="プロフィール画像" class="avatar__img">
-                @else
-                <img src="{{asset('/images/Ellipse 1.png')}}" id="preview-image" alt="プロフィール画像" class="avatar__img">
-                @endif
-                「{{$trade->seller->name}}」さんとの取引画面
-                @elseif($trade->seller)
-                @if((!empty($trade->buyer->profile->img_url)))
-                <img src="{{ \Storage::url($trade->buyer->profile->img_url) }}" . id="preview-image" alt="プロフィール画像" class="avatar__img">
-                @else
-                <img src="{{asset('/images/Ellipse 1.png')}}" id="preview-image" alt="プロフィール画像" class="avatar__img">
-                @endif
-                「{{$trade->buyer->name}}」さんとの取引画面
+                @if(auth()->id() === $trade->buyer_id)
+                    @if((!empty($trade->seller->profile->img_url)))
+                    <img src="{{ \Storage::url($trade->seller->profile->img_url) }}" id="preview-image" alt="プロフィール画像" class="avatar__img">
+                    @else
+                    <img src="{{asset('/images/Ellipse 1.png')}}" id="preview-image" alt="プロフィール画像" class="avatar__img">
+                    @endif
+                    「{{$trade->seller->name}}」さんとの取引画面
+                @elseif(auth()->id() === $trade->seller_id)
+                    @if((!empty($trade->buyer->profile->img_url)))
+                    <img src="{{ \Storage::url($trade->buyer->profile->img_url) }}" id="preview-image" alt="プロフィール画像" class="avatar__img">
+                    @else
+                    <img src="{{asset('/images/Ellipse 1.png')}}" id="preview-image" alt="プロフィール画像" class="avatar__img">
+                    @endif
+                    「{{$trade->buyer->name}}」さんとの取引画面
                 @endif
             </h1>
             <div class="btn">
@@ -62,8 +62,13 @@
             @foreach($messages as $message)
             <div class="{{ $message->isMine() ? 'chat-right' : 'chat-left' }}">
                 <div class="chat___user">
-                    <div class="user__name">{{$trade->buyer->name}}</div>
-                    <img src="{{ \Storage::url($trade->buyer->img_url) }}" alt="プロフィール画像">
+                    @if($message->user_id === $trade->buyer_id)
+                        <div class="user__name">{{$trade->buyer->name}}</div>
+                        <img src="{{ \Storage::url($trade->buyer->img_url) }}" alt="プロフィール画像">
+                    @elseif($message->user_id === $trade->seller_id)
+                        <div class="user__name">{{$trade->seller->name}}</div>
+                        <img src="{{ \Storage::url($trade->seller->img_url) }}" alt="プロフィール画像">
+                    @endif
                 </div>
                 <div class="chat__message">
                     <div class="comment">
@@ -84,8 +89,8 @@
                         @csrf
                         <textarea class="form__textarea" name="comment" id="comment" placeholder="取引メッセージを記入してください">
                         </textarea>
-                        <label for="" class="img__upload">
-                            画像を追加<input type="file" src="" alt="" hidden>
+                        <label for="image" class="img__upload">
+                            画像を追加<input type="file" id="image" hidden>
                         </label>
                         <button class="send__btn" type="submit"><img src="/images/メッセージ送信.jpg" alt="送信ボタン">
                         </button>
