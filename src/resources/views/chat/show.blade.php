@@ -87,7 +87,7 @@
                 <div class="message___form">
                     <form action="{{route('message.store', ['trade' => $trade->id])}}" method='post' enctype="multipart/form-data">
                         @csrf
-                        <textarea class="form__textarea" name="comment" id="comment" placeholder="取引メッセージを記入してください">
+                        <textarea class="form__textarea" name="comment" id="draft_message" placeholder="取引メッセージを記入してください">
                         </textarea>
                         <label for="image" class="img__upload">
                             画像を追加<input type="file" id="image" hidden>
@@ -118,7 +118,32 @@
             });
         }
     });
+    document.addEventListener('DOMContentLoaded', function () {
+        //取得するデータtextareaのidと一致
+        const textarea = document.getElementById('draft_message');
 
+        // 取引ごとに分ける
+        const key = 'draft_message_{{ $trade->id }}';
+
+        // 保存されている下書きを復元
+        const saved = localStorage.getItem(key);
+        if (saved) {
+            textarea.value = saved;
+        }
+
+        // 入力するたびに保存
+        textarea.addEventListener('input', function () {
+            localStorage.setItem(key, textarea.value);
+        });
+
+        // 送信したら削除
+        const form = textarea.closest('form');
+        if (form) {
+            form.addEventListener('submit', function () {
+                localStorage.removeItem(key);
+            });
+        }
+    });
 </script>
 @endsection
 

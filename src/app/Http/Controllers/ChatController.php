@@ -17,7 +17,7 @@ class ChatController extends Controller
             ->where('trade_id',$trade->id)
             ->where('read', false)
             ->update(['read'=>true]);
-        
+
         $user = auth()->id();
         $messages = $trade->messages;
         $trades = Trade::with('item')
