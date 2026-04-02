@@ -175,14 +175,18 @@ class ItemController extends Controller
         $items = Item::where('user_id', $user->id)->get();
         $orders = Order::with('item')->where('user_id', $user->id)->get();
         $page = $request->query('page', 'sell');
-        $trades = Trade::with('item')
-            ->where(function ($query) use ($user) {
-                $query->where('buyer_id', $user->id)
-                    ->orWhere('seller_id', $user->id);
-            })
+        $trades = Trade::with(['item','messages'=>function($query){
+            $query->latest();
+        }])
+        ->where(function ($query) use ($user) {
+            $query->where('buyer_id', $user->id)
+                ->orWhere('seller_id', $user->id);
+        })
             ->where('status', Trade::STATUS_IN_PROGRESS)
-            ->orderBy('created_at', 'desc')
-            ->get();
+            ->get()
+            ->sortByDesc(function ($trade) {
+                return optional($trade->messages->first())->created_at;
+            });
 
         $averageRating = Review::where('reviewee_id', $user->id)->avg('rating');
         $rating = round($averageRating);
