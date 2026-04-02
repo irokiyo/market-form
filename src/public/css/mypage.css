@@ -109,6 +109,14 @@
 .is-hidden {
     display: none;
 }
+.star{
+    font-size: 28px;
+    color: #D9D9D9;
+}
+
+.star--active{
+    color: #FFF048;
+}
 
 @media screen and (max-width: 768px) {
     .mypage__name{

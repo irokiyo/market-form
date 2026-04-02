@@ -21,7 +21,13 @@
         </div>
         <div class="mypage__info">
             <p class="mypage__name">{{ $profile?->name }}</p>
-
+            <div class="user__rating">
+            @if($averageRating)
+                @for ($i = 1; $i <= 5; $i++)
+                <span class="star {{ $i <= $rating ? 'star--active' : '' }}">★</span>
+                @endfor
+            @endif
+            </div>
         </div>
         <div class="mypage__btn">
             <a href="{{ route('profile.show') }}" class="mypage__edit-btn">プロフィールを編集</a>

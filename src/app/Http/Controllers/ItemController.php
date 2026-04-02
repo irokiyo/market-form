@@ -18,6 +18,7 @@ use App\Models\Order;
 use App\Models\PaymentMethod;
 use App\Models\Favorite;
 use App\Models\Trade;
+use App\Models\Review;
 use Illuminate\Support\Facades\Session;
 
 class ItemController extends Controller
@@ -182,7 +183,10 @@ class ItemController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
-        return view('mypage', compact('user', 'profile', 'items', 'orders', 'page','trades'));
+        $averageRating = Review::where('reviewee_id', $user->id)->avg('rating');
+        $rating = round($averageRating);
+
+        return view('mypage', compact('user', 'profile', 'items', 'orders', 'page','trades','averageRating','rating'));
     }
     //プロフィール登録画面表示(初回)
     public function showMypage()
