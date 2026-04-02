@@ -32,21 +32,6 @@ class UsersTableSeeder extends Seeder
             'email' => 'suzuki@example.com',
             'email_verified_at' => now(),'password' => Hash::make('password')
             ],
-            [
-            'name' => '高橋美咲',
-            'email' => 'takahashi@example.com',
-            'email_verified_at' => now(),'password' => Hash::make('password')
-            ],
-            [
-            'name' => '伊藤健',
-            'email' => 'ito@example.com',
-            'email_verified_at' => now(),'password' => Hash::make('password')
-            ],
-            [
-            'name' => '中村彩',
-            'email' => 'nakamura@example.com',
-            'email_verified_at' => now(),'password' => Hash::make('password')
-            ],
         ];
         DB::table('users')->insert($params);
     }

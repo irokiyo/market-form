@@ -40,30 +40,6 @@ class ProfilesTableSeeder extends Seeder
                 'address' => '大阪府大阪市北区中之島3-15-21',
                 'building' => '中之島パークタワー 12F',
             ],
-            [
-                'user_id' => 4,
-                'img_url' => null,
-                'name' => 'みさみさ',
-                'postcode' => '460-0012',
-                'address' => '愛知県名古屋市中区千代田2-8-16',
-                'building' => '千代田セントラルマンション 204号室',
-            ],
-            [
-                'user_id' => 5,
-                'img_url' => null,
-                'name' => '伊藤健',
-                'postcode' => '810-0041',
-                'address' => '福岡県福岡市中央区大名1-6-22',
-                'building' => '大名サウスコートビル 7階',
-            ],
-            [
-                'user_id' => 6,
-                'img_url' => null,
-                'name' => '中村',
-                'postcode' => '060-0042',
-                'address' => '北海道札幌市中央区大通西5丁目9-4',
-                'building' => '札幌フロントタワー 18F',
-            ],
         ];
         DB::table('profiles')->insert($params);
     }
