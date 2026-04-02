@@ -61,7 +61,6 @@
         <div class="chat-card">
             @foreach($messages as $message)
             <div class="{{ $message->isMine() ? 'chat-right' : 'chat-left' }}">
-
                 <div class="chat___user">
                     <div class="user__name">{{$trade->buyer->name}}</div>
                     <img src="{{ \Storage::url($trade->buyer->img_url) }}" alt="プロフィール画像">
@@ -73,12 +72,12 @@
                 </div>
                 @if($message->isMine())
                 <div class="message__edit">
-                    <button class="update" type="submit">編集</button>
-                    <button class="delete" type="submit">削除</button>
+                    <button class="update" type="button">編集</button>
+                    <button class="delete" type="button">削除</button>
                 </div>
                 @endif
-                @endforeach
             </div>
+            @endforeach
             <div class="message">
                 <div class="message___form">
                     <form action="{{route('message.store', ['trade' => $trade->id])}}" method='post' enctype="multipart/form-data">
@@ -86,14 +85,14 @@
                         <textarea class="form__textarea" name="comment" id="comment" placeholder="取引メッセージを記入してください">
                         </textarea>
                         <label for="" class="img__upload">
-                            画像を追加<input type="image" src="" alt="" hidden>
+                            画像を追加<input type="file" src="" alt="" hidden>
                         </label>
                         <button class="send__btn" type="submit"><img src="/images/メッセージ送信.jpg" alt="送信ボタン">
                         </button>
-                    </form>
                     @error('comment')
                     <p class="error-message">{{ $message }}</p>
                     @enderror
+                    </form>
                 </div>
             </div>
         </div>
@@ -117,3 +116,4 @@
 
 </script>
 @endsection
+
