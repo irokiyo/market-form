@@ -22,11 +22,10 @@
         <div class="mypage__info">
             <p class="mypage__name">{{ $profile?->name }}</p>
             <div class="user__rating">
-            @if($averageRating)
-                @for ($i = 1; $i <= 5; $i++)
-                <span class="star {{ $i <= $rating ? 'star--active' : '' }}">★</span>
-                @endfor
-            @endif
+                @if($averageRating)
+                @for ($i = 1; $i <= 5; $i++) <span class="star {{ $i <= $rating ? 'star--active' : '' }}">★</span>
+                    @endfor
+                    @endif
             </div>
         </div>
         <div class="mypage__btn">
@@ -38,8 +37,14 @@
         <ul class="tabs__list">
             <li><a href="{{route('mypage', ['page' => 'sell'])}}" class="page {{ $page === 'sell' ? 'is-active' : '' }}">出品した商品</a></li>
             <li><a href="{{route('mypage', ['page' => 'buy'])}}" class="page {{ $page === 'buy' ? 'is-active' : '' }}">購入した商品</a></li>
-            <li><a href="{{route('mypage', ['page' => 'progress'])}}" class="page {{ $page === 'progress' ? 'is-active' : '' }}">取引中の商品</a></li>
-
+            <li class="status-progress"><a href="{{route('mypage', ['page' => 'progress'])}}" class="page {{ $page === 'progress' ? 'is-active' : '' }}">取引中の商品
+                    @if($totalUnreadCount > 0)
+                    <div class="unread-count">
+                        <span class="unread-count__int">{{$totalUnreadCount}}</span>
+                    </div>
+                    @endif
+                </a>
+            </li>
         </ul>
     </div>
     <div class="line"></div>
@@ -72,12 +77,19 @@
         <div class="mypage-grid">
             @foreach($trades as $trade)
             <div class="item-card">
-                <a href="{{route('chat.show',['trade' => $trade->id])}}"><img src="{{ \Storage::url($trade->item->img_url) }}" alt="{{ $trade->item->name }}" class="item__img"></a>
+                <a href="{{route('chat.show',['trade' => $trade->id])}}">
+                    @if($tradeUnreadCount > 0)
+                    <div class="trade__unread-count">
+                        <span class="trade__unread-count__int">{{$tradeUnreadCount}}</span>
+                    </div>
+                    @endif
+                    <img src="{{ \Storage::url($trade->item->img_url) }}" alt="{{ $trade->item->name }}" class="item__img">
+                </a>
                 <p class="item__name">{{$trade->item->name}}</p>
             </div>
             @endforeach
         </div>
     </div>
-
 </div>
 @endsection
+

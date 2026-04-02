@@ -118,6 +118,7 @@ messagesテーブル（メッセージテーブル）
 | --------- | ------------|-------------|------------|----------|-------------|
 | id        | bigint      |⚪︎           |             |⚪︎        |             |
 |user_id　　|bigint        |             |            |⚪︎        |user(id)     |
+|receiver_id|bigint       |             |            |⚪︎        |user(id)     |
 |trade_id　 |bigint       |             |             |⚪︎        |trade(id)    |
 |comment    |varchar(255) |             |             |⚪︎       |             |
 |image_url  |varchar(255) |             |             |         |             |

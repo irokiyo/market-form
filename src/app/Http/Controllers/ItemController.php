@@ -19,6 +19,7 @@ use App\Models\PaymentMethod;
 use App\Models\Favorite;
 use App\Models\Trade;
 use App\Models\Review;
+use App\Models\Message;
 use Illuminate\Support\Facades\Session;
 
 class ItemController extends Controller
@@ -185,8 +186,28 @@ class ItemController extends Controller
 
         $averageRating = Review::where('reviewee_id', $user->id)->avg('rating');
         $rating = round($averageRating);
+        $totalUnreadCount = Message::where('receiver_id', Auth::id())
+            ->where('read',false)
+            ->count();
+        $tradeUnreadCount = Message::where('receiver_id', Auth::id())
+            ->where('read', false)
+            ->selectRaw('trade_id, COUNT(*) as count')
+            ->groupBy('trade_id')
+            ->pluck('count', 'trade_id')
+            ->count();
 
-        return view('mypage', compact('user', 'profile', 'items', 'orders', 'page','trades','averageRating','rating'));
+        return view('mypage', compact(
+            'user',
+            'profile',
+            'items',
+            'orders',
+            'page',
+            'trades',
+            'averageRating',
+            'rating',
+            'totalUnreadCount',
+            'tradeUnreadCount'
+        ));
     }
     //プロフィール登録画面表示(初回)
     public function showMypage()
