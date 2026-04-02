@@ -3,6 +3,7 @@
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/sanitize.css') }}" />
 <link rel="stylesheet" href="{{ asset('css/chat.css') }}" />
+<link rel="stylesheet" href="{{ asset('css/modal.css') }}" />
 @endsection
 
 @section('header')
@@ -44,7 +45,7 @@
             </h1>
             <div class="btn">
                 @if($trade->buyer)
-                <button class="completed_btn" type="submit">取引を完了する</button>
+                <button class="completed_btn" type="button" id="openModal">取引を完了する</button>
                 @endif
             </div>
         </div>
@@ -98,5 +99,21 @@
         </div>
     </div>
 </div>
-@endsection
+@include('chat.modal')
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        //モーダルの取得するボタンの連動
+        const openBtn = document.getElementById('openModal');
+        //モーダル本体を取得
+        const modal = document.getElementById('reviewModal');
 
+        //モーダル開く処理
+        if (openBtn && modal) {
+            openBtn.addEventListener('click', function() {
+                modal.classList.add('is-open');
+            });
+        }
+    });
+
+</script>
+@endsection

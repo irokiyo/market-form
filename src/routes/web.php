@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\StripeCheckoutController;
 use App\Http\Controllers\StripeWebhookController;
 
@@ -51,6 +52,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     //チャット機能
     Route::get('/chat/{trade}', [ChatController::class, 'show'])->name('chat.show');
     Route::post('/chat/{trade}/message', [MessageController::class, 'store'])->name('message.store');
+    Route::post('/chat/{trade}/review', [ReviewController::class, 'store'])->name('review.store');
 
 });
 
