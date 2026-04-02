@@ -189,12 +189,11 @@ class ItemController extends Controller
         $totalUnreadCount = Message::where('receiver_id', Auth::id())
             ->where('read',false)
             ->count();
-        $tradeUnreadCount = Message::where('receiver_id', Auth::id())
+        $tradeUnreadCounts = Message::where('receiver_id', Auth::id())
             ->where('read', false)
             ->selectRaw('trade_id, COUNT(*) as count')
             ->groupBy('trade_id')
-            ->pluck('count', 'trade_id')
-            ->count();
+            ->pluck('count', 'trade_id');
 
         return view('mypage', compact(
             'user',
@@ -206,7 +205,7 @@ class ItemController extends Controller
             'averageRating',
             'rating',
             'totalUnreadCount',
-            'tradeUnreadCount'
+            'tradeUnreadCounts'
         ));
     }
     //プロフィール登録画面表示(初回)

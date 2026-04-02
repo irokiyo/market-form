@@ -78,9 +78,9 @@
             @foreach($trades as $trade)
             <div class="item-card">
                 <a href="{{route('chat.show',['trade' => $trade->id])}}">
-                    @if($tradeUnreadCount > 0)
+                    @if(($tradeUnreadCounts[$trade->id] ?? 0) > 0)
                     <div class="trade__unread-count">
-                        <span class="trade__unread-count__int">{{$tradeUnreadCount}}</span>
+                        <span class="trade__unread-count__int">{{$tradeUnreadCounts[$trade->id]}}</span>
                     </div>
                     @endif
                     <img src="{{ \Storage::url($trade->item->img_url) }}" alt="{{ $trade->item->name }}" class="item__img">

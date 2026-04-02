@@ -13,6 +13,11 @@ class ChatController extends Controller
 {
     public function show(Trade $trade)
     {
+        Message::where('receiver_id', auth()->id())
+            ->where('trade_id',$trade->id)
+            ->where('read', false)
+            ->update(['read'=>true]);
+        
         $user = auth()->id();
         $messages = $trade->messages;
         $trades = Trade::with('item')
