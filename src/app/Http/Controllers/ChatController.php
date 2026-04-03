@@ -11,7 +11,7 @@ use App\Models\Review;
 
 class ChatController extends Controller
 {
-    public function show(Trade $trade)
+    public function show(Request $request , Trade $trade)
     {
         Message::where('receiver_id', auth()->id())
             ->where('trade_id',$trade->id)
@@ -25,11 +25,13 @@ class ChatController extends Controller
             ->orWhere('seller_id', $user)
             ->orderBy('created_at', 'desc')
             ->get();
+        $editMessage= $request -> query('edit');
 
         return view('chat.show', compact(
             'trade',
             'trades',
-            'messages'
+            'messages',
+            'editMessage'
         ));
     }
 }

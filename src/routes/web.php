@@ -52,7 +52,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     //チャット機能
     Route::get('/chat/{trade}', [ChatController::class, 'show'])->name('chat.show');
     Route::post('/chat/{trade}/message', [MessageController::class, 'store'])->name('message.store');
-    Route::patch('/chat/{trade}/message', [MessageController::class, 'update'])->name('message.update');
+    Route::patch('/chat/{trade}/{message}/update', [MessageController::class, 'update'])->name('message.update');
     Route::delete('/chat/{trade}/{message}/delete', [MessageController::class, 'delete'])->name('message.delete');
     Route::post('/chat/{trade}/review', [ReviewController::class, 'store'])->name('review.store');
 

@@ -28,19 +28,19 @@
         <div class="sub__ttl">
             <h1 class="ttl">
                 @if(auth()->id() === $trade->buyer_id)
-                    @if((!empty($trade->seller->profile->img_url)))
-                    <img src="{{ \Storage::url($trade->seller->profile->img_url) }}" id="preview-image" alt="プロフィール画像" class="avatar__img">
-                    @else
-                    <img src="{{asset('/images/Ellipse 1.png')}}" id="preview-image" alt="プロフィール画像" class="avatar__img">
-                    @endif
-                    「{{$trade->seller->name}}」さんとの取引画面
+                @if((!empty($trade->seller->profile->img_url)))
+                <img src="{{ \Storage::url($trade->seller->profile->img_url) }}" id="preview-image" alt="プロフィール画像" class="avatar__img">
+                @else
+                <img src="{{asset('/images/Ellipse 1.png')}}" id="preview-image" alt="プロフィール画像" class="avatar__img">
+                @endif
+                「{{$trade->seller->name}}」さんとの取引画面
                 @elseif(auth()->id() === $trade->seller_id)
-                    @if((!empty($trade->buyer->profile->img_url)))
-                    <img src="{{ \Storage::url($trade->buyer->profile->img_url) }}" id="preview-image" alt="プロフィール画像" class="avatar__img">
-                    @else
-                    <img src="{{asset('/images/Ellipse 1.png')}}" id="preview-image" alt="プロフィール画像" class="avatar__img">
-                    @endif
-                    「{{$trade->buyer->name}}」さんとの取引画面
+                @if((!empty($trade->buyer->profile->img_url)))
+                <img src="{{ \Storage::url($trade->buyer->profile->img_url) }}" id="preview-image" alt="プロフィール画像" class="avatar__img">
+                @else
+                <img src="{{asset('/images/Ellipse 1.png')}}" id="preview-image" alt="プロフィール画像" class="avatar__img">
+                @endif
+                「{{$trade->buyer->name}}」さんとの取引画面
                 @endif
             </h1>
             <div class="btn">
@@ -59,28 +59,39 @@
             </div>
         </div>
         <div class="chat-card">
-            @foreach($messages as $message)
-            <div class="{{ $message->isMine() ? 'chat-right' : 'chat-left' }}">
+            @foreach($messages as $chatMessage)
+            <div class="{{ $chatMessage->isMine() ? 'chat-right' : 'chat-left' }}">
                 <div class="chat___user">
-                    @if($message->user_id === $trade->buyer_id)
-                        <div class="user__name">{{$trade->buyer->name}}</div>
-                        <img src="{{ \Storage::url($trade->buyer->img_url) }}" alt="プロフィール画像">
-                    @elseif($message->user_id === $trade->seller_id)
-                        <div class="user__name">{{$trade->seller->name}}</div>
-                        <img src="{{ \Storage::url($trade->seller->img_url) }}" alt="プロフィール画像">
+                    @if($chatMessage->user_id === $trade->buyer_id)
+                    <div class="user__name">{{$trade->buyer->name}}</div>
+                    <img src="{{ \Storage::url($trade->buyer->img_url) }}" alt="プロフィール画像">
+                    @elseif($chatMessage->user_id === $trade->seller_id)
+                    <div class="user__name">{{$trade->seller->name}}</div>
+                    <img src="{{ \Storage::url($trade->seller->img_url) }}" alt="プロフィール画像">
                     @endif
                 </div>
                 <div class="chat__message">
                     <div class="comment">
-                        {{$message->comment}}
+                        @if($editMessage == $chatMessage->id)
+                        <form action="{{route('message.update',['trade' => $trade->id , 'message' => $chatMessage->id])}}" id="message-update" method="post">
+                            @csrf
+                            @method('patch')
+                            <a href="{{route('chat.show',['trade'=>$trade->id])}}" class="cancel__btn">×</a>
+                            <textarea class="form__textarea" name="comment" id="draft_message">{{$chatMessage->comment}}
+                            </textarea>
+                            <button class="update" type="submit" for="message-update">編集する</button>
+                            @else
+                            {{$chatMessage->comment}}
+                            @endif
+                        </form>
                     </div>
                 </div>
-                @if($message->isMine())
+                @if($chatMessage->isMine())
                 <div class="message__edit">
-                    <button class="update" type="button" >編集</button>
-                    <form action="{{route('message.delete',['trade' => $trade->id , 'message' => $message->id])}}" id="message-delete" method="post">
-                    @csrf
-                    @method('delete')
+                    <a href="{{route('chat.show',['trade'=>$trade->id, 'edit'=>$chatMessage->id])}}" class="update">編集</a>
+                    <form action="{{route('message.delete',['trade' => $trade->id , 'message' => $chatMessage->id])}}" id="message-delete" method="post">
+                        @csrf
+                        @method('delete')
                         <button class="delete" type="submit" for="message-delete" onclick="return confirm('このメッセージを削除しますか？')">削除</button>
                     </form>
                 </div>
@@ -98,9 +109,9 @@
                         </label>
                         <button class="send__btn" type="submit"><img src="/images/メッセージ送信.jpg" alt="送信ボタン">
                         </button>
-                    @error('comment')
-                    <p class="error-message">{{ $message }}</p>
-                    @enderror
+                        @error('comment')
+                        <p class="error-message">{{ $message }}</p>
+                        @enderror
                     </form>
                 </div>
             </div>
@@ -125,8 +136,8 @@
         }
     });
 
-    
-    document.addEventListener('DOMContentLoaded', function () {
+
+    document.addEventListener('DOMContentLoaded', function() {
         //取得するデータtextareaのidと一致
         const textarea = document.getElementById('draft_message');
 
@@ -140,18 +151,19 @@
         }
 
         // 入力するたびに保存
-        textarea.addEventListener('input', function () {
+        textarea.addEventListener('input', function() {
             localStorage.setItem(key, textarea.value);
         });
 
         // 送信したら削除
         const form = textarea.closest('form');
         if (form) {
-            form.addEventListener('submit', function () {
+            form.addEventListener('submit', function() {
                 localStorage.removeItem(key);
             });
         }
     });
+
 </script>
 @endsection
 

@@ -33,14 +33,13 @@ class MessageController extends Controller
         return redirect()->back()->with('success', '送信しました');
     }
 
-    public function update(MessageRequest $request,Trade $trade)
+    public function update(MessageRequest $request,Trade $trade , Message $message)
     {
-        $message = Message::findOrFail($request->message->id);
         $message->update([
             'comment'=>$request->comment,
         ]);
 
-        return redirect()->back()->with('success', '更新しました');
+        return redirect()->route('chat.show', ['trade' => $trade->id])->with('success', '更新しました');
     }
 
     public function delete(Request $request,Trade $trade, Message $message)
