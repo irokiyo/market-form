@@ -127,13 +127,15 @@ messagesテーブル（メッセージテーブル）
 |updated_at |timestamp    |             |             |         |             |
 
 reviewsテーブル（評価テーブル）
-| カラム名   |  型          |primary key  |unique key  |not null  |foreign key  |
-| --------- | ------------|-------------|-------------|----------|-------------|
-| id        | bigint      |⚪︎           |             |⚪︎        |             |
-|reviewer_id|bigint       |             |             |⚪︎        |user(id)     |
-|reviewee_id|bigint       |             |             |⚪︎        |user(id)     |
-|trade_id　 |bigint       |             |             |⚪︎        |trade(id)    |
-|rating     |int          |             |             |⚪︎       |             |
-|comment    |varchar(255) |             |             |         |             |
-|created_at |timestamp    |             |             |         |             |
-|updated_at |timestamp    |             |             |         |             |
+| カラム名           |  型          |primary key  |unique key  |not null  |foreign key  |
+| ------------------| ------------|-------------|-------------|----------|-------------|
+| id                | bigint      |⚪︎           |             |⚪︎        |             |
+|reviewer_id        |bigint       |             |             |⚪︎        |user(id)     |
+|reviewee_id        |bigint       |             |             |⚪︎        |user(id)     |
+|trade_id　         |bigint       |             |             |⚪︎        |trade(id)    |
+|rating             |int          |             |             |⚪︎       |             |
+|comment            |varchar(255) |             |             |         |             |
+|buyer_completed_at |timestamp    |             |             |⚪       |             |
+|seller_reviewed_at |timestamp    |             |             |         |             |
+|created_at         |timestamp    |             |             |         |             |
+|updated_at         |timestamp    |             |             |         |             |
