@@ -15,9 +15,7 @@ class Review extends Model
             'reviewer_id',
             'reviewee_id',
             'rating',
-            'comment',
-            'buyer_completed_at',
-            'seller_reviewed_at',
+            'comment'
         ];
 
     public function reviewer()

@@ -19,6 +19,8 @@ class Trade extends Model
             'seller_id',
             'item_id',
             'status',
+            'buyer_completed_at',
+            'seller_reviewed_at',
         ];
 
 

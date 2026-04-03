@@ -21,6 +21,8 @@ class ReviewController extends Controller
             'reviewee_id' =>$reviewee->id,
             'rating'=>$request->rating,
             'comment'=>null,
+            'buyer_completed_at'=>$request->now(),
+            'seller_reviewed_at'=>null
         ];
         Review::create($review);
 

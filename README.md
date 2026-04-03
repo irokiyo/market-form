@@ -103,15 +103,17 @@ Webhook を利用していますので
 購入者と出品者のやり取りができるチャット機能と評価機能を追加しました。
 追加テーブルは以下の通りです。
 tradesテーブル（取引テーブル）
-| カラム名   |  型          |primary key  |unique key  |not null  |foreign key  |
-| --------- | ------------|-------------|------------|----------|-------------|
-| id        | bigint      |⚪︎           |             |⚪︎        |             |
-|buyer_id　　|bigint       |             |             |⚪︎       |user(id)     |
-|seller_id  |bigint       |             |             |⚪︎       |user(id)     |
-|item_id    |bigint       |             |             |⚪︎       |item(id)     |
-|status     |varchar(255) |             |             |⚪︎       |             |
-|created_at |timestamp    |             |             |         |             |
-|updated_at |timestamp    |             |             |         |             |
+| カラム名           |  型          |primary key  |unique key  |not null  |foreign key  |
+| ------------------| ------------|-------------|------------|----------|-------------|
+| id                | bigint      |⚪︎           |             |⚪︎        |             |
+|buyer_id　　        |bigint       |             |            |⚪︎       |user(id)      |
+|seller_id          |bigint       |             |             |⚪︎       |user(id)     |
+|item_id            |bigint       |             |             |⚪︎       |item(id)     |
+|status             |varchar(255) |             |             |⚪︎       |             |
+|buyer_completed_at |timestamp    |             |             |         |             |
+|seller_reviewed_at |timestamp    |             |             |         |             |
+|created_at         |timestamp    |             |             |         |             |
+|updated_at         |timestamp    |             |             |         |             |
 
 messagesテーブル（メッセージテーブル）
 | カラム名   |  型          |primary key  |unique key  |not null  |foreign key  |
@@ -135,7 +137,5 @@ reviewsテーブル（評価テーブル）
 |trade_id　         |bigint       |             |             |⚪︎        |trade(id)    |
 |rating             |int          |             |             |⚪︎       |             |
 |comment            |varchar(255) |             |             |         |             |
-|buyer_completed_at |timestamp    |             |             |⚪       |             |
-|seller_reviewed_at |timestamp    |             |             |         |             |
 |created_at         |timestamp    |             |             |         |             |
 |updated_at         |timestamp    |             |             |         |             |

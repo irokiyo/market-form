@@ -19,6 +19,8 @@ class CreateTradesTable extends Migration
             $table->foreignId('seller_id')->constrained('users')->cascadeOnDelete();
             $table->foreignId('item_id')->constrained()->cascadeOnDelete();
             $table->string('status')->default('in_progress');//in_progress,completed,cancelledの状態で作成
+            $table->timestamp('buyer_completed_at')->nullable();
+            $table->timestamp('seller_reviewed_at')->nullable();
             $table->timestamps();
         });
     }
