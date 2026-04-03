@@ -17,7 +17,7 @@ class MessageController extends Controller
 
         $imagePath=null;
         if($request->hasFile('img_url')){
-            $imagePath->file('img_url')->store('message', 'public');
+            $imagePath = $request->file('img_url')->store('message', 'public');
         }
 
         $messages = Message::create([
@@ -31,5 +31,22 @@ class MessageController extends Controller
 
 
         return redirect()->back()->with('success', '送信しました');
+    }
+
+    public function update(MessageRequest $request,Trade $trade)
+    {
+        $message = Message::findOrFail($request->message->id);
+        $message->update([
+            'comment'=>$request->comment,
+        ]);
+
+        return redirect()->back()->with('success', '更新しました');
+    }
+
+    public function delete(Request $request,Trade $trade, Message $message)
+    {
+        $message->delete();
+
+        return redirect()->back()->with('success', '削除しました');
     }
 }

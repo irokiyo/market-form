@@ -77,8 +77,12 @@
                 </div>
                 @if($message->isMine())
                 <div class="message__edit">
-                    <button class="update" type="button">編集</button>
-                    <button class="delete" type="button">削除</button>
+                    <button class="update" type="button" >編集</button>
+                    <form action="{{route('message.delete',['trade' => $trade->id , 'message' => $message->id])}}" id="message-delete" method="post">
+                    @csrf
+                    @method('delete')
+                        <button class="delete" type="submit" for="message-delete" onclick="return confirm('このメッセージを削除しますか？')">削除</button>
+                    </form>
                 </div>
                 @endif
             </div>
@@ -103,14 +107,16 @@
         </div>
     </div>
 </div>
-@include('chat.modal')
+@include('chat.modal.review')
+@include('chat.modal.message-edit')
+
 <script>
+    //レビューのモーダル
     document.addEventListener('DOMContentLoaded', function() {
         //モーダルの取得するボタンの連動
         const openBtn = document.getElementById('openModal');
         //モーダル本体を取得
         const modal = document.getElementById('reviewModal');
-
         //モーダル開く処理
         if (openBtn && modal) {
             openBtn.addEventListener('click', function() {
@@ -118,6 +124,8 @@
             });
         }
     });
+
+    
     document.addEventListener('DOMContentLoaded', function () {
         //取得するデータtextareaのidと一致
         const textarea = document.getElementById('draft_message');
