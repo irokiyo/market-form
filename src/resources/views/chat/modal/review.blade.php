@@ -1,5 +1,7 @@
 <div class="modal__review" id="reviewModal">
-    <form id="reviewForm" action="{{route('review.store',['trade' => $trade->id])}}" class="form__review" method="post">
+    <form id="reviewForm" action="{{$showSellerReviewModal
+            ?route('review.seller.store',['trade' => $trade->id])
+            :route('review.store',['trade' => $trade->id])}}" class="form__review" method="post">
         @csrf
         <div class="modal__card">
             <div class="card__part">
@@ -16,7 +18,7 @@
                     <label for="star3" class="review-star">★</label>
                     <input type="radio" name="rating" id="star2" value="2" hidden>
                     <label for="star2" class="review-star">★</label>
-                    <input type="radio" name="rating" id="star5" value="1" hidden>
+                    <input type="radio" name="rating" id="star1" value="1" hidden>
                     <label for="star1" class="review-star">★</label>
                 </div>
                 @error('rating')

@@ -44,7 +44,7 @@
                 @endif
             </h1>
             <div class="btn">
-                @if($trade->buyer)
+                @if(auth()->id()===$trade->buyer_id)
                 <button class="completed_btn" type="button" id="openModal">取引を完了する</button>
                 @endif
             </div>
@@ -119,10 +119,8 @@
     </div>
 </div>
 @include('chat.modal.review')
-@include('chat.modal.message-edit')
-
 <script>
-    //レビューのモーダル
+    //購入者のレビューのモーダル
     document.addEventListener('DOMContentLoaded', function() {
         //モーダルの取得するボタンの連動
         const openBtn = document.getElementById('openModal');
@@ -135,26 +133,20 @@
             });
         }
     });
-
-
     document.addEventListener('DOMContentLoaded', function() {
         //取得するデータtextareaのidと一致
         const textarea = document.getElementById('draft_message');
-
         // 取引ごとに分ける
         const key = 'draft_message_{{ $trade->id }}';
-
         // 保存されている下書きを復元
         const saved = localStorage.getItem(key);
         if (saved) {
             textarea.value = saved;
         }
-
         // 入力するたびに保存
         textarea.addEventListener('input', function() {
             localStorage.setItem(key, textarea.value);
         });
-
         // 送信したら削除
         const form = textarea.closest('form');
         if (form) {
@@ -163,7 +155,17 @@
             });
         }
     });
-
 </script>
+
+@if($showSellerReviewModal)
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const modal = document.getElementById('reviewModal');
+        if (modal) {
+            modal.classList.add('is-open');
+        }
+    });
+</script>
+@endif
 @endsection
 

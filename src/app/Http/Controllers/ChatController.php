@@ -13,6 +13,11 @@ class ChatController extends Controller
 {
     public function show(Request $request , Trade $trade)
     {
+        $showSellerReviewModal =  auth()->id()=== $trade->seller_id
+            &&!is_null($trade->buyer_completed_at)
+            &&is_null($trade->seller_reviewed_at);
+
+        //既読か未読の設定
         Message::where('receiver_id', auth()->id())
             ->where('trade_id',$trade->id)
             ->where('read', false)
@@ -31,7 +36,8 @@ class ChatController extends Controller
             'trade',
             'trades',
             'messages',
-            'editMessage'
+            'editMessage',
+            'showSellerReviewModal'
         ));
     }
 }

@@ -20,8 +20,6 @@ class CreateReviewsTable extends Migration
             $table->foreignId('reviewee_id')->constrained('users')->cascadeOnDelete();
             $table->integer('rating');
             $table->string('comment')->nullable();
-            $table->timestamp('buyer_completed_at')->nullable();
-            $table->timestamp('seller_reviewed_at')->nullable();
             $table->timestamps();
         });
     }

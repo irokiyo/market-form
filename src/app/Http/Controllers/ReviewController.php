@@ -42,4 +42,25 @@ class ReviewController extends Controller
 
         return redirect()->route('index')->with('success', 'レビューを送信しました');
     }
+
+    public function sellerStore(ReviewRequest $request,Trade $trade)
+    {
+        $review = [
+            'trade_id'=>$trade->id,
+            'reviewer_id'=> auth()->id(),
+            'reviewee_id' =>$trade->buyer->id,
+            'rating'=>$request->rating,
+            'comment'=>null,
+        ];
+        Review::create($review);
+
+        if (auth()->id()===$trade->seller->id) {
+            $trade->update([
+                'status'=>Trade::STATUS_COMPLETED,
+                'seller_reviewed_at'=> now()
+            ]);
+        }
+
+        return redirect()->route('index')->with('success', '取引が完了しました');
+    }
 }
