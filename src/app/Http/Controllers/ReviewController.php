@@ -11,6 +11,14 @@ class ReviewController extends Controller
 {
     public function store(ReviewRequest $request,Trade $trade)
     {
+        $alreadyReview = Review::where('trade_id',$trade->id)
+            ->where('reviewer_id',auth()->id())
+            ->exists();
+
+        if ($alreadyReview) {
+            return redirect()->route('index')->with('error', 'すでにレビュー済みです');
+        }
+
         $reviewee =auth()->id()===$trade->buyer->id
             ? $trade->seller
             : $trade->buyer;
@@ -21,19 +29,17 @@ class ReviewController extends Controller
             'reviewee_id' =>$reviewee->id,
             'rating'=>$request->rating,
             'comment'=>null,
-            'buyer_completed_at'=>$request->now(),
-            'seller_reviewed_at'=>null
         ];
         Review::create($review);
 
-        $trade->update([
-                'status'=>Trade::STATUS_COMPLETED,
+        if (auth()->id()===$trade->buyer->id) {
+            $trade->update([
+                'buyer_completed_at'=> now(),
             ]);
 
-        if(auth()->id()===$trade->buyer->id){
             $trade->seller->notify(new TransactionCompleted($trade));
         }
 
-        return redirect()->route('index')->with('success', '取引が完了しました');;
+        return redirect()->route('index')->with('success', 'レビューを送信しました');
     }
 }

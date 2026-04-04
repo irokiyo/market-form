@@ -122,6 +122,8 @@ class ItemController extends Controller
                 'seller_id'=>$item->user_id,
                 'item_id'=>$item_id,
                 'status'=>Trade::STATUS_IN_PROGRESS,
+                'buyer_completed_at'=> null,
+                'seller_reviewed_at'=> null,
             ]);
 
         session()->forget('temp_address');
