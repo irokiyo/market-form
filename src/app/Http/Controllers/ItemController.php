@@ -13,7 +13,6 @@ use App\Models\Profile;
 use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Item;
-use App\Models\User;
 use App\Models\Order;
 use App\Models\PaymentMethod;
 use App\Models\Favorite;

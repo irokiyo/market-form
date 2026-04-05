@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Models\Order;
 use App\Models\User;
 use App\Models\Item;
 use App\Models\PaymentMethod;
