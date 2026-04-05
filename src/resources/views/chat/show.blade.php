@@ -19,7 +19,6 @@
         <div class="progress___list">
             <a href="{{route('chat.show',['trade' => $t->id])}}" class="progress___list__link">
                 <p class="progress___list__item__name">{{$t->item->name}}</p>
-
             </a>
         </div>
         @endif
@@ -29,18 +28,18 @@
         <div class="sub__ttl">
             <h1 class="ttl">
                 @if(auth()->id() === $trade->buyer_id)
-                @if((!empty($trade->seller->profile->img_url)))
+                    @if((!empty($trade->seller->profile->img_url)))
                     <img src="{{ \Storage::url($trade->seller->profile->img_url) }}" id="preview-image" alt="プロフィール画像" class="avatar__img">
-                @else
+                    @else
                     <img src="{{asset('images/Ellipse 1.png')}}" id="preview-image" alt="プロフィール画像" class="avatar__img">
-                @endif
+                    @endif
                 「{{$trade->seller->name}}」さんとの取引画面
                 @elseif(auth()->id() === $trade->seller_id)
-                @if((!empty($trade->buyer->profile->img_url)))
-                <img src="{{ \Storage::url($trade->buyer->profile->img_url) }}" id="preview-image" alt="プロフィール画像" class="avatar__img">
-                @else
-                <img src="{{asset('images/Ellipse 1.png')}}" id="preview-image" alt="プロフィール画像" class="avatar__img">
-                @endif
+                    @if((!empty($trade->buyer->profile->img_url)))
+                    <img src="{{ \Storage::url($trade->buyer->profile->img_url) }}" id="preview-image" alt="プロフィール画像" class="avatar__img">
+                    @else
+                    <img src="{{asset('images/Ellipse 1.png')}}" id="preview-image" alt="プロフィール画像" class="avatar__img">
+                    @endif
                 「{{$trade->buyer->name}}」さんとの取引画面
                 @endif
             </h1>
@@ -74,7 +73,7 @@
                         @elseif($chatMessage->user_id === $trade->seller_id)
                         <div class="user__name">{{$trade->seller->name}}</div>
                             @if((!empty($trade->seller->profile->img_url)))
-                                <img src="{{ \Storage::url($trade->seller->profile->img_url) }}" alt="プロフィール画像">
+                            <img src="{{ \Storage::url($trade->seller->profile->img_url) }}" alt="プロフィール画像">
                             @else
                             <img src="{{asset('images/Ellipse 1.png')}}" id="preview-image" alt="プロフィール画像" class="avatar__img">
                             @endif
@@ -84,21 +83,21 @@
                     <div class="chat__message">
                         <div class="comment">
                             @if($editMessage == $chatMessage->id)
-                                <form action="{{route('message.update',['trade' => $trade->id , 'message' => $chatMessage->id])}}" method="post" enctype="multipart/form-data">
+                            <form action="{{route('message.update',['trade' => $trade->id , 'message' => $chatMessage->id])}}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 @method('patch')
-                                    <a href="{{route('chat.show',['trade'=>$trade->id])}}" class="cancel__btn">×</a>
-                                    <textarea class="edit__textarea" name="comment">{{ $chatMessage->comment }}</textarea>
-                                    <img src="{{ Storage::url($chatMessage->image_url) }}" alt="送信画像" class="message__img">
-                                    <label for="editId" class="img__upload">画像を変更</label>
-                                    <input type="file" name="img_url" id="editId" hidden>
-                                    <button class="update" type="submit">編集する</button>
-                                </form>
+                                <a href="{{route('chat.show',['trade'=>$trade->id])}}" class="cancel__btn">×</a>
+                                <textarea class="edit__textarea" name="comment">{{ $chatMessage->comment }}</textarea>
+                                <img src="{{ Storage::url($chatMessage->image_url) }}" alt="送信画像" class="message__img">
+                                <label for="editId" class="img__upload">画像を変更</label>
+                                <input type="file" name="img_url" id="editId" hidden>
+                                <button class="update" type="submit">編集する</button>
+                            </form>
                             @else
-                                {{ $chatMessage->comment }}
-                                @if(!empty($chatMessage->image_url))
-                                    <img src="{{ Storage::url($chatMessage->image_url) }}" alt="送信画像" class="message__img" >
-                                @endif
+                            {{ $chatMessage->comment }}
+                            @if(!empty($chatMessage->image_url))
+                            <img src="{{ Storage::url($chatMessage->image_url) }}" alt="送信画像" class="message__img">
+                            @endif
                             @endif
                         </div>
                     </div>
@@ -186,7 +185,6 @@
             modal.classList.add('is-open');
         }
     });
-
 </script>
 @endif
 @endsection

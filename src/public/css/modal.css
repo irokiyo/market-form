@@ -9,11 +9,9 @@
     justify-content: center;
     align-items: center;
 }
-
 .form__review{
     margin: 0;
 }
-
 .modal__card{
     width: 500px;
     background: #f6f1de;
@@ -30,17 +28,15 @@
 .card__part:first-child{
     background: #f6f1de;
     text-align: left;
-    border-bottom: 1px solid #8a8a6a;
 }
 .card__part:nth-child(2){
     text-align: center;
     padding-top: 24px;
     padding-bottom: 24px;
 }
-.moda__message{
+.modal__message{
     background-color: #f6f1de;
 }
-
 .rating{
     display: flex;
     justify-content: center;
@@ -54,7 +50,6 @@
     font-size: 18px;
 }
 .review-star{
-    font-size: 50px;
     color: #D9D9D9;
     cursor: pointer;
     font-size: 80px;
