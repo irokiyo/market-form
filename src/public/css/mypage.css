@@ -98,14 +98,15 @@
     color: #F45B5B;
     font-weight: bold;
 }
-.page.is-active:last-child{
-    display: flex;
-}
+
 .page{
     text-decoration: none;
     font-size: 24px;
     color: #5F5F5F;
     font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
 }
 
 

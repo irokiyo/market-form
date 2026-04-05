@@ -91,7 +91,7 @@ Webhook を利用していますので
 (CO06~CO10のダミーデータを出品)  
 
 メールアドレス: suzuki@example.com  
-パスワード: password
+パスワード: password  
 (出品なし)  
 
 ## 使用技術
