@@ -5,7 +5,7 @@
         @csrf
         <div class="modal__card">
             <div class="card__part">
-                <h1 class="message">取引が完了しました。</h1>
+                <h1 class="moda__message">取引が完了しました。</h1>
             </div>
             <div class="card__part">
                 <p class="review__cmt">今回の取引相手はどうでしたか？</p>

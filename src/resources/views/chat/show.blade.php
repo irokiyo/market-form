@@ -30,16 +30,16 @@
             <h1 class="ttl">
                 @if(auth()->id() === $trade->buyer_id)
                 @if((!empty($trade->seller->profile->img_url)))
-                <img src="{{ \Storage::url($trade->seller->profile->img_url) }}" id="preview-image" alt="プロフィール画像" class="avatar__img">
+                    <img src="{{ \Storage::url($trade->seller->profile->img_url) }}" id="preview-image" alt="プロフィール画像" class="avatar__img">
                 @else
-                <img src="{{asset('/images/Ellipse 1.png')}}" id="preview-image" alt="プロフィール画像" class="avatar__img">
+                    <img src="{{asset('images/Ellipse 1.png')}}" id="preview-image" alt="プロフィール画像" class="avatar__img">
                 @endif
                 「{{$trade->seller->name}}」さんとの取引画面
                 @elseif(auth()->id() === $trade->seller_id)
                 @if((!empty($trade->buyer->profile->img_url)))
                 <img src="{{ \Storage::url($trade->buyer->profile->img_url) }}" id="preview-image" alt="プロフィール画像" class="avatar__img">
                 @else
-                <img src="{{asset('/images/Ellipse 1.png')}}" id="preview-image" alt="プロフィール画像" class="avatar__img">
+                <img src="{{asset('images/Ellipse 1.png')}}" id="preview-image" alt="プロフィール画像" class="avatar__img">
                 @endif
                 「{{$trade->buyer->name}}」さんとの取引画面
                 @endif
@@ -66,10 +66,18 @@
                     <div class="chat___user">
                         @if($chatMessage->user_id === $trade->buyer_id)
                         <div class="user__name">{{$trade->buyer->name}}</div>
-                        <img src="{{ \Storage::url($trade->buyer->img_url) }}" alt="プロフィール画像">
+                            @if((!empty($trade->buyer->profile->img_url)))
+                            <img src="{{ \Storage::url($trade->buyer->img_url) }}" alt="プロフィール画像">
+                            @else
+                            <img src="{{asset('images/Ellipse 1.png')}}" id="preview-image" alt="プロフィール画像" class="avatar__img">
+                            @endif
                         @elseif($chatMessage->user_id === $trade->seller_id)
                         <div class="user__name">{{$trade->seller->name}}</div>
-                        <img src="{{ \Storage::url($trade->seller->img_url) }}" alt="プロフィール画像">
+                            @if((!empty($trade->buyer->profile->img_url)))
+                                <img src="{{ \Storage::url($trade->seller->img_url) }}" alt="プロフィール画像">
+                            @else
+                            <img src="{{asset('images/Ellipse 1.png')}}" id="preview-image" alt="プロフィール画像" class="avatar__img">
+                            @endif
                         @endif
                     </div>
 

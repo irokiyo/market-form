@@ -163,10 +163,6 @@
     margin-bottom: 6px;
 }
 
-.chat-right .chat___user{
-    flex-direction: row-reverse;
-}
-
 .chat___user img,
 .chat___user .user-icon{
     width: 36px;
@@ -197,18 +193,24 @@
 
 .message__edit{
     display: flex;
-    gap: 8px;
-    margin-top: 4px;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+}
+.message__edit form{
+    margin: 0;
 }
 
 .update,
 .delete{
-    border: none;
-    background: transparent;
     color: #666;
-    font-size: 10px;
     text-decoration: none;
+    background: transparent;
+    border: none;
+    padding: 0;
     cursor: pointer;
+    font: inherit;
+    line-height: 1.5; 
 }
 
 .message{

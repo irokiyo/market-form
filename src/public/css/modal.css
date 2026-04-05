@@ -23,24 +23,34 @@
     box-sizing: border-box;
 }
 .card__part{
-    padding: 10px;
-    border-bottom: 1px solid #000000;
-    text-align: center;
+    padding: 18px 20px;
+    border-bottom: 1px solid #8a8a6a;
+    box-sizing: border-box;
 }
 .card__part:first-child{
+    background: #f6f1de;
     text-align: left;
+    border-bottom: 1px solid #8a8a6a;
 }
 .card__part:nth-child(2){
     text-align: center;
+    padding-top: 24px;
+    padding-bottom: 24px;
 }
+.moda__message{
+    background-color: #f6f1de;
+}
+
 .rating{
     display: flex;
-    flex-direction: row-reverse;
-    text-align: center;
-    width: 100%;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
 }
 .review__cmt{
+    margin: 0 0 24px;
     color: #868686;
+    font-size: 18px;
 }
 .review-star{
     font-size: 50px;
@@ -60,6 +70,7 @@
 .card__part:last-child{
     border-bottom: none;
     text-align: right;
+    padding: 10px 12px;
 }
 .submit_btn{
     color: #FFFFFF;
