@@ -67,14 +67,14 @@
                         @if($chatMessage->user_id === $trade->buyer_id)
                         <div class="user__name">{{$trade->buyer->name}}</div>
                             @if((!empty($trade->buyer->profile->img_url)))
-                            <img src="{{ \Storage::url($trade->buyer->img_url) }}" alt="プロフィール画像">
+                            <img src="{{ \Storage::url($trade->buyer->profile->img_url) }}" alt="プロフィール画像">
                             @else
                             <img src="{{asset('images/Ellipse 1.png')}}" id="preview-image" alt="プロフィール画像" class="avatar__img">
                             @endif
                         @elseif($chatMessage->user_id === $trade->seller_id)
                         <div class="user__name">{{$trade->seller->name}}</div>
                             @if((!empty($trade->buyer->profile->img_url)))
-                                <img src="{{ \Storage::url($trade->seller->img_url) }}" alt="プロフィール画像">
+                                <img src="{{ \Storage::url($trade->seller->profile->img_url) }}" alt="プロフィール画像">
                             @else
                             <img src="{{asset('images/Ellipse 1.png')}}" id="preview-image" alt="プロフィール画像" class="avatar__img">
                             @endif
