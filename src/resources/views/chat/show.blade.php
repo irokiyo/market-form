@@ -17,8 +17,9 @@
         @foreach($trades as $t)
         @if($t->id !== $trade->id)
         <div class="progress___list">
-            <a href="{{route('chat.show',['trade' => $t->id])}}">
-                <p class="item__name">{{$t->item->name}}</p>
+            <a href="{{route('chat.show',['trade' => $t->id])}}" class="progress___list__link">
+                <p class="progress___list__item__name">{{$t->item->name}}</p>
+
             </a>
         </div>
         @endif
@@ -59,60 +60,63 @@
             </div>
         </div>
         <div class="chat-card">
-            @foreach($messages as $chatMessage)
-            <div class="{{ $chatMessage->isMine() ? 'chat-right' : 'chat-left' }}">
-                <div class="chat___user">
-                    @if($chatMessage->user_id === $trade->buyer_id)
-                    <div class="user__name">{{$trade->buyer->name}}</div>
-                    <img src="{{ \Storage::url($trade->buyer->img_url) }}" alt="プロフィール画像">
-                    @elseif($chatMessage->user_id === $trade->seller_id)
-                    <div class="user__name">{{$trade->seller->name}}</div>
-                    <img src="{{ \Storage::url($trade->seller->img_url) }}" alt="プロフィール画像">
-                    @endif
-                </div>
-                <div class="chat__message">
-                    <div class="comment">
-                        @if($editMessage == $chatMessage->id)
-                        <form action="{{route('message.update',['trade' => $trade->id , 'message' => $chatMessage->id])}}" id="message-update" method="post">
-                            @csrf
-                            @method('patch')
-                            <a href="{{route('chat.show',['trade'=>$trade->id])}}" class="cancel__btn">×</a>
-                            <textarea class="form__textarea" name="comment" id="draft_message">{{$chatMessage->comment}}
-                            </textarea>
-                            <button class="update" type="submit" for="message-update">編集する</button>
+            <div class="chat-area">
+                @foreach($messages as $chatMessage)
+                <div class="{{ $chatMessage->isMine() ? 'chat-right' : 'chat-left' }}">
+                    <div class="chat___user">
+                        @if($chatMessage->user_id === $trade->buyer_id)
+                        <div class="user__name">{{$trade->buyer->name}}</div>
+                        <img src="{{ \Storage::url($trade->buyer->img_url) }}" alt="プロフィール画像">
+                        @elseif($chatMessage->user_id === $trade->seller_id)
+                        <div class="user__name">{{$trade->seller->name}}</div>
+                        <img src="{{ \Storage::url($trade->seller->img_url) }}" alt="プロフィール画像">
+                        @endif
+                    </div>
+
+                    <div class="chat__message">
+                        <div class="comment">
+                            @if($editMessage == $chatMessage->id)
+                            <form action="{{route('message.update',['trade' => $trade->id , 'message' => $chatMessage->id])}}" method="post">
+                                @csrf
+                                @method('patch')
+                                <a href="{{route('chat.show',['trade'=>$trade->id])}}" class="cancel__btn">×</a>
+                                <textarea class="edit__textarea" name="comment">{{ $chatMessage->comment }}</textarea>
+                                <button class="update" type="submit">編集する</button>
+                            </form>
                             @else
-                            {{$chatMessage->comment}}
+                            {{ $chatMessage->comment }}
                             @endif
+                        </div>
+                    </div>
+
+                    @if($chatMessage->isMine())
+                    <div class="message__edit">
+                        <a href="{{route('chat.show',['trade'=>$trade->id, 'edit'=>$chatMessage->id])}}" class="update">編集</a>
+                        <form action="{{route('message.delete',['trade' => $trade->id , 'message' => $chatMessage->id])}}" method="post">
+                            @csrf
+                            @method('delete')
+                            <button class="delete" type="submit" onclick="return confirm('このメッセージを削除しますか？')">削除</button>
                         </form>
                     </div>
+                    @endif
                 </div>
-                @if($chatMessage->isMine())
-                <div class="message__edit">
-                    <a href="{{route('chat.show',['trade'=>$trade->id, 'edit'=>$chatMessage->id])}}" class="update">編集</a>
-                    <form action="{{route('message.delete',['trade' => $trade->id , 'message' => $chatMessage->id])}}" id="message-delete" method="post">
-                        @csrf
-                        @method('delete')
-                        <button class="delete" type="submit" for="message-delete" onclick="return confirm('このメッセージを削除しますか？')">削除</button>
-                    </form>
-                </div>
-                @endif
+                @endforeach
             </div>
-            @endforeach
+
             <div class="message">
                 <div class="message___form">
-                    <form action="{{route('message.store', ['trade' => $trade->id])}}" method='post' enctype="multipart/form-data">
+                    <form action="{{route('message.store', ['trade' => $trade->id])}}" method="post" enctype="multipart/form-data">
                         @csrf
-                        <textarea class="form__textarea" name="comment" id="draft_message" placeholder="取引メッセージを記入してください">
-                        </textarea>
-                        <label for="image" class="img__upload">
-                            画像を追加<input type="file" id="image" hidden>
-                        </label>
-                        <button class="send__btn" type="submit"><img src="/images/メッセージ送信.jpg" alt="送信ボタン">
+                        <textarea class="form__textarea" name="comment" id="draft_message_main" placeholder="取引メッセージを記入してください"></textarea>
+                        <label for="image" class="img__upload">画像を追加</label>
+                        <input type="file" name="image" id="image" hidden>
+                        <button class="send__btn" type="submit">
+                            <img src="/images/メッセージ送信.jpg" alt="送信ボタン">
                         </button>
-                        @error('comment')
-                        <p class="error-message">{{ $message }}</p>
-                        @enderror
                     </form>
+                    @error('comment')
+                    <p class="error-message">{{ $message }}</p>
+                    @enderror
                 </div>
             </div>
         </div>
@@ -135,7 +139,7 @@
     });
     document.addEventListener('DOMContentLoaded', function() {
         //取得するデータtextareaのidと一致
-        const textarea = document.getElementById('draft_message');
+        const textarea = document.getElementById('draft_message_main');
         // 取引ごとに分ける
         const key = 'draft_message_{{ $trade->id }}';
         // 保存されている下書きを復元
@@ -155,6 +159,7 @@
             });
         }
     });
+
 </script>
 
 @if($showSellerReviewModal)
@@ -165,6 +170,7 @@
             modal.classList.add('is-open');
         }
     });
+
 </script>
 @endif
 @endsection

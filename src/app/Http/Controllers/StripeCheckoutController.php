@@ -7,6 +7,7 @@ use App\Models\Item;
 use App\Models\User;
 use App\Models\Order;
 use App\Models\PaymentMethod;
+use App\Models\Trade;
 use Stripe\Stripe;
 use Stripe\Checkout\Session as CheckoutSession;
 use Illuminate\Support\Facades\Auth;
@@ -38,7 +39,17 @@ class StripeCheckoutController extends Controller
             'building' => $request->building,
             ]);
 
-            return redirect()->route('mypage');
+            $trade = Trade::create([
+                    'buyer_id'=>Auth::id(),
+                    'seller_id'=>$item->user_id,
+                    'item_id'=>$item->id,
+                    'status'=>Trade::STATUS_IN_PROGRESS,
+                    'buyer_completed_at'=> null,
+                    'seller_reviewed_at'=> null,
+                ]);
+
+
+            return redirect()->route('chat.show', ['trade' => $trade->id]);
         }
 
         Stripe::setApiKey(config('services.stripe.secret'));
@@ -73,7 +84,29 @@ class StripeCheckoutController extends Controller
 
     public function success(Request $request)
     {
-        return redirect()->route('mypage');
+        $sessionId = $request->get('session_id');
+
+        \Stripe\Stripe::setApiKey(config('services.stripe.secret'));
+
+        $session = \Stripe\Checkout\Session::retrieve($sessionId);
+
+        $itemId = $session->metadata->item_id ?? null;
+        $buyerId = $session->metadata->user_id ?? null;
+
+        if (!$itemId || !$buyerId) {
+            return redirect()->route('index');
+        }
+
+        $trade = Trade::where('item_id', $itemId)
+            ->where('buyer_id', $buyerId)
+            ->latest()
+            ->first();
+
+        if (!$trade) {
+            return redirect()->route('index');
+    }
+
+    return redirect()->route('chat.show', ['trade' => $trade->id]);
     }
 
     public function cancel()
