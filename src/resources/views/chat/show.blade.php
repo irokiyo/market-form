@@ -73,7 +73,7 @@
                             @endif
                         @elseif($chatMessage->user_id === $trade->seller_id)
                         <div class="user__name">{{$trade->seller->name}}</div>
-                            @if((!empty($trade->buyer->profile->img_url)))
+                            @if((!empty($trade->seller->profile->img_url)))
                                 <img src="{{ \Storage::url($trade->seller->profile->img_url) }}" alt="プロフィール画像">
                             @else
                             <img src="{{asset('images/Ellipse 1.png')}}" id="preview-image" alt="プロフィール画像" class="avatar__img">
@@ -84,19 +84,21 @@
                     <div class="chat__message">
                         <div class="comment">
                             @if($editMessage == $chatMessage->id)
-                            <form action="{{route('message.update',['trade' => $trade->id , 'message' => $chatMessage->id])}}" method="post">
+                                <form action="{{route('message.update',['trade' => $trade->id , 'message' => $chatMessage->id])}}" method="post">
                                 @csrf
                                 @method('patch')
-                                <a href="{{route('chat.show',['trade'=>$trade->id])}}" class="cancel__btn">×</a>
-                                <textarea class="edit__textarea" name="comment">{{ $chatMessage->comment }}</textarea>
-                                <button class="update" type="submit">編集する</button>
-                            </form>
+                                    <a href="{{route('chat.show',['trade'=>$trade->id])}}" class="cancel__btn">×</a>
+                                    <textarea class="edit__textarea" name="comment">{{ $chatMessage->comment }}</textarea>
+                                    <button class="update" type="submit">編集する</button>
+                                </form>
                             @else
-                            {{ $chatMessage->comment }}
+                                {{ $chatMessage->comment }}
+                                @if(!empty($chatMessage->image_url))
+                                    <img src="{{ Storage::url($chatMessage->image_url) }}" alt="送信画像" class="message__img" >
+                                @endif
                             @endif
                         </div>
                     </div>
-
                     @if($chatMessage->isMine())
                     <div class="message__edit">
                         <a href="{{route('chat.show',['trade'=>$trade->id, 'edit'=>$chatMessage->id])}}" class="update">編集</a>
@@ -117,12 +119,15 @@
                         @csrf
                         <textarea class="form__textarea" name="comment" id="draft_message_main" placeholder="取引メッセージを記入してください"></textarea>
                         <label for="image" class="img__upload">画像を追加</label>
-                        <input type="file" name="image" id="image" hidden>
+                        <input type="file" name="img_url" id="image">
                         <button class="send__btn" type="submit">
                             <img src="/images/メッセージ送信.jpg" alt="送信ボタン">
                         </button>
                     </form>
                     @error('comment')
+                    <p class="error-message">{{ $message }}</p>
+                    @enderror
+                    @error('img_url')
                     <p class="error-message">{{ $message }}</p>
                     @enderror
                 </div>

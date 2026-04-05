@@ -190,6 +190,12 @@
     line-height: 1.4;
     word-break: break-word;
 }
+.message__img{
+    display: block;
+    max-width: 250px;
+    margin-top: 10px;
+    border-radius: 8px;
+}
 
 .message__edit{
     display: flex;

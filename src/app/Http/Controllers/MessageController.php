@@ -17,7 +17,7 @@ class MessageController extends Controller
 
         $imagePath=null;
         if($request->hasFile('img_url')){
-            $imagePath = $request->file('img_url')->store('message', 'public');
+            $imagePath = $request->file('img_url')->store('message_images', 'public');
         }
 
         $messages = Message::create([
