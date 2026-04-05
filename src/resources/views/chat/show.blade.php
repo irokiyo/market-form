@@ -84,11 +84,14 @@
                     <div class="chat__message">
                         <div class="comment">
                             @if($editMessage == $chatMessage->id)
-                                <form action="{{route('message.update',['trade' => $trade->id , 'message' => $chatMessage->id])}}" method="post">
+                                <form action="{{route('message.update',['trade' => $trade->id , 'message' => $chatMessage->id])}}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 @method('patch')
                                     <a href="{{route('chat.show',['trade'=>$trade->id])}}" class="cancel__btn">×</a>
                                     <textarea class="edit__textarea" name="comment">{{ $chatMessage->comment }}</textarea>
+                                    <img src="{{ Storage::url($chatMessage->image_url) }}" alt="送信画像" class="message__img">
+                                    <label for="editId" class="img__upload">画像を変更</label>
+                                    <input type="file" name="img_url" id="editId" hidden>
                                     <button class="update" type="submit">編集する</button>
                                 </form>
                             @else
@@ -119,7 +122,7 @@
                         @csrf
                         <textarea class="form__textarea" name="comment" id="draft_message_main" placeholder="取引メッセージを記入してください"></textarea>
                         <label for="image" class="img__upload">画像を追加</label>
-                        <input type="file" name="img_url" id="image">
+                        <input type="file" name="img_url" id="image" hidden>
                         <button class="send__btn" type="submit">
                             <img src="/images/メッセージ送信.jpg" alt="送信ボタン">
                         </button>

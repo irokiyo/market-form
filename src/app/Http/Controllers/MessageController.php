@@ -35,8 +35,14 @@ class MessageController extends Controller
 
     public function update(MessageRequest $request,Trade $trade , Message $message)
     {
+        $imagePath=$message->image_url;
+        
+        if($request->hasFile('img_url')){
+            $imagePath = $request->file('img_url')->store('message_images', 'public');
+        }
         $message->update([
             'comment'=>$request->comment,
+            'image_url'=>$imagePath,
         ]);
 
         return redirect()->route('chat.show', ['trade' => $trade->id])->with('success', '更新しました');
