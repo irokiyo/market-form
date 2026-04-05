@@ -50,50 +50,49 @@ class StripeWebhookController extends Controller
                 'address' => $address,
                 'building' => $building,
                 ]);
-            return new Response('Missing metadata', 400);
+                return new Response('Missing metadata', 400);
             }
 
             try {
                 DB::transaction(function () use (
-                $itemId,
-                $buyerId,
-                $paymentMethodId,
-                $postcode,
-                $address,
-                $building
-            )
-            {
-                $item = Item::lockForUpdate()->findOrFail($itemId);
+                    $itemId,
+                    $buyerId,
+                    $paymentMethodId,
+                    $postcode,
+                    $address,
+                    $building
+                ) {
+                    $item = Item::lockForUpdate()->findOrFail($itemId);
 
-                Log::info('item found', ['item_id' => $item->id]);
+                    Log::info('item found', ['item_id' => $item->id]);
 
-                if (Order::where('item_id', $item->id)->exists()) {
-                    Log::info('order already exists', ['item_id' => $item->id]);
-                    return;
-                }
+                    if (Order::where('item_id', $item->id)->exists()) {
+                        Log::info('order already exists', ['item_id' => $item->id]);
+                        return;
+                    }
 
-                Order::create([
+                    Order::create([
                     'user_id' => $buyerId,
                     'item_id' => $itemId,
                     'payment_method_id' => $paymentMethodId,
                     'postcode' => $postcode,
                     'address' => $address,
                     'building' => $building ?: null,
-                ]);
+                    ]);
 
-                Log::info('order created', ['item_id' => $itemId, 'buyer_id' => $buyerId]);
+                    Log::info('order created', ['item_id' => $itemId, 'buyer_id' => $buyerId]);
 
-                Trade::create([
+                    Trade::create([
                     'buyer_id' => $buyerId,
                     'seller_id' => $item->user_id,
                     'item_id' => $itemId,
                     'status' => Trade::STATUS_IN_PROGRESS,
                     'buyer_completed_at' => null,
                     'seller_reviewed_at' => null,
-                ]);
+                    ]);
 
-                Log::info('trade created', ['item_id' => $itemId, 'buyer_id' => $buyerId]);
-            });
+                    Log::info('trade created', ['item_id' => $itemId, 'buyer_id' => $buyerId]);
+                });
             } catch (\Throwable $e) {
                 Log::error('Stripe webhook failed', [
                 'message' => $e->getMessage(),

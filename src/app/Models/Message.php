@@ -35,5 +35,4 @@ class Message extends Model
     {
         return $this->belongsTo(Trade::class, 'trade_id');
     }
-
 }

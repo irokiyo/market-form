@@ -56,7 +56,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/chat/{trade}/{message}/delete', [MessageController::class, 'delete'])->name('message.delete');
     Route::post('/chat/{trade}/review', [ReviewController::class, 'store'])->name('review.store');
     Route::post('/chat/{trade}/review/seller', [ReviewController::class, 'sellerStore'])->name('review.seller.store');
-
 });
 
 Route::post('/stripe/webhook', [StripeWebhookController::class, 'handle'])

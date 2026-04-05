@@ -11,17 +11,17 @@ use App\Models\Review;
 
 class ChatController extends Controller
 {
-    public function show(Request $request , Trade $trade)
+    public function show(Request $request, Trade $trade)
     {
-        $showSellerReviewModal =  auth()->id()=== $trade->seller_id
-            &&!is_null($trade->buyer_completed_at)
-            &&is_null($trade->seller_reviewed_at);
+        $showSellerReviewModal =  auth()->id() === $trade->seller_id
+            && !is_null($trade->buyer_completed_at)
+            && is_null($trade->seller_reviewed_at);
 
         //既読か未読の設定
         Message::where('receiver_id', auth()->id())
-            ->where('trade_id',$trade->id)
+            ->where('trade_id', $trade->id)
             ->where('read', false)
-            ->update(['read'=>true]);
+            ->update(['read' => true]);
 
         $user = auth()->id();
         $messages = $trade->messages;
@@ -30,7 +30,7 @@ class ChatController extends Controller
             ->orWhere('seller_id', $user)
             ->orderBy('created_at', 'desc')
             ->get();
-        $editMessage= $request -> query('edit');
+        $editMessage = $request -> query('edit');
 
         return view('chat.show', compact(
             'trade',

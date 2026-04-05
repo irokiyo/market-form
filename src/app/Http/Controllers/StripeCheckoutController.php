@@ -40,12 +40,12 @@ class StripeCheckoutController extends Controller
             ]);
 
             $trade = Trade::create([
-                    'buyer_id'=>Auth::id(),
-                    'seller_id'=>$item->user_id,
-                    'item_id'=>$item->id,
-                    'status'=>Trade::STATUS_IN_PROGRESS,
-                    'buyer_completed_at'=> null,
-                    'seller_reviewed_at'=> null,
+                    'buyer_id' => Auth::id(),
+                    'seller_id' => $item->user_id,
+                    'item_id' => $item->id,
+                    'status' => Trade::STATUS_IN_PROGRESS,
+                    'buyer_completed_at' => null,
+                    'seller_reviewed_at' => null,
                 ]);
 
 
@@ -104,9 +104,9 @@ class StripeCheckoutController extends Controller
 
         if (!$trade) {
             return redirect()->route('index');
-    }
+        }
 
-    return redirect()->route('chat.show', ['trade' => $trade->id]);
+        return redirect()->route('chat.show', ['trade' => $trade->id]);
     }
 
     public function cancel()

@@ -29,7 +29,7 @@ DB_PASSWORD=laravel_pass
 1. php artisan storage:link  
 
 ## メール認証(MailHog)
-メール認証はMailHogを使用しています  
+メール認証と購入者のレビュー登録の際に使用しています  
 
 ### MailHog 環境構築  
 
@@ -74,6 +74,14 @@ Webhook を利用していますので
 ## user のログイン用初期データ  
 
 - メールアドレス: yamada@example.com  
+- パスワード: password  
+- CO01~CO05のダミーデータを出品  
+
+- メールアドレス: sato@example.com  
+- パスワード: password  
+- CO06~CO010のダミーデータを出品  
+
+- メールアドレス: suzuki@example.com  
 - パスワード: password
 
 ## 使用技術

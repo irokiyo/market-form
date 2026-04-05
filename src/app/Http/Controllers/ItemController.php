@@ -116,19 +116,18 @@ class ItemController extends Controller
 
         Order::create($order);
 
-        $trade =Trade::create
-            ([
-                'buyer_id'=>Auth::id(),
-                'seller_id'=>$item->user_id,
-                'item_id'=>$item_id,
-                'status'=>Trade::STATUS_IN_PROGRESS,
-                'buyer_completed_at'=> null,
-                'seller_reviewed_at'=> null,
-            ]);
+        $trade = Trade::create([
+                'buyer_id' => Auth::id(),
+                'seller_id' => $item->user_id,
+                'item_id' => $item_id,
+                'status' => Trade::STATUS_IN_PROGRESS,
+                'buyer_completed_at' => null,
+                'seller_reviewed_at' => null,
+        ]);
 
         session()->forget('temp_address');
 
-        return redirect()->route('chat.show',['trade'=>$trade->id]);
+        return redirect()->route('chat.show', ['trade' => $trade->id]);
     }
     //住所変更のページ
     public function address($item_id)
@@ -177,7 +176,7 @@ class ItemController extends Controller
         $items = Item::where('user_id', $user->id)->get();
         $orders = Order::with('item')->where('user_id', $user->id)->get();
         $page = $request->query('page', 'sell');
-        $trades = Trade::with(['item','messages'=>function($query){
+        $trades = Trade::with(['item','messages' => function ($query) {
             $query->latest();
         }])
         ->where(function ($query) use ($user) {
@@ -193,7 +192,7 @@ class ItemController extends Controller
         $averageRating = Review::where('reviewee_id', $user->id)->avg('rating');
         $rating = round($averageRating);
         $totalUnreadCount = Message::where('receiver_id', Auth::id())
-            ->where('read',false)
+            ->where('read', false)
             ->count();
         $tradeUnreadCounts = Message::where('receiver_id', Auth::id())
             ->where('read', false)

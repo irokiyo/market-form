@@ -27,7 +27,7 @@ class TransactionCompleted extends Notification
     // メール通知の内容
     public function toMail($notifiable)
     {
-        return (new MailMessage)
+        return (new MailMessage())
                     ->subject('取引完了のご報告')
                     ->line('取引が完了しました。')
                     ->action('取引詳細を見る', route('chat.show', ['trade' => $this->trade->id]))
