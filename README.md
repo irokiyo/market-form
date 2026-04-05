@@ -11,7 +11,6 @@
 
 1. docker-compose exec php bash  
 1. composer install  
-1. cd src  
 1. cp .env.example .env  
 1. .env ファイルの一部を以下のように編集
 ```
@@ -22,11 +21,21 @@ DB_DATABASE=laravel_db
 DB_USERNAME=laravel_user
 DB_PASSWORD=laravel_pass
 ```
-6. docker-compose exec php bash  
-1. php artisan key:generate  
+6. php artisan key:generate  
 1. php artisan migrate:fresh  
 1. php artisan db:seed  
 1. php artisan storage:link  
+
+### テスト用データベース作成
+テスト実行にはテスト用データベースが必要になるため以下のデータベースを作成してください  
+※ .env.testing の DB_DATABASE と一致させてください  
+
+```sql
+CREATE DATABASE laravel_test_db;
+```
+#### テスト実行
+1. php artisan test  
+
 
 ## メール認証(MailHog)
 メール認証と購入者のレビュー登録の際に使用しています  
@@ -51,7 +60,7 @@ MAIL_FROM_NAME="${APP_NAME}"
 
 ## 決済（Stripe）
 決済機能は Stripe を使用しています。  
-支払い方法のカード支払いのみstripeの画面に遷移するように作成しています。  
+支払い方法のカード支払いのみ stripe の画面に遷移するようにしています。  
 
 ### Stripe 環境構築
 1. docker-compose exec php bash
@@ -73,16 +82,17 @@ Webhook を利用していますので
 
 ## user のログイン用初期データ  
 
-- メールアドレス: yamada@example.com  
-- パスワード: password  
-- CO01~CO05のダミーデータを出品  
+メールアドレス: yamada@example.com  
+パスワード: password  
+(CO01~CO05のダミーデータを出品)  
 
-- メールアドレス: sato@example.com  
-- パスワード: password  
-- CO06~CO010のダミーデータを出品  
+メールアドレス: sato@example.com  
+パスワード: password  
+(CO06~CO10のダミーデータを出品)  
 
-- メールアドレス: suzuki@example.com  
-- パスワード: password
+メールアドレス: suzuki@example.com  
+パスワード: password
+(出品なし)  
 
 ## 使用技術
 - MySQL 8.0.26  
@@ -98,7 +108,7 @@ Webhook を利用していますので
 - GitHub Actions（CI）
 
 ## URL
-- 環境開発: http://localhost/  
+- 開発環境: http://localhost/  
 - phpMyAdmin: http://localhost:8080/  
 - MailHog: http://localhost:8025/  
 - Stripe: https://dashboard.stripe.com/  
@@ -110,7 +120,7 @@ Webhook を利用していますので
 ## 追加機能
 購入者と出品者のやり取りができるチャット機能と評価機能を追加しました。
 追加テーブルは以下の通りです。
-tradesテーブル（取引テーブル）
+### tradesテーブル（取引テーブル）
 | カラム名           |  型          |primary key  |unique key  |not null  |foreign key  |
 | ------------------| ------------|-------------|------------|----------|-------------|
 | id                | bigint      |⚪︎           |             |⚪︎        |             |
@@ -123,7 +133,7 @@ tradesテーブル（取引テーブル）
 |created_at         |timestamp    |             |             |         |             |
 |updated_at         |timestamp    |             |             |         |             |
 
-messagesテーブル（メッセージテーブル）
+### messagesテーブル（メッセージテーブル）
 | カラム名   |  型          |primary key  |unique key  |not null  |foreign key  |
 | --------- | ------------|-------------|------------|----------|-------------|
 | id        | bigint      |⚪︎           |             |⚪︎        |             |
@@ -136,7 +146,7 @@ messagesテーブル（メッセージテーブル）
 |created_at |timestamp    |             |             |         |             |
 |updated_at |timestamp    |             |             |         |             |
 
-reviewsテーブル（評価テーブル）
+### reviewsテーブル（評価テーブル）
 | カラム名           |  型          |primary key  |unique key  |not null  |foreign key  |
 | ------------------| ------------|-------------|-------------|----------|-------------|
 | id                | bigint      |⚪︎           |             |⚪︎        |             |
