@@ -18,13 +18,13 @@
     </header>
     <main class="main">
         @if (session('error'))
-        <p class="flash flash-error">
+        <p class="flash__message error" onclick="this.remove()">
             {{ session('error') }}
         </p>
         @endif
 
         @if (session('success'))
-        <p class="flash flash-success">
+        <p class="flash__message success" onclick="this.remove()">
             {{ session('success') }}
         </p>
         @endif

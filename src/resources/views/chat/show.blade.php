@@ -119,7 +119,11 @@
                 <div class="message___form">
                     <form action="{{route('message.store', ['trade' => $trade->id])}}" method="post" enctype="multipart/form-data">
                         @csrf
-                        <textarea class="form__textarea" name="comment" id="draft_message_main" placeholder="取引メッセージを記入してください"></textarea>
+                        @if((!empty($trade->buyer_completed_at)))
+                            <textarea class="form__textarea" name="comment" id="draft_message_main" placeholder="コメントできません" disabled></textarea>
+                        @else
+                            <textarea class="form__textarea" name="comment" id="draft_message_main" placeholder="取引メッセージを記入してください" ></textarea>
+                        @endif
                         <label for="image" class="img__upload">画像を追加</label>
                         <input type="file" name="img_url" id="image" hidden>
                         <button class="send__btn" type="submit">

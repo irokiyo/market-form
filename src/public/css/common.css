@@ -106,6 +106,37 @@ body {
     color: #000;
 }
 
+.flash-message {
+    position: relative;
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+}
+
+.flash__message.success {
+    position: fixed;
+    width: 100%;
+    color: #1d643b;
+    background-color: #d7f3e3;
+    border-color: #c7eed8;
+    transform: translateY(-50%);
+    text-align: center;
+    z-index: 99;
+    font-size: 1.5rem;
+}
+.flash__message.error {
+    position: fixed;
+    top: 9%;
+    width: 100%;
+    background: #f00;
+    color: #fff;
+    font-size: 1.5rem;
+    transform: translateY(-50%);
+    text-align: center;
+    z-index: 99;
+}
+
 
 @media (max-width: 768px) {
     .nav__item {
